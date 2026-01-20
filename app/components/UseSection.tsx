@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform, Variants, useSpring } from "framer-motion";
 import CountUp from "react-countup";
+import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";
 import { 
   FaUserGraduate, 
@@ -227,10 +228,12 @@ const UsSection = () => {
               <div className="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-slate-900/20 border-[8px] border-white bg-white">
                 <div className="aspect-[3/4] relative group">
                   {/* Using a professional business image from Unsplash */}
-                  <img 
+                  <Image 
                     src="/ceo.webp" 
                     alt="Agency Founder" 
-                    className="w-full h-full object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+                    fill
+                    className="object-cover transform scale-100 group-hover:scale-105 transition-transform duration-700 ease-in-out" 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-80" />
                   

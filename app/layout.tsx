@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import { LanguageProvider } from "./context/LanguageContext";
 import { ClerkProvider } from "@clerk/nextjs";
+import SmoothScroll from "./components/SmoothScroll";
 import Footer from "./components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -27,8 +28,8 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <LanguageProvider>
-            
-              <Navbar />
+            <SmoothScroll />
+              <Navbar/>
             <main className="min-h-[100dvh] pb-24 lg:pb-0">
               {children}
             </main>

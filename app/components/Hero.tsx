@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, Variants } from "framer-motion";
+import Image from "next/image";
 import { 
   FaArrowRight, 
   FaPlayCircle, 
@@ -324,11 +325,16 @@ const HeroSection = () => {
                 >
                   <div className="w-full h-full relative group">
                     {/* Background Image */}
-                    <img 
-                      src={active.img} 
-                      alt={t(active.title)} 
-                      className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700"
-                    />
+                    <div className="relative w-full h-full">
+                      <Image 
+                        src={active.img} 
+                        alt={t(active.title)}
+                        fill
+                        className="object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        priority
+                      />
+                    </div>
                     
                     {/* Gradient Overlay */}
                     <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80`} />

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams } from "next/navigation";
 import { 
   Calendar, 
@@ -21,6 +22,7 @@ import {
 import { motion, useScroll, useSpring } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useLanguage } from "../../context/LanguageContext";
+import { optimizeCloudinaryUrl } from "@/lib/cloudinary";
 
 interface NewsArticle {
   _id: string;
@@ -101,7 +103,7 @@ export default function NewsDetail() {
       <div className="absolute inset-0 pointer-events-none fixed overflow-hidden">
          <div className={`absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-[150px] transition-opacity duration-700
             ${isDark ? "bg-[#00aeef] opacity-[0.05]" : "bg-sky-100 opacity-[0.4]"}`} />
-         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.02] mix-blend-overlay" />
+         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] mix-blend-overlay" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
@@ -119,8 +121,13 @@ export default function NewsDetail() {
                  <span className={`text-[10px] font-black uppercase tracking-widest opacity-40 mb-1`}>{TRANSLATIONS.author[lang]}</span>
                  <p className="text-sm font-bold text-[#00aeef]">{article.author}</p>
               </div>
-              <div className={`w-12 h-12 rounded-2xl overflow-hidden border-2 ${isDark ? "border-white/10" : "border-slate-100"}`}>
-                 <img src={`https://ui-avatars.com/api/?name=${article.author}&background=00aeef&color=fff`} alt="Author" />
+              <div className={`relative w-12 h-12 rounded-2xl overflow-hidden border-2 ${isDark ? "border-white/10" : "border-slate-100"}`}>
+                 <Image 
+                    src={`https://ui-avatars.com/api/?name=${article.author}&background=00aeef&color=fff`} 
+                    alt="Author" 
+                    fill
+                    className="object-cover"
+                 />
               </div>
            </div>
         </div>
@@ -156,7 +163,14 @@ export default function NewsDetail() {
           animate={{ opacity: 1, scale: 1 }}
           className="relative aspect-[21/9] w-full rounded-[4rem] overflow-hidden mb-20 shadow-3xl border border-white/5"
         >
-           <img src={article.image} alt="Hero" className="w-full h-full object-cover" />
+           <Image 
+              src={optimizeCloudinaryUrl(article.image)} 
+              alt="Hero" 
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+           />
            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         </motion.div>
 

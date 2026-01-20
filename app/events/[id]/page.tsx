@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { 
   Calendar, 
@@ -25,6 +26,7 @@ import { motion, useScroll, useSpring } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useLanguage } from "../../context/LanguageContext";
 import { useUser } from "@clerk/nextjs";
+import { optimizeCloudinaryUrl } from "@/lib/cloudinary";
 
 interface EventDetail {
   _id: string;
@@ -152,7 +154,7 @@ export default function EventDetailPage() {
       <div className="absolute inset-0 pointer-events-none fixed overflow-hidden">
          <div className={`absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-[150px] transition-opacity duration-700
             ${isDark ? "bg-[#00aeef] opacity-[0.05]" : "bg-sky-100 opacity-[0.4]"}`} />
-         <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.02] mix-blend-overlay" />
+         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.02] mix-blend-overlay" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
@@ -222,7 +224,14 @@ export default function EventDetailPage() {
           animate={{ opacity: 1, scale: 1 }}
           className="relative aspect-[21/9] w-full rounded-[4rem] overflow-hidden mb-20 shadow-3xl border border-white/5"
         >
-           <img src={event.image} alt={event.title[lang]} className="w-full h-full object-cover" />
+           <Image 
+              src={optimizeCloudinaryUrl(event.image)} 
+              alt={event.title[lang]} 
+              fill
+              className="object-cover"
+              sizes="100vw"
+              priority
+           />
            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         </motion.div>
 
