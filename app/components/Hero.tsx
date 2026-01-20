@@ -1,448 +1,396 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import Link from "next/link";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { 
-  ArrowRight, 
-  Heart, 
-  Users, 
-  Globe, 
-  Megaphone, 
-  FileText,
-  Target
-} from "lucide-react";
-import { 
-  motion, 
-  useMotionTemplate, 
-  useMotionValue, 
-  useSpring, 
-  useTransform 
-} from "framer-motion";
-import { useLanguage } from "../context/LanguageContext"; // Ensure path matches your project
-import { useTheme } from "next-themes";
+  FaArrowRight, 
+  FaPlayCircle, 
+  FaGlobeEurope, 
+  FaChevronRight, 
+  FaChevronLeft,
+  FaCheckCircle
+} from "react-icons/fa";
 
-// --- BRAND COLORS ---
-const BRAND = {
-  sky: "#00aeef",
-  ocean: "#005691",
-  deep: "#001829",
-  gold: "#fbbf24",
-  white: "#ffffff",
-};
+// ─── MOCK CONTEXT (Replace with your actual import) ───
+// import { useLanguage } from "../context/LanguageContext";
+const useLanguage = () => ({ language: "mn" }); 
 
-// --- DATA ---
-const TEXTS = {
-  headline: { en: "Small Actions", mn: "Жижиг Үйлдэл" },
-  highlight: { en: "Big Differences", mn: "Том Өөрчлөлт" },
-  description: { 
-    en: "MNUMS Student UNICEF Club represents a bright future for every child. We advocate for rights, equality, and inclusive education.",
-    mn: "АШУҮИС-ийн Оюутны UNICEF Клуб нь хүүхэд бүрийн гэрэлт ирээдүйн төлөө. Бид тэгш байдал, хүртээмжтэй нийгмийг бүтээнэ."
-  },
-  stats: [
-    { label: { en: "Est.", mn: "Байгуулагдсан" }, value: "2025" },
-    { label: { en: "Members", mn: "Гишүүд" }, value: "50+" },
-    { label: { en: "Status", mn: "Төлөв" }, value: "Active" },
-  ],
-  weStandFor: { en: "Our Mission:", mn: "Бидний Эрхэм Зорилго:" }
-};
-
-const TYPEWRITER_WORDS = [
-  { text: "Bright Future", mnText: "Гэрэлт Ирээдүй", color: BRAND.gold }, 
-  { text: "Child Rights", mnText: "Хүүхдийн Эрх", color: BRAND.sky },
-  { text: "Gender Equality", mnText: "Жендэрийн Тэгш Байдал", color: "#f472b6" }, 
-  { text: "Inclusive Education", mnText: "Тэгш Боловсрол", color: "#4ade80" } 
-];
-
-const ACTIVITY_CARDS = [
+/* ────────────────────── Config & Data ────────────────────── */
+const COUNTRY_DATA = [
   {
-    id: 1,
-    icon: Megaphone,
-    title: { en: "Campaigns", mn: "Аяны Ажил" },
-    desc: { en: "Social psychology awareness drives.", mn: "Нийгмийн сэтгэл зүйд нөлөөлөх." },
-    color: "bg-sky-500",
-    glow: "shadow-sky-500/50"
+    id: "germany",
+    colors: { 
+      primary: "#F59E0B", // Amber 500
+      secondary: "#FFFBEB", // Amber 50
+      accent: "#B45309", // Amber 700
+      gradient: "from-amber-400 to-orange-500"
+    },
+    flag: "🇩🇪",
+    iso: "DEU",
+    img: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&q=80&w=800", // German Street/Architecture
+    title: { mn: "Герман", en: "Germany" },
+    subtitle: { mn: "Европын Эдийн Засгийн Төв", en: "Economic Heart of Europe" },
+    desc: {
+      mn: "Дэлхийн тэргүүлэгч улсад хэл сурангаа, Европын соёлтой танилцаж, ирээдүйн карьераа эхлүүл.",
+      en: "Master the language in a world-leading nation while experiencing European culture and kickstarting your career."
+    },
+    stat: "12-24 Months",
+    link: "/aupair/germany"
   },
   {
-    id: 2,
-    icon: Users,
-    title: { en: "Training", mn: "Сургалт" },
-    desc: { en: "Lectures on gender & rights.", mn: "Жендэрийн мэдрэмжтэй сургалт." },
-    color: "bg-indigo-500",
-    glow: "shadow-indigo-500/50"
+    id: "austria",
+    colors: { 
+      primary: "#F43F5E", // Rose 500
+      secondary: "#FFF1F2", // Rose 50
+      accent: "#9F1239", // Rose 800
+      gradient: "from-rose-400 to-red-600"
+    },
+    flag: "🇦🇹",
+    iso: "AUT",
+    img: "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&q=80&w=800", // Vienna/Alps
+    title: { mn: "Австри", en: "Austria" },
+    subtitle: { mn: "Сонгодог Урлагийн Өлгий", en: "Cradle of Classical Art" },
+    desc: {
+      mn: "Альпийн нурууны байгалийн үзэсгэлэн дунд амьдарч, Герман хэлийг төгс эзэмших алтан боломж.",
+      en: "A golden opportunity to master German while living amidst the breathtaking beauty of the Alps."
+    },
+    stat: "High Safety",
+    link: "/aupair/austria"
   },
   {
-    id: 3,
-    icon: FileText,
-    title: { en: "Reporting", mn: "Тайлагнал" },
-    desc: { en: "Annual transparent reporting.", mn: "Үйл ажиллагааг тайлагнах." },
-    color: "bg-teal-500",
-    glow: "shadow-teal-500/50"
+    id: "belgium",
+    colors: { 
+      primary: "#EAB308", // Yellow 500
+      secondary: "#FEFCE8", // Yellow 50
+      accent: "#854D0E", // Yellow 800
+      gradient: "from-yellow-400 to-amber-600"
+    },
+    flag: "🇧🇪",
+    iso: "BEL",
+    img: "https://images.unsplash.com/photo-1559410545-0112ea057b99?auto=format&fit=crop&q=80&w=800", // Brussels
+    title: { mn: "Бельги", en: "Belgium" },
+    subtitle: { mn: "Олон Улсын Төв", en: "International Hub" },
+    desc: {
+      mn: "Европын холбооны төв байранд ажиллаж, олон хэл, олон соёлыг нэг дор мэдрэх боломж.",
+      en: "Experience multilingual culture at the headquarters of the European Union."
+    },
+    stat: "Multi-Lang",
+    link: "/aupair/belgium"
+  },
+  {
+    id: "switzerland",
+    colors: { 
+      primary: "#EF4444", // Red 500
+      secondary: "#FEF2F2", // Red 50
+      accent: "#991B1B", // Red 800
+      gradient: "from-red-500 to-rose-600"
+    },
+    flag: "🇨🇭",
+    iso: "CHE",
+    img: "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&q=80&w=800", // Swiss Alps
+    title: { mn: "Швейцарь", en: "Switzerland" },
+    subtitle: { mn: "Амьдралын Чанар", en: "Highest Quality of Life" },
+    desc: {
+      mn: "Дэлхийн хамгийн өндөр цалин, хамгийн цэвэр агаар, хамгийн аюулгүй орчинд амьдрах боломж.",
+      en: "Live with the world's highest allowance, purest air, and safest environment."
+    },
+    stat: "Top Allowance",
+    link: "/aupair/switzerland"
   }
 ];
 
-// --- SUB-COMPONENTS ---
-
-// 1. Enhanced Typewriter
-const Typewriter = ({ lang }: { lang: 'en' | 'mn' }) => {
+const HeroSection = () => {
+  const { language } = useLanguage();
   const [index, setIndex] = useState(0);
-  const [subIndex, setSubIndex] = useState(0);
-  const [reverse, setReverse] = useState(false);
-  const [blink, setBlink] = useState(true);
+  const [direction, setDirection] = useState(0);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => setBlink(!blink), 500);
-    return () => clearTimeout(timeout);
-  }, [blink]);
+  const active = COUNTRY_DATA[index];
+  
+  // Safe translation helper
+  const t = (obj: any) => obj[language === "mn" ? "mn" : "en"] || obj.en;
 
-  useEffect(() => {
-    const currentWord = lang === 'mn' ? TYPEWRITER_WORDS[index].mnText : TYPEWRITER_WORDS[index].text;
-    if (subIndex === currentWord.length + 1 && !reverse) {
-      setTimeout(() => setReverse(true), 2500); return;
+  // Handle slide changes
+  const changeSlide = (newDirection: number) => {
+    setDirection(newDirection);
+    if (newDirection === 1) {
+      setIndex((curr) => (curr + 1) % COUNTRY_DATA.length);
+    } else {
+      setIndex((curr) => (curr === 0 ? COUNTRY_DATA.length - 1 : curr - 1));
     }
-    if (subIndex === 0 && reverse) {
-      setReverse(false);
-      setIndex((prev) => (prev + 1) % TYPEWRITER_WORDS.length);
-      return;
-    }
-    const timeout = setTimeout(() => {
-      setSubIndex((prev) => prev + (reverse ? -1 : 1));
-    }, reverse ? 75 : 150);
-    return () => clearTimeout(timeout);
-  }, [subIndex, index, reverse, lang]);
-
-  return (
-    <div className="flex items-center min-h-[3rem]">
-      <span className="text-2xl sm:text-3xl md:text-4xl font-black tracking-tight drop-shadow-lg" style={{ color: TYPEWRITER_WORDS[index].color }}>
-        {(lang === 'mn' ? TYPEWRITER_WORDS[index].mnText : TYPEWRITER_WORDS[index].text).substring(0, subIndex)}
-      </span>
-      <motion.span
-        animate={{ opacity: [0, 1, 0] }}
-        transition={{ repeat: Infinity, duration: 0.8 }}
-        className="w-[3px] sm:w-[4px] h-[1em] bg-current ml-2 rounded-full"
-      />
-    </div>
-  );
-};
-
-// 2. 3D Tilt Card Container (Gracefully degrades on mobile)
-const TiltCard = ({ children }: { children: React.ReactNode }) => {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const mouseXSpring = useSpring(x);
-  const mouseYSpring = useSpring(y);
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    x.set(mouseX / width - 0.5);
-    y.set(mouseY / height - 0.5);
   };
 
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
+  // 1. TEXT VARIANTS
+  const textContainerVariant: Variants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.1 }
+    },
+    exit: { opacity: 0 }
+  };
+
+  const textItemVariant: Variants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      transition: { duration: 0.5, ease: "easeOut" } 
+    },
+    exit: { opacity: 0, x: 20 }
+  };
+
+  // 2. CARD VARIANTS (3D Effect)
+  const cardVariants: Variants = {
+    enter: (dir: number) => ({
+      x: dir > 0 ? 200 : -200,
+      opacity: 0,
+      rotateY: dir > 0 ? 45 : -45,
+      scale: 0.8,
+      zIndex: 0
+    }),
+    center: {
+      x: 0,
+      opacity: 1,
+      rotateY: 0,
+      scale: 1,
+      zIndex: 10,
+      transition: {
+        duration: 0.6,
+        type: "spring",
+        stiffness: 150,
+        damping: 20
+      }
+    },
+    exit: (dir: number) => ({
+      x: dir < 0 ? 200 : -200,
+      opacity: 0,
+      rotateY: dir < 0 ? 45 : -45,
+      scale: 0.8,
+      zIndex: 0,
+      transition: { duration: 0.4 }
+    })
   };
 
   return (
-    <motion.div
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      className="relative z-10 w-full perspective-1000"
-    >
-      {children}
-    </motion.div>
-  );
-};
-
-// 3. Info List Item
-const InfoCard = ({ data, lang, index, isDark }: any) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: 20 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.2 + index * 0.1 }}
-      className={`group flex items-center gap-4 p-3 sm:p-4 rounded-2xl border backdrop-blur-md transition-all cursor-default transform translate-z-10 shadow-lg 
-        ${isDark 
-           ? "bg-white/5 border-white/5 hover:bg-white/10 hover:border-white/20" 
-           : "bg-white/60 border-slate-200/60 hover:bg-white hover:border-sky-200 shadow-slate-200/50"}`}
-    >
-      <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-xl ${data.color} flex items-center justify-center text-white shadow-lg ${data.glow} shrink-0 group-hover:scale-110 transition-transform duration-300`}>
-        <data.icon size={22} className="sm:w-[26px] sm:h-[26px]" strokeWidth={2.5} />
-      </div>
-      <div>
-        <h4 className={`font-bold text-xs sm:text-sm uppercase tracking-wide group-hover:text-[#00aeef] transition-colors ${isDark ? 'text-white' : 'text-slate-800'}`}>
-           {data.title[lang]}
-        </h4>
-        <p className={`text-[11px] sm:text-xs mt-0.5 sm:mt-1 leading-snug font-medium max-w-[180px] sm:max-w-[200px] ${isDark ? 'text-white/60' : 'text-slate-600'}`}>
-           {data.desc[lang]}
-        </p>
-      </div>
-    </motion.div>
-  );
-};
-
-// --- MAIN HERO ---
-export default function Hero() {
-  const { language: lang } = useLanguage();
-  const { theme } = useTheme();
-
-  // Handle Hydration mismatch
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-  
-  const isDark = mounted && (theme === 'dark' || !theme);
-  
-  // Spotlight
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  
-  // Update template based on mouse position
-  const spotlightBg = useMotionTemplate`radial-gradient(800px circle at ${mouseX}px ${mouseY}px, ${BRAND.sky}, transparent 80%)`;
-
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
-  if (!mounted) return null;
-
-  return (
-    <section 
-      className={`relative w-full min-h-[100dvh] overflow-x-hidden flex items-center transition-colors duration-700
-         ${isDark ? 'bg-[#001829]' : 'bg-[#f0f9ff]'}`}
-      onMouseMove={handleMouseMove}
-    >
-      {/* 1. ATMOSPHERE BACKGROUND */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-         {/* Theme Specific Gradient */}
-         <div className={`absolute inset-0 bg-gradient-to-br transition-colors duration-700
-            ${isDark ? "from-[#001829] via-[#002b49] to-[#00101a]" : "from-[#f0f9ff] via-[#e0f2fe] to-white"}`} 
-         />
-         
-         {/* Spotlight (Hidden on Touch for performance) */}
-         <motion.div
-            className="hidden lg:block absolute inset-0 opacity-30 mix-blend-soft-light"
-            style={{ background: spotlightBg }}
-         />
-
-         {/* Mobile Static Glow */}
-         <div className={`lg:hidden absolute top-0 left-0 right-0 h-[50vh] opacity-30 bg-gradient-to-b ${isDark ? "from-[#00aeef]" : "from-sky-200"} to-transparent`} />
-
-         {/* Floating Blur Blobs */}
-         <div className={`absolute -top-[10%] -left-[20%] w-[300px] sm:w-[800px] h-[300px] sm:h-[800px] rounded-full blur-[100px] sm:blur-[200px] transition-opacity
-            ${isDark ? 'bg-[#00aeef] opacity-[0.15]' : 'bg-[#00aeef] opacity-[0.05]'}`} />
-         <div className={`absolute bottom-0 -right-[20%] w-[300px] sm:w-[800px] h-[300px] sm:h-[800px] rounded-full blur-[100px] sm:blur-[200px] transition-opacity
-            ${isDark ? 'bg-[#005691] opacity-[0.15]' : 'bg-[#bae6fd] opacity-[0.3]'}`} />
-         
-         {/* Noise Overlay */}
-         <div className="absolute inset-0 opacity-[0.03] bg-[url('/noise.png')] mix-blend-overlay" />
-      </div>
-
-      {/* 2. CONTENT GRID */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center pt-28 pb-24 lg:pt-32 lg:pb-32">
-        
-        {/* --- LEFT: NARRATIVE --- */}
-        <div className="flex flex-col justify-center max-w-2xl mx-auto lg:mx-0 text-left">
-          
-          {/* Badge */}
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="flex items-center gap-3 mb-6 sm:mb-8"
-          >
-             <div className={`px-3 py-1.5 rounded-full border backdrop-blur-md flex items-center gap-2 transition-colors
-                ${isDark 
-                   ? "bg-[#00aeef]/10 border-[#00aeef]/30" 
-                   : "bg-white/60 border-sky-200 shadow-sm"}`}>
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00aeef] opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00aeef]"></span>
-                </span>
-                <span className="text-[#00aeef] font-black text-[9px] sm:text-[10px] uppercase tracking-[0.2em]">
-                  Est. 2025
-                </span>
-             </div>
-             <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest ${isDark ? 'text-white/40' : 'text-slate-500'}`}>
-               MNUMS Club
-             </span>
-          </motion.div>
-
-          {/* Headline */}
-          <div className="mb-4 sm:mb-6">
-            <motion.h1 
-               initial={{ opacity: 0, y: 30 }}
-               animate={{ opacity: 1, y: 0 }}
-               transition={{ delay: 0.3, duration: 0.8 }}
-               className={`text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[0.95] tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}
-            >
-              {TEXTS.headline[lang]} <br />
-              <span className={`text-transparent bg-clip-text bg-gradient-to-r drop-shadow-sm 
-                 ${isDark ? "from-[#00aeef] via-[#38bdf8] to-[#0077a3]" : "from-[#00aeef] to-[#005691]"}`}>
-                {TEXTS.highlight[lang]}
-              </span>
-            </motion.h1>
-          </div>
-
-          {/* Typewriter Mission */}
-          <motion.div 
-             initial={{ opacity: 0 }}
-             animate={{ opacity: 1 }}
-             transition={{ delay: 0.5 }}
-             className="mb-6 sm:mb-10 flex flex-col items-start gap-1 sm:gap-2 h-16 sm:h-14"
-          >
-             <span className={`font-bold uppercase tracking-widest text-[10px] sm:text-xs flex items-center gap-2 ${isDark ? 'text-white/50' : 'text-slate-500'}`}>
-                 <Target size={14} /> {TEXTS.weStandFor[lang]}
-             </span>
-             <Typewriter lang={lang} />
-          </motion.div>
-
-          {/* Description */}
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-            className={`text-base sm:text-lg leading-relaxed max-w-lg mb-8 sm:mb-10 font-medium ${isDark ? 'text-white/70' : 'text-slate-600'}`}
-          >
-            {TEXTS.description[lang]}
-          </motion.p>
-
-          {/* Stats Bar (Responsive) */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7 }}
-            className={`flex gap-6 sm:gap-10 mb-8 sm:mb-12 border-l-4 pl-4 sm:pl-6 ${isDark ? 'border-[#00aeef]' : 'border-sky-300'}`}
-          >
-            {TEXTS.stats.map((stat, i) => (
-              <div key={i}>
-                 <p className="text-[#00aeef] text-[9px] sm:text-[10px] uppercase font-black tracking-widest mb-0.5 sm:mb-1">{stat.label[lang]}</p>
-                 <p className={`text-2xl sm:text-3xl font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{stat.value}</p>
-              </div>
-            ))}
-          </motion.div>
-
-          {/* Actions (Full width on mobile) */}
-          <motion.div 
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ delay: 0.8 }}
-             className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto"
-          >
-             <Link href="/join" className={`group relative w-full sm:w-auto flex justify-center px-8 py-3.5 sm:py-4 text-white font-bold rounded-full overflow-hidden transition-all shadow-lg hover:shadow-xl hover:scale-105 active:scale-95
-                ${isDark 
-                  ? "bg-[#00aeef] hover:bg-[#009bd5] shadow-[#00aeef]/40" 
-                  : "bg-[#00aeef] hover:bg-[#009bd5] shadow-sky-300"}`}
-             >
-                <span className="relative z-10 flex items-center gap-3 uppercase tracking-wide text-xs sm:text-sm">
-                   <Heart size={18} className="fill-white" />
-                   {lang === 'mn' ? 'Бидэнтэй Нэгдэх' : 'Join the Club'}
-                </span>
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-             </Link>
-             
-             <button className={`group w-full sm:w-auto flex justify-center px-8 py-3.5 sm:py-4 border font-bold rounded-full backdrop-blur-md uppercase tracking-wide text-xs sm:text-sm items-center gap-2 transition-all hover:shadow-lg active:scale-95
-                ${isDark 
-                  ? "border-white/10 bg-white/5 text-white hover:bg-white/10 hover:border-white/30" 
-                  : "border-slate-200 bg-white/50 text-slate-700 hover:bg-white hover:border-sky-200"}`}
-             >
-                {lang === 'mn' ? 'Дэлгэрэнгүй' : 'Learn More'}
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-             </button>
-          </motion.div>
-        </div>
-
-        {/* --- RIGHT: 3D MISSION CONTROL (Stacked on Mobile) --- */}
-        <div className="relative w-full max-w-md lg:max-w-full mx-auto mt-2 lg:mt-0">
-           <TiltCard>
-             <motion.div 
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2, duration: 1, type: "spring" }}
-                className={`relative z-10 backdrop-blur-2xl border rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 lg:p-10 shadow-2xl transition-colors duration-500
-                   ${isDark 
-                     ? "bg-[#001d30]/80 border-white/10 shadow-black/60" 
-                     : "bg-white/70 border-white/40 shadow-sky-100/50"}`}
-             >
-                {/* Card Header */}
-                <div className={`flex justify-between items-end mb-6 sm:mb-8 border-b pb-4 sm:pb-6 ${isDark ? "border-white/10" : "border-slate-200/60"}`}>
-                   <div>
-                      <h3 className={`text-2xl sm:text-3xl font-black tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>{lang === 'mn' ? 'Үйл Ажиллагаа' : 'Activities'}</h3>
-                      <p className={`text-[10px] sm:text-xs uppercase tracking-[0.2em] mt-1 sm:mt-2 font-bold opacity-80 ${isDark ? "text-[#00aeef]" : "text-sky-600"}`}>
-                          {lang === 'mn' ? 'Гол чиглэлүүд' : 'Key Pillars'}
-                      </p>
-                   </div>
-                   <div className={`p-2 sm:p-3 rounded-2xl border animate-pulse-slow 
-                      ${isDark ? "bg-[#00aeef]/10 border-[#00aeef]/20" : "bg-sky-50 border-sky-100"}`}>
-                      <Globe className="text-[#00aeef] w-6 h-6 sm:w-9 sm:h-9" strokeWidth={1.5} />
-                   </div>
-                </div>
-
-                {/* Info Cards List */}
-                <div className="space-y-3 sm:space-y-4">
-                   {ACTIVITY_CARDS.map((card, idx) => (
-                      <InfoCard key={card.id} data={card} index={idx} lang={lang} isDark={isDark} />
-                   ))}
-                </div>
-
-                {/* Live Member Count Footer */}
-                <div className={`mt-6 sm:mt-8 pt-4 sm:pt-6 border-t flex items-center justify-between ${isDark ? "border-white/10" : "border-slate-200/60"}`}>
-                   <div className="flex items-center gap-3 sm:gap-4">
-                      <div className="flex -space-x-2 sm:-space-x-3">
-                          {[...Array(3)].map((_, i) => (
-                             <div key={i} className={`w-7 h-7 sm:w-9 sm:h-9 rounded-full border-2 relative overflow-hidden ${isDark ? "bg-[#002b49] border-[#00aeef]/30" : "bg-white border-white shadow-sm"}`}>
-                                <div className={`absolute inset-0 ${isDark ? "bg-gradient-to-br from-transparent to-black/30" : "bg-slate-100"}`} />
-                             </div>
-                          ))}
-                          <div className={`w-7 h-7 sm:w-9 sm:h-9 rounded-full border-2 flex items-center justify-center text-[8px] sm:text-[9px] font-black ${isDark ? "bg-[#00aeef] border-[#001d30] text-white" : "bg-sky-500 border-white text-white"}`}>
-                             +50
-                          </div>
-                      </div>
-                      <div className="flex flex-col">
-                        <span className={`text-xs sm:text-sm font-bold ${isDark ? "text-white" : "text-slate-800"}`}>Active Members</span>
-                        <span className={`text-[9px] sm:text-[10px] uppercase tracking-widest ${isDark ? "text-white/40" : "text-slate-400"}`}>Growing daily</span>
-                      </div>
-                   </div>
-                   <div className="h-2 w-2 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e] animate-pulse" />
-                </div>
-             </motion.div>
-           </TiltCard>
-        </div>
-      </div>
-
-      {/* 3. SCROLLING MARQUEE (Adjusted for Mobile) */}
-      <div className={`absolute bottom-0 left-0 w-full z-20 border-t backdrop-blur-sm
-         ${isDark ? "border-white/5 bg-[#00101a]/50" : "border-slate-100 bg-white/60"}`}>
-        <motion.div 
-          animate={{ x: [0, -1000] }}
-          transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-          className="flex gap-8 sm:gap-16 py-3 sm:py-4 items-center whitespace-nowrap"
-        >
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className="flex items-center gap-8 sm:gap-16">
-              <span className={`font-black uppercase text-lg sm:text-3xl tracking-widest ${isDark ? "text-white/20" : "text-slate-300"}`}>
-                {lang === 'mn' ? "ХҮҮХДИЙН ТӨЛӨӨ" : "FOR EVERY CHILD"}
-              </span>
-              <span className="text-[#00aeef] text-sm sm:text-xl">★</span>
-              <span className={`font-black uppercase text-lg sm:text-3xl tracking-widest ${isDark ? "text-white/20" : "text-slate-300"}`}>
-                {lang === 'mn' ? "ГЭРЭЛТ ИРЭЭДҮЙ" : "BRIGHT FUTURE"}
-              </span>
-              <span className="text-[#fbbf24] text-sm sm:text-xl">●</span>
-            </div>
-          ))}
-        </motion.div>
-      </div>
+    <section className="relative w-full min-h-[95vh] flex items-center bg-slate-50 overflow-hidden py-24 lg:py-0">
       
+      {/* ────────────────── 1. FLUID ATMOSPHERIC BACKGROUND ────────────────── */}
+      <div className="absolute inset-0 z-0">
+         {/* Transitioning Background Color */}
+         <motion.div 
+           animate={{ backgroundColor: active.colors.secondary }}
+           transition={{ duration: 1 }}
+           className="absolute inset-0"
+         />
+         
+         {/* Noise Texture */}
+         <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-soft-light" />
+
+         {/* Animated Blobs */}
+         <motion.div 
+            animate={{ 
+              backgroundColor: active.colors.primary,
+              x: [0, 100, -100, 0],
+              y: [0, -50, 50, 0],
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full blur-[140px] opacity-20 mix-blend-multiply"
+         />
+         <motion.div 
+            animate={{ backgroundColor: active.colors.primary }}
+            className="absolute -bottom-[20%] -left-[10%] w-[500px] h-[500px] rounded-full blur-[120px] opacity-15 mix-blend-multiply"
+         />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-16 h-full items-center">
+        
+        {/* ────────────────── 2. LEFT: CONTENT ────────────────── */}
+        <div className="flex flex-col justify-center order-2 lg:order-1">
+          
+          <AnimatePresence mode="wait">
+            <motion.div 
+              key={index} 
+              variants={textContainerVariant}
+              initial="hidden" 
+              animate="visible" 
+              exit="exit" 
+              className="space-y-8"
+            >
+              {/* Top Badge */}
+              <motion.div variants={textItemVariant} className="flex items-center gap-3">
+                <span 
+                  className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-white shadow-sm border border-slate-100 flex items-center gap-2"
+                  style={{ color: active.colors.accent }}
+                >
+                   <FaGlobeEurope /> {active.stat}
+                </span>
+              </motion.div>
+
+              {/* Main Headline */}
+              <motion.div variants={textItemVariant} className="relative z-20">
+                 <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 leading-[0.95] tracking-tight">
+                   Explore <br/>
+                   <span className={`text-transparent bg-clip-text bg-gradient-to-r ${active.colors.gradient}`}>
+                     {t(active.title)}
+                   </span>
+                 </h1>
+                 {/* Decorative Underline */}
+                 <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: 120 }}
+                    transition={{ delay: 0.4, duration: 0.8 }}
+                    className="h-2 mt-4 rounded-full"
+                    style={{ backgroundColor: active.colors.primary }}
+                 />
+              </motion.div>
+
+              {/* Description */}
+              <motion.div variants={textItemVariant} className="max-w-xl">
+                 <h3 className="text-xl font-bold text-slate-800 mb-2">{t(active.subtitle)}</h3>
+                 <p className="text-lg text-slate-600 leading-relaxed font-medium">
+                   {t(active.desc)}
+                 </p>
+              </motion.div>
+
+              {/* Action Buttons */}
+              <motion.div variants={textItemVariant} className="flex flex-wrap items-center gap-4 pt-2">
+                <Link href={active.link}>
+                  <motion.button
+                    whileHover={{ scale: 1.05, paddingRight: "2.5rem" }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`group relative px-8 py-4 rounded-full text-white font-bold text-lg shadow-xl shadow-${active.colors.primary}/20 overflow-hidden flex items-center transition-all bg-gradient-to-r ${active.colors.gradient}`}
+                  >
+                    <span className="relative z-10">{language === 'mn' ? 'Бүртгүүлэх' : 'Start Journey'}</span>
+                    <FaArrowRight className="absolute right-6 opacity-0 group-hover:opacity-100 transition-all transform translate-x-4 group-hover:translate-x-0" />
+                    
+                    {/* Shine Effect */}
+                    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500 ease-in-out z-0" />
+                  </motion.button>
+                </Link>
+
+                <button className="flex items-center gap-3 px-6 py-4 rounded-full bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-all text-slate-600 font-bold group">
+                   <div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+                      <FaPlayCircle size={14} />
+                   </div>
+                   <span>How it works</span>
+                </button>
+              </motion.div>
+
+              {/* Trust Indicator */}
+              <motion.div variants={textItemVariant} className="flex items-center gap-4 pt-6 opacity-80">
+                 <div className="flex -space-x-2">
+                     <div className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white" />
+                     <div className="w-8 h-8 rounded-full bg-slate-300 border-2 border-white" />
+                     <div className="w-8 h-8 rounded-full bg-slate-400 border-2 border-white flex items-center justify-center text-[10px] font-bold text-white">500+</div>
+                 </div>
+                 <div className="text-xs font-semibold text-slate-500">
+                    Trusted by families & <br/> students worldwide.
+                 </div>
+              </motion.div>
+
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* ────────────────── 3. RIGHT: 3D CARD STACK ────────────────── */}
+        <div className="relative order-1 lg:order-2 h-[500px] lg:h-[600px] flex items-center justify-center lg:justify-end perspective-[2000px]">
+           
+           {/* Huge ISO Watermark (Behind) */}
+           <motion.div 
+             key={`iso-${active.iso}`}
+             initial={{ opacity: 0, x: 50 }}
+             animate={{ opacity: 0.1, x: 0 }}
+             exit={{ opacity: 0, x: -50 }}
+             transition={{ duration: 0.8 }}
+             className="absolute top-1/2 left-1/2 lg:left-auto lg:right-0 transform -translate-x-1/2 lg:translate-x-1/4 -translate-y-1/2 text-[12rem] lg:text-[20rem] font-black text-slate-900 pointer-events-none select-none z-0 tracking-tighter"
+             style={{ color: active.colors.primary }}
+           >
+             {active.iso}
+           </motion.div>
+
+           {/* The Image Card Container */}
+           <div className="relative w-[320px] md:w-[380px] aspect-[3/4] z-20">
+              <AnimatePresence initial={false} custom={direction} mode="popLayout">
+                <motion.div
+                  key={index}
+                  custom={direction}
+                  variants={cardVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  className="absolute inset-0 rounded-[2.5rem] overflow-hidden bg-white shadow-2xl"
+                  style={{ boxShadow: `0 30px 60px -12px ${active.colors.primary}60` }} // Dynamic Colored Shadow
+                >
+                  <div className="w-full h-full relative group">
+                    {/* Background Image */}
+                    <img 
+                      src={active.img} 
+                      alt={t(active.title)} 
+                      className="w-full h-full object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700"
+                    />
+                    
+                    {/* Gradient Overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80`} />
+                    
+                    {/* Top UI */}
+                    <div className="absolute top-0 inset-x-0 p-6 flex justify-between items-start">
+                        <div className="w-14 h-14 rounded-2xl bg-white/90 backdrop-blur-md flex items-center justify-center text-3xl shadow-lg">
+                           {active.flag}
+                        </div>
+                        <div className="px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-wide flex items-center gap-1">
+                           <FaCheckCircle className="text-emerald-400" /> Verified
+                        </div>
+                    </div>
+
+                    {/* Bottom Info Glass Card */}
+                    <div className="absolute bottom-6 left-6 right-6">
+                       <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-5 rounded-3xl text-white">
+                          <h4 className="text-2xl font-bold mb-1">{t(active.title)}</h4>
+                          <div className="flex items-center gap-3 text-xs font-medium text-slate-200">
+                             <span>Program ID: #{active.iso}00{index+1}</span>
+                             <span className="w-1 h-1 bg-white/50 rounded-full" />
+                             <span>Open Now</span>
+                          </div>
+                       </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+
+              {/* Navigation Buttons (Floating) */}
+              <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-4 z-30">
+                 <button 
+                   onClick={() => changeSlide(-1)}
+                   className="w-14 h-14 rounded-full bg-white text-slate-400 hover:text-slate-900 flex items-center justify-center transition-all shadow-lg hover:scale-110 active:scale-95"
+                 >
+                   <FaChevronLeft size={18} />
+                 </button>
+                 <button 
+                   onClick={() => changeSlide(1)}
+                   className="w-14 h-14 rounded-full text-white flex items-center justify-center transition-all shadow-lg hover:scale-110 active:scale-95"
+                   style={{ backgroundColor: active.colors.primary }}
+                 >
+                   <FaChevronRight size={18} />
+                 </button>
+              </div>
+
+           </div>
+           
+           {/* Decorative Card Stack (Visual Depth) */}
+           <motion.div 
+             animate={{ 
+               rotate: [6, 8, 6],
+               backgroundColor: active.colors.secondary
+             }}
+             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+             className="absolute top-4 lg:right-4 w-[320px] md:w-[380px] h-full rounded-[2.5rem] opacity-60 -z-10 border-2 border-slate-100"
+           />
+        </div>
+
+      </div>
     </section>
   );
-}
+};
+
+export default HeroSection;

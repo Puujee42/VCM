@@ -1,278 +1,392 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { 
-  ArrowRight, 
-  Sparkles, 
-  History, 
-  Lightbulb, 
-  Target, 
-  Megaphone,
-  Mail,
-  MapPin,
-  Instagram,
-  Calendar,
-  Users,
-  BriefcaseBusiness,
-  Star 
-} from "lucide-react";
-import { motion } from "framer-motion";
-import { useTheme } from "next-themes";
+  motion, 
+  useScroll, 
+  useTransform, 
+  useSpring, 
+  useMotionValue, 
+  useMotionTemplate, 
+  Variants 
+} from "framer-motion";
+import { FaStar, FaGlobeEurope, FaCertificate, FaHeart, FaUserGraduate, FaPassport } from "react-icons/fa";
 import { useLanguage } from "../context/LanguageContext";
 
-// --- CONFIG ---
-const PAGE_CONTENT = {
-  hero: {
-    badge: { en: "Who We Are", mn: "Бид Хэн Бэ" },
-    headline: { en: "Driving Change,", mn: "Өөрчлөлтийг Хөтлөгч," },
-    highlight: { en: "For Every Child", mn: "Хүүхэд Бүрийн Төлөө" },
-    description: {
-      en: "The MNUMS Student UNICEF Club is a vibrant community committed to advocating for children's rights and welfare across Mongolia. Join us in making impactful differences.",
-      mn: "АШУҮИС-ийн Оюутны UNICEF Клуб нь Монгол улсын хүүхдийн эрх, сайн сайхны төлөө зүтгэдэг идэвхтэй баг юм. Бидэнтэй нэгдэж, бодит өөрчлөлтийг бүтээцгээе."
-    },
-    cta1: { en: "Our Mission", mn: "Бидний Эрхэм Зорилго" },
-    cta2: { en: "Join Us", mn: "Бидэнтэй Нэгдэх" },
-  },
-  ourStory: {
-    heading: { en: "Our Story", mn: "Бидний Түүх" },
-    subtitle: { en: "A Timeline of Dedication and Growth", mn: "Зориулалт ба Өсөлтийн Он тооллын Бүтээл" },
-    p1: { 
-      en: "Established in 2025, the MNUMS Student UNICEF Club was founded under the dedicated supervision of Lecturer B. Narangarav. Our journey began with a clear vision to extend the reach of UNICEF Mongolia’s mission within the academic community.",
-      mn: "2025 онд Багш Б.Нарангаравын удирдлага дор АШУҮИС-ийн Оюутны UNICEF Клуб байгуулагдсан. Бидний аян UNICEF Монголын эрхэм зорилгыг сургуулийн орчинд түгээх тодорхой зорилгоор эхэлсэн юм."
-    },
-    p2: { 
-      en: "We actively collaborate with UNICEF Mongolia to implement impactful voluntary activities and campaigns, transforming 'small actions' into 'big differences' for every child. Our commitment is to foster a vibrant and sustainable club that truly makes a difference in society.",
-      mn: "Бид UNICEF Монгол-той идэвхтэй хамтран ажиллаж, 'жижиг үйлдэл'-ийг 'том өөрчлөлт' болгон хувиргадаг. Бидний амлалт бол нийгэмд бодит хувь нэмэр оруулдаг, тогтвортой, идэвхтэй клуб байгуулах явдал юм."
-    },
-    keyFigure: { en: "Supervisor: B. Narangarav, Lecturer, MNUMS", mn: "Удирдагч: Б. Нарангарав, АШУҮИС-ийн Багш" },
-  },
-  ourMission: {
-    heading: { en: "Our Mission & Vision", mn: "Бидний Эрхэм Зорилго & Алсын Хараа" },
-    goals: [
-      { icon: Users, title: { en: "Promote Child Rights", mn: "Хүүхдийн Эрхийг Дэмжих" }, desc: { en: "Advocate for child rights and gender equality among students.", mn: "Оюутнуудын дунд хүүхдийн эрх, жендэрийн тэгш байдлыг сурталчлах." } },
-      { icon: Lightbulb, title: { en: "Inclusive Learning", mn: "Хүртээмжтэй Орчин" }, desc: { en: "Contribute to creating a sensitive and inclusive learning environment.", mn: "Жендэрийн мэдрэмжтэй, хүртээмжтэй сургалтын орчныг бий болгоход хувь нэмэр оруулах." } },
-      { icon: Sparkles, title: { en: "Voluntary Actions", mn: "Сайн Дурын Ажил" }, desc: { en: "Collaborate with UNICEF Mongolia for impactful voluntary activities.", mn: "UNICEF Mongolia-тай хамтран сайн дурын үйл ажиллагааг өрнүүлэх." } },
-      { icon: History, title: { en: "Sustainable Future", mn: "Тогтвортой Ирээдүй" }, desc: { en: "Establish a vibrant and sustainable club during academic periods.", mn: "Сургуулийнхаа хэмжээнд үе дамжсан тогтвортой идэвхтэй клуб байгуулах." } }
-    ],
-  },
-  ourActivities: {
-    heading: { en: "What We Do", mn: "Бидний Үйл Ажиллагаа" },
-    activities: [
-      { id: "01", icon: Megaphone, title: { en: "Conduct Campaigns", mn: "Аян Зохион Байгуулах" }, desc: { en: "Lead campaigns to positively impact social psychology and raise awareness.", mn: "Нийгмийн сэтгэл зүйд эерэг өөрчлөлт оруулах кампанит ажил хийх." } },
-      { id: "02", icon: BriefcaseBusiness, title: { en: "Lectures & Training", mn: "Лекц, Сургалт" }, desc: { en: "Organize trainings, lectures, and discussions on key topics.", mn: "Сургалт, лекц, хэлэлцүүлэг зохион байгуулах." } },
-      { id: "03", icon: Users, title: { en: "Club Collaborations", mn: "Клубуудын Хамтын Ажиллагаа" }, desc: { en: "Collaborate with other UNICEF clubs and partner organizations.", mn: "UNICEF болон бусад клубуудтэй хамтран ажиллах." } },
-      { id: "04", icon: Calendar, title: { en: "Annual Reporting", mn: "Жилийн Тайлан" }, desc: { en: "Produce transparent annual reports on club activities and impact.", mn: "Жил бүр үйл ажиллагааны тайлан гаргах." } }
-    ]
-  },
-  connect: {
-    heading: { en: "Connect With Us", mn: "Бидэнтэй Холбогдох" },
-    contactInfo: [
-      { icon: Instagram, label: "@mnums_foreverychild", href: "https://instagram.com/mnums_foreverychild" },
-      { icon: Mail, label: "unicef.club@st.mnums.edu.mn", href: "mailto:unicef.club@st.mnums.edu.mn" },
-      { icon: MapPin, label: "MNUMS Campus, Ulaanbaatar", href: "https://maps.google.com/?q=MNUMS" },
-    ]
+// --- ANIMATION VARIANTS ---
+const containerVar: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 }
   }
 };
 
-// --- ANIMATION VARIANTS ---
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  visible: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 80, damping: 15, delayChildren: 0.1, staggerChildren: 0.1 } },
-};
-
-const itemVariants = {
+const itemVar: Variants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
+  visible: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { type: "spring", bounce: 0.4, duration: 0.9 } 
+  }
 };
 
-export default function AboutPage() {
-  const { language: lang } = useLanguage();
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
+// --- DATA ---
+const aboutData = {
+  mn: {
+    tag: "БИДНИЙ ТУХАЙ",
+    heroTitle: "Монгол Залуусыг",
+    heroHighlight: "Хөгжлийн Замд",
+    heroSubtitle: "Дэлхийтэй холбогдох гүүр.",
+    intro: "Бид 20 жилийн туршлагаараа 3000+ залуусыг дэлхийн соёлтой танилцуулж, амжилтын түүхийг хамт бүтээлцлээ.",
+    
+    storyTitle: "Германаас эхлэлтэй түүх",
+    storyP1: "Манай компани 2005 онд үүсгэн байгуулагдсан бөгөөд үүсгэн байгуулагч, өнөөгийн захирал маань ХБНГУ-ын Au-Pair хөтөлбөрт оролцсоноор амьдралын болон мэргэжлийн замналаа эхлүүлсэн юм.",
+    storyP2: "Тэрбээр Германд зочин айлын хүүхдийг асарч, соёл уламжлалтай танилцан, хэлний мэдлэгээ сайжруулж, хувь хүнийхээ хувьд хөгжин, ирээдүйг харах шинэ өнцгийг олж авсан. Энэхүү үр шимийг эх орныхоо залууст хуваалцах чин хүслээр энэ байгууллагыг байгуулсан билээ.",
+    
+    stats: [
+        { val: "20", label: "Жил", sub: "Ажлын Туршлага" },
+        { val: "3000+", label: "Оролцогч", sub: "Амжилттай" },
+        { val: "14", label: "Жил", sub: "IAPA Гишүүн" },
+        { val: "55", label: "Жил", sub: "Олон Улсын Түүх" },
+    ],
+    
+    cards: [
+      { icon: FaUserGraduate, title: "Хувь Хүний Хөгжил", text: "Бие даах чадвар, хариуцлага болон ирээдүйн зорилгоо тодорхойлох боломж." },
+      { icon: FaCertificate, title: "IAPA Итгэмжлэл", text: "Монгол дахь цорын ганц 'Longstanding Member' албан ёсны эрхтэй байгууллага." },
+      { icon: FaGlobeEurope, title: "Соёлын Солилцоо", text: "Шинэ хэл сурч, Европын орнуудаар аялж, дэлхийн иргэн болох." },
+      { icon: FaPassport, title: "Бодит Туршлага", text: "Германд ажиллаж амьдарсан туршлага дээр үндэслэсэн мэргэжлийн зөвлөгөө." }
+    ]
+  },
+  en: {
+    tag: "ABOUT US",
+    heroTitle: "Leading Youth to",
+    heroHighlight: "Global Growth",
+    heroSubtitle: "Your bridge to the world.",
+    intro: "With 20 years of experience, we have connected 3000+ young people with global culture.",
+    storyTitle: "A Story Starting in Germany",
+    storyP1: "Founded in 2005, our director started their professional journey by participating in the Au-Pair program in Germany.",
+    storyP2: "Through caring for host family children and experiencing the culture, they gained a new perspective. We were founded to share this life-changing experience with Mongolian youth.",
+    stats: [
+        { val: "20", label: "Years", sub: "Experience" },
+        { val: "3000+", label: "Alumni", sub: "Participants" },
+        { val: "14", label: "Years", sub: "IAPA Member" },
+        { val: "55", label: "Years", sub: "Program History" },
+    ],
+    cards: [
+      { icon: FaUserGraduate, title: "Personal Growth", text: "Develop independence and define future career goals." },
+      { icon: FaCertificate, title: "IAPA Accredited", text: "The only 'Longstanding Member' agency in Mongolia." },
+      { icon: FaGlobeEurope, title: "Cultural Exchange", text: "Learn languages, travel Europe, and become a global citizen." },
+      { icon: FaPassport, title: "Real Experience", text: "Professional guidance based on actual experience in Germany." }
+    ]
+  },
+};
 
-  useEffect(() => setMounted(true), []);
-  if (!mounted) return null;
+export default function AboutPageRed() {
+  const { language } = useLanguage();
+  const t = aboutData[language];
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const isDark = theme === 'dark' || !theme;
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
+  
+  // Parallax effects
+  const yHero = useTransform(scrollYProgress, [0, 1], [0, -120]);
+  const textY = useTransform(scrollYProgress, [0, 0.5], [60, 0]);
 
   return (
-    <div className={`relative transition-colors duration-700 pt-24 min-h-screen overflow-hidden ${isDark ? "bg-[#001829] text-white" : "bg-slate-50 text-slate-900"}`}>
+    <section 
+      ref={containerRef} 
+      className="relative w-full min-h-screen bg-white overflow-hidden py-32 font-sans selection:bg-[#D93644] selection:text-white"
+    >
       
-      {/* 1. GLOBAL BACKGROUND ELEMENTS */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        <div className={`absolute -top-40 -left-40 w-[800px] h-[800px] rounded-full blur-[200px] transition-opacity duration-700 ${isDark ? "bg-[#00aeef] opacity-[0.08]" : "bg-sky-200 opacity-[0.5]"}`} />
-        <div className={`absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full blur-[200px] transition-opacity duration-700 ${isDark ? "bg-[#005691] opacity-[0.1]" : "bg-blue-200 opacity-[0.4]"}`} />
-        <div className="absolute inset-0 bg-[url('/noise.png')] opacity-[0.03] mix-blend-overlay" />
+      {/* ─── 1. WARM RED ATMOSPHERE ─── */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        {/* Dominant Red Blob Top Right */}
+        <motion.div 
+          animate={{ 
+            x: [0, 50, -50, 0], 
+            y: [0, -30, 30, 0],
+            scale: [1, 1.1, 0.9, 1] 
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[-15%] right-[-10%] w-[900px] h-[900px] bg-gradient-to-br from-rose-100 via-[#D93644]/10 to-transparent rounded-full blur-[100px] opacity-80" 
+        />
+        {/* Secondary Emerald/Rose Mix Bottom Left */}
+        <motion.div 
+          animate={{ 
+            x: [0, -70, 30, 0], 
+            y: [0, 60, -40, 0],
+            scale: [1, 1.2, 0.8, 1] 
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[-10%] left-[-15%] w-[800px] h-[800px] bg-gradient-to-tr from-[#D93644]/20 via-rose-100 to-emerald-50 rounded-full blur-[100px]" 
+        />
+        {/* Grain Texture for that 'Editorial' look */}
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.25] mix-blend-overlay" />
       </div>
 
-      {/* --- HERO SECTION --- */}
-      <section className="relative text-center py-24 px-4 max-w-5xl mx-auto z-10">
-        <motion.span
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`inline-block px-4 py-2 rounded-full border font-black uppercase tracking-widest text-xs mb-6 transition-colors ${isDark ? "bg-[#00aeef]/10 border-[#00aeef]/30 text-[#00aeef]" : "bg-white border-sky-100 text-[#00aeef] shadow-sm"}`}
-        >
-          {PAGE_CONTENT.hero.badge[lang]}
-        </motion.span>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-5xl md:text-7xl font-black leading-[0.9] mb-8 tracking-tighter"
-        >
-          {PAGE_CONTENT.hero.headline[lang]} <br />
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00aeef] to-[#40c9ff]">
-            {PAGE_CONTENT.hero.highlight[lang]}
-          </span>
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className={`text-lg max-w-2xl mx-auto leading-relaxed mb-12 font-medium transition-colors ${isDark ? "text-white/70" : "text-slate-600"}`}
-        >
-          {PAGE_CONTENT.hero.description[lang]}
-        </motion.p>
-        <motion.div className="flex flex-wrap justify-center gap-4">
-          <Link href="#mission" className="flex items-center gap-2 px-8 py-4 bg-[#00aeef] text-white font-bold rounded-full shadow-lg shadow-[#00aeef]/30 hover:bg-[#009bd5] transition-all transform hover:-translate-y-1">
-            {PAGE_CONTENT.hero.cta1[lang]} <ArrowRight size={18} />
-          </Link>
-          <Link href="/join" className={`flex items-center gap-2 px-8 py-4 border font-bold rounded-full transition-all transform hover:-translate-y-1 ${isDark ? "border-white/20 bg-white/10 text-white hover:bg-white/20" : "border-slate-200 bg-white text-slate-900 hover:bg-slate-50 shadow-sm"}`}>
-            {PAGE_CONTENT.hero.cta2[lang]} <ArrowRight size={18} />
-          </Link>
-        </motion.div>
-      </section>
-
-      {/* --- OUR STORY SECTION --- */}
-      <motion.section 
-        variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-        className="relative py-20 px-4 max-w-6xl mx-auto z-10"
-      >
-        <h2 className="text-center text-4xl md:text-6xl font-black mb-16 tracking-tight">
-          {PAGE_CONTENT.ourStory.heading[lang]}
-        </h2>
-
-        <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div variants={itemVariants} className={`relative rounded-[2.5rem] overflow-hidden shadow-2xl border transition-colors ${isDark ? "border-white/10 bg-[#002b49]/40" : "border-slate-200 bg-white p-2"}`}>
-                <Image 
-                  src="https://images.unsplash.com/photo-1542810634-71277d95fa6b?q=80&w=2070&auto=format&fit=crop"
-                  alt="Team collaboration" width={600} height={400} className="w-full h-auto object-cover opacity-90 rounded-[2rem]"
-                />
-                <div className={`absolute bottom-8 left-8 text-white text-lg font-black px-4 py-2 rounded-xl backdrop-blur-md ${isDark ? "bg-black/20" : "bg-[#00aeef]/80"}`}>
-                    MNUMS, Est. 2025
-                </div>
+      <div className="container relative z-10 px-6 mx-auto max-w-7xl">
+        
+        {/* ─── 2. HERO SECTION ─── */}
+        <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-center mb-32">
+          
+          {/* Text Content */}
+          <motion.div 
+             initial="hidden"
+             whileInView="visible"
+             viewport={{ once: true }}
+             variants={containerVar}
+             style={{ y: textY }}
+             className="space-y-10 relative pt-10"
+          >
+            {/* Tagline */}
+            <motion.div variants={itemVar} className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-white/90 border border-red-100 shadow-[0_4px_20px_-10px_rgba(217,54,68,0.3)] backdrop-blur-md">
+               <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D93644] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-[#D93644]"></span>
+               </span>
+               <span className="text-xs font-black uppercase tracking-[0.25em] text-[#D93644]">{t.tag}</span>
             </motion.div>
 
-            <div className="space-y-8">
-                <motion.p variants={itemVariants} className={`text-lg leading-relaxed border-l-4 border-[#00aeef] pl-6 font-medium transition-colors ${isDark ? "text-white/80" : "text-slate-700"}`}>
-                    {PAGE_CONTENT.ourStory.p1[lang]}
-                </motion.p>
-                <motion.p variants={itemVariants} className={`text-lg leading-relaxed border-l-4 border-[#005691] pl-6 font-medium transition-colors ${isDark ? "text-white/80" : "text-slate-700"}`}>
-                    {PAGE_CONTENT.ourStory.p2[lang]}
-                </motion.p>
-                <motion.div variants={itemVariants} className={`mt-8 flex items-center gap-3 transition-colors ${isDark ? "text-white/50" : "text-slate-400"}`}>
-                    <Star size={20} className="text-[#fbbf24] fill-[#fbbf24]" />
-                    <span className="font-bold uppercase tracking-widest text-xs">{PAGE_CONTENT.ourStory.keyFigure[lang]}</span>
-                </motion.div>
-            </div>
-        </div>
-      </motion.section>
+            {/* Title with Red Dominance */}
+            <motion.h1 variants={itemVar} className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.95] text-slate-900 drop-shadow-sm">
+              <span className="block text-slate-300 relative z-10">
+                {t.heroTitle}
+              </span>
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#D93644] via-rose-500 to-emerald-500 filter drop-shadow-sm">
+                {t.heroHighlight}
+              </span>
+              <span className="block text-2xl md:text-4xl font-serif italic text-slate-400 mt-4 font-normal">
+                {t.heroSubtitle}
+              </span>
+            </motion.h1>
 
-      {/* --- OUR MISSION SECTION --- */}
-      <motion.section 
-        id="mission" variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-        className="relative py-32 px-4 z-10"
-      >
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-center text-4xl md:text-6xl font-black mb-20 tracking-tight">
-            {PAGE_CONTENT.ourMission.heading[lang]}
-          </h2>
+            <motion.p variants={itemVar} className="text-xl font-medium text-slate-600 leading-relaxed border-l-[6px] border-rose-300 pl-8 max-w-lg">
+              {t.intro}
+            </motion.p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {PAGE_CONTENT.ourMission.goals.map((goal, index) => (
-              <motion.div 
-                key={index} variants={itemVariants} whileHover={{ y: -10 }}
-                className={`p-8 rounded-[2.5rem] border transition-all duration-300 group shadow-lg ${isDark ? "bg-[#002b49]/60 border-white/10 hover:border-[#00aeef]/50" : "bg-white border-slate-200 hover:border-sky-300 shadow-slate-200/50"}`}
-              >
-                <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-8 shadow-xl transition-all group-hover:rotate-6 ${isDark ? "bg-[#00aeef] text-white" : "bg-[#00aeef] text-white"}`}>
-                  <goal.icon size={32} strokeWidth={2.5} />
+            {/* Stats Counter */}
+            <motion.div variants={itemVar} className="grid grid-cols-2 gap-y-10 gap-x-12 pt-4">
+               {t.stats.slice(0,2).map((stat, i) => (
+                  <div key={i} className="group">
+                     <div className="text-6xl font-black text-slate-900 group-hover:text-[#D93644] transition-colors duration-500 relative inline-block">
+                       {stat.val}
+                       {/* Sparkle Icon */}
+                       <FaStar className="absolute -top-2 -right-6 text-2xl text-rose-400 opacity-0 group-hover:opacity-100 transition-all duration-300 animate-pulse" />
+                     </div>
+                     <div className="text-xs font-bold uppercase tracking-widest text-slate-400 mt-2 group-hover:text-emerald-600 transition-colors">
+                        {stat.label} <span className="opacity-50 mx-1 text-red-300">|</span> {stat.sub}
+                     </div>
+                  </div>
+               ))}
+            </motion.div>
+          </motion.div>
+
+          {/* Hero Image */}
+          <div className="relative">
+             {/* Curtain Reveal Image */}
+             <motion.div 
+               style={{ y: yHero }}
+               initial={{ clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)" }}
+               whileInView={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" }}
+               viewport={{ once: true }}
+               transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }} 
+               // Changed Shadow & Border to Red/Rose tones
+               className="relative z-10 rounded-[2.5rem] overflow-hidden shadow-2xl shadow-rose-900/20 border-[8px] border-white bg-white aspect-[4/5] w-full"
+             >
+                <div className="relative w-full h-full group">
+                   <Image
+                     src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=800&q=80" 
+                     alt="Mongolian Youth" 
+                     fill 
+                     className="object-cover transition-transform duration-[2s] group-hover:scale-110"
+                   />
+                   {/* Warm Red Tint Overlay */}
+                   <div className="absolute inset-0 bg-gradient-to-t from-rose-900/40 via-transparent to-transparent opacity-60 mix-blend-multiply" />
                 </div>
-                <h3 className={`text-xl font-black mb-4 transition-colors ${isDark ? "text-white group-hover:text-[#00aeef]" : "text-slate-900 group-hover:text-[#00aeef]"}`}>
-                  {goal.title[lang]}
-                </h3>
-                <p className={`text-sm font-medium transition-colors ${isDark ? "text-white/60" : "text-slate-500"}`}>
-                  {goal.desc[lang]}
-                </p>
-              </motion.div>
-            ))}
+             </motion.div>
+
+             {/* Rotating Badge - "Established 2005" */}
+             <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                className="absolute -top-12 -right-6 md:-right-12 z-20 w-40 h-40 flex items-center justify-center bg-white rounded-full shadow-2xl border-[6px] border-rose-50"
+             >
+                 <svg viewBox="0 0 100 100" width="150" height="150" className="animate-spin-slow absolute">
+                   <path id="curve" d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="transparent" />
+                   <text className="text-[12px] font-bold uppercase tracking-widest fill-[#D93644]">
+                     <textPath href="#curve">
+                       Mongolian Au Pair Agency • 2005 •
+                     </textPath>
+                   </text>
+                 </svg>
+                 <div className="relative z-10 flex flex-col items-center leading-none">
+                    <span className="text-4xl font-black text-slate-900">20</span>
+                    <span className="text-[10px] font-bold uppercase text-red-400 tracking-wider">Years</span>
+                 </div>
+             </motion.div>
           </div>
         </div>
-      </motion.section>
 
-      {/* --- WHAT WE DO SECTION --- */}
-      <motion.section 
-        variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-        className="relative py-20 px-4 z-10 max-w-7xl mx-auto"
-      >
-        <h2 className="text-center text-4xl md:text-6xl font-black mb-20 tracking-tight">
-          {PAGE_CONTENT.ourActivities.heading[lang]}
-        </h2>
+        {/* ─── 3. STORY SECTION ─── */}
+        <div className="grid lg:grid-cols-12 gap-12 mb-32 items-start">
+           
+           <motion.div 
+             initial={{ opacity: 0, x: -30 }}
+             whileInView={{ opacity: 1, x: 0 }}
+             viewport={{ once: true }}
+             className="lg:col-span-5 relative"
+           >
+              {/* Sticky Heading */}
+              <div className="sticky top-32 space-y-6">
+                 <div className="w-20 h-1.5 bg-gradient-to-r from-[#D93644] to-rose-400 rounded-full" />
+                 <h2 className="text-4xl md:text-5xl font-black text-slate-900 leading-tight">
+                    {t.storyTitle}
+                 </h2>
+                 
+                 {/* Secondary Stats */}
+                 <div className="grid grid-cols-2 gap-6 pt-8 border-t border-slate-100">
+                    {t.stats.slice(2,4).map((stat, i) => (
+                       <div key={i}>
+                          <h4 className="text-4xl font-black text-[#D93644]">{stat.val}</h4>
+                          <p className="text-xs font-bold text-slate-400 uppercase">{stat.label}</p>
+                          <p className="text-[10px] text-slate-400 mt-1">{stat.sub}</p>
+                       </div>
+                    ))}
+                 </div>
+              </div>
+           </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {PAGE_CONTENT.ourActivities.activities.map((activity, index) => (
-            <motion.div 
-              key={index} variants={itemVariants}
-              className={`relative p-8 rounded-[2.5rem] border-t-4 transition-all duration-300 group shadow-xl ${isDark ? "bg-[#001829] border-[#00aeef] shadow-[#00aeef]/5" : "bg-white border-[#00aeef] shadow-slate-200/50"}`}
-            >
-                <div className="mb-6 flex items-center justify-between">
-                    <div className={`p-4 rounded-2xl transition-colors ${isDark ? "bg-[#00aeef]/10" : "bg-sky-50"}`}>
-                        <activity.icon size={28} strokeWidth={2.5} className="text-[#00aeef]" />
+           <motion.div 
+             initial={{ opacity: 0, y: 30 }}
+             whileInView={{ opacity: 1, y: 0 }}
+             viewport={{ once: true }}
+             className="lg:col-span-7 bg-white/60 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 border border-rose-50 shadow-[0_20px_60px_-15px_rgba(217,54,68,0.1)] space-y-6"
+           >
+              <p className="text-lg md:text-xl text-slate-700 leading-relaxed font-medium">
+                 {t.storyP1}
+              </p>
+              <p className="text-lg md:text-xl text-slate-500 leading-relaxed font-light">
+                 {t.storyP2}
+              </p>
+              
+              <div className="pt-6">
+                 <div className="inline-flex items-center gap-4 p-4 rounded-2xl bg-gradient-to-r from-red-50 to-white border border-red-100">
+                    <div className="p-3 bg-white rounded-xl text-[#D93644] shadow-sm">
+                       <FaCertificate size={24} />
                     </div>
-                    <span className={`text-3xl font-black opacity-10 transition-opacity group-hover:opacity-30 ${isDark ? "text-white" : "text-slate-900"}`}>
-                        {activity.id}
-                    </span>
-                </div>
-                <h3 className={`text-2xl font-black mb-3 transition-colors ${isDark ? "text-white group-hover:text-[#00aeef]" : "text-slate-900 group-hover:text-[#00aeef]"}`}>
-                    {activity.title[lang]}
-                </h3>
-                <p className={`text-sm font-medium transition-colors ${isDark ? "text-white/60" : "text-slate-500"}`}>
-                    {activity.desc[lang]}
-                </p>
-            </motion.div>
-          ))}
+                    <div>
+                       <h4 className="font-bold text-slate-900">Longstanding Member</h4>
+                       <p className="text-sm text-red-500/80 font-medium">International Au-Pair Association (IAPA)</p>
+                    </div>
+                 </div>
+              </div>
+           </motion.div>
         </div>
-      </motion.section>
 
-      {/* --- CONNECT SECTION --- */}
-      <motion.section 
-        variants={sectionVariants} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}
-        className="relative py-32 px-4 z-10 max-w-5xl mx-auto"
-      >
-        <h2 className="text-center text-4xl md:text-5xl font-black mb-16 tracking-tight">
-          {PAGE_CONTENT.connect.heading[lang]}
-        </h2>
+        {/* ─── 4. VALUES (Red-Themed 3D Grid) ─── */}
+        <div>
+           <div className="text-center max-w-2xl mx-auto mb-16">
+              <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4">Бидний Давуу Тал</h2>
+              {/* Gradient Divider: Red to Emerald */}
+              <div className="w-32 h-1.5 bg-gradient-to-r from-[#D93644] via-rose-400 to-emerald-400 mx-auto rounded-full"/>
+           </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {PAGE_CONTENT.connect.contactInfo.map((contact, index) => (
-            <motion.div 
-              key={index} variants={itemVariants} whileHover={{ y: -5 }}
-              className={`p-10 rounded-[3rem] border transition-all duration-300 flex flex-col items-center group shadow-lg ${isDark ? "bg-[#002b49]/60 border-white/10 hover:border-[#00aeef]/40" : "bg-white border-slate-200 hover:border-sky-300 shadow-slate-200/50"}`}
-            >
-              <Link href={contact.href} target="_blank" className="flex flex-col items-center space-y-6">
-                <div className={`p-5 rounded-[2rem] transition-all group-hover:scale-110 ${isDark ? "bg-[#00aeef]/10 text-[#00aeef]" : "bg-sky-50 text-[#00aeef]"}`}>
-                   <contact.icon size={40} strokeWidth={1.5} />
-                </div>
-                <span className={`text-sm font-black tracking-tight transition-colors ${isDark ? "text-white/80 group-hover:text-white" : "text-slate-600 group-hover:text-slate-900"}`}>
-                   {contact.label}
-                </span>
-              </Link>
-            </motion.div>
-          ))}
+           <div className="grid md:grid-cols-2 gap-8">
+              {t.cards.map((card, i) => (
+                <RedTiltCard key={i} {...card} index={i} />
+              ))}
+           </div>
         </div>
-      </motion.section>
 
-      {/* Spacer */}
-      <div className="h-40" /> 
-    </div>
+      </div>
+    </section>
   );
 }
+
+// ─── 3D MAGNETIC CARD (Red Dominant) ───
+interface CardProps {
+  icon: any;
+  title: string;
+  text: string;
+  index: number;
+}
+
+const RedTiltCard = ({ icon: Icon, title, text, index }: CardProps) => {
+  const ref = useRef<HTMLDivElement>(null); 
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const xSpring = useSpring(x, { stiffness: 150, damping: 15 });
+  const ySpring = useSpring(y, { stiffness: 150, damping: 15 });
+  const rotateX = useTransform(ySpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(xSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const glareX = useTransform(xSpring, [-0.5, 0.5], ["0%", "100%"]);
+  const glareY = useTransform(ySpring, [-0.5, 0.5], ["0%", "100%"]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const xPct = (e.clientX - rect.left) / rect.width - 0.5;
+    const yPct = (e.clientY - rect.top) / rect.height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
+  // Logic: 3 cards Red-themed, 1 card Emerald-themed for accent
+  const isRed = index !== 1; // Arbitrary pattern for variety
+
+  return (
+    <motion.div
+      ref={ref}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
+      className={`group relative min-h-[240px] p-10 rounded-[2.5rem] bg-white border shadow-xl cursor-pointer perspective-1000 overflow-hidden
+        ${isRed 
+          ? "border-red-50 hover:border-red-200 shadow-rose-100/50" 
+          : "border-emerald-50 hover:border-emerald-200 shadow-emerald-100/50"}`}
+    >
+      {/* Dynamic Glare */}
+      <motion.div 
+         style={{ background: useMotionTemplate`radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.8), transparent 50%)` }}
+         className="absolute inset-0 rounded-[2.5rem] opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity duration-300 z-20 mix-blend-overlay"
+      />
+
+      <div style={{ transform: "translateZ(30px)" }} className="relative z-10 h-full flex flex-col items-start">
+        {/* Icon Box */}
+        <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:rotate-6
+          ${isRed 
+            ? "bg-rose-50 text-[#D93644] group-hover:bg-[#D93644] group-hover:text-white" 
+            : "bg-emerald-50 text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white"}`}>
+          <Icon size={28} />
+        </div>
+        
+        <h3 className={`text-xl font-black mb-3 group-hover:translate-x-1 transition-transform
+           ${isRed ? "text-slate-900" : "text-slate-900"}`}>
+           {title}
+        </h3>
+        
+        <p className="text-sm text-slate-500 font-medium leading-relaxed mt-auto">
+          {text}
+        </p>
+      </div>
+
+      {/* Decorative Blob in corner */}
+      <div className={`absolute -right-12 -bottom-12 w-48 h-48 rounded-full blur-[70px] opacity-0 group-hover:opacity-20 transition-opacity duration-500 z-0
+         ${isRed ? "bg-[#D93644]" : "bg-emerald-500"}`} 
+      />
+    </motion.div>
+  );
+};
