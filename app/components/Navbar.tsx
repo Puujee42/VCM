@@ -91,7 +91,6 @@ export default function Navbar() {
     { name: { mn: "Нүүр", en: "Home" }, href: "/" },
     { name: { mn: "Бидний тухай", en: "About" }, href: "/about" },
     { name: { mn: "Au Pair хөтөлбөр", en: "Au Pair Program" }, href: "/aupair", hasDropdown: true }, 
-    { name: { mn: "Сургалт", en: "Lessons" }, href: "/lessons" },
     { name: { mn: "Эвент", en: "Events" }, href: "/events" },
     { name: { mn: "Цаг авах", en: "Booking" }, href: "/booking" },
     { name: { mn: "Мэдээ", en: "News" }, href: "/news" },
@@ -101,7 +100,6 @@ export default function Navbar() {
     { id: "home", icon: Home, href: "/", label: { mn: "Нүүр", en: "Home" } },
     { id: "aupair", icon: Plane, href: "/aupair", label: { mn: "Au Pair", en: "Au Pair" } },
     { id: "booking", icon: CalendarClock, href: "/booking", label: { mn: "Цаг авах", en: "Book" }, isMain: true }, 
-    { id: "lessons", icon: BookOpen, href: "/lessons", label: { mn: "Сургалт", en: "Class" } },
     { id: "events", icon: Ticket, href: "/events", label: { mn: "Эвент", en: "Event" } },
   ];
 
