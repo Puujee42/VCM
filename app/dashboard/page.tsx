@@ -112,7 +112,7 @@ export default function MemberDashboard() {
   }, [isLoaded, user, router]);
 
   if (!isLoaded || loading) return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FAFAFA]">
+    <div className="min-h-[100dvh] flex items-center justify-center bg-[#FAFAFA]">
       <div className="flex flex-col items-center gap-4">
         <Loader2 className="w-10 h-10 animate-spin text-[#E31B23]" />
         <p className="text-xs font-black uppercase tracking-[0.2em] text-slate-400">Loading Profile...</p>
@@ -130,10 +130,10 @@ export default function MemberDashboard() {
   const pendingApp = userApps.find(a => a.status === 'pending');
   
   // Format Date Helper
-  const formatDate = (date: string) => new Date(date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const formatDate = (date: string) => new Date(date.replace(/-/g, "/")).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#E31B23] selection:text-white pt-28 pb-12 px-6">
+    <div className="min-h-[100dvh] bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#E31B23] selection:text-white pt-28 pb-12 px-6">
       
       {/* ATMOSPHERE */}
       <div className="fixed inset-0 pointer-events-none">

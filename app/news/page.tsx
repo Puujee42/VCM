@@ -92,14 +92,14 @@ export default function NewsPage() {
 
   if (loading) {
       return (
-          <div className="min-h-screen flex items-center justify-center bg-white">
+          <div className="min-h-[100dvh] flex items-center justify-center bg-white">
               <Loader2 className="animate-spin text-red-600" size={48} />
           </div>
       );
   }
 
   return (
-    <div className="min-h-screen bg-white text-slate-800 font-sans selection:bg-red-500 selection:text-white">
+    <div className="min-h-[100dvh] bg-white text-slate-800 font-sans selection:bg-red-500 selection:text-white">
       
       {/* ─── SCROLL BAR ─── */}
       <motion.div 

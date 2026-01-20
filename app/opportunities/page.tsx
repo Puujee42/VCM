@@ -167,7 +167,7 @@ export default function OpportunitiesPage() {
   ] as const;
 
   return (
-    <div className={`min-h-screen transition-colors duration-700 pt-32 pb-20 px-6 font-sans
+    <div className={`min-h-[100dvh] transition-colors duration-700 pt-32 pb-20 px-6 font-sans
       ${isDark ? "bg-[#001829] text-white" : "bg-slate-50 text-slate-900"}`}>
       
       <div className="absolute inset-0 pointer-events-none overflow-hidden">

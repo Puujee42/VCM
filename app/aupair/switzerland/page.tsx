@@ -91,7 +91,7 @@ export default function SwitzerlandPageBright() {
   const yHero = useTransform(scrollYProgress, [0, 1], [0, -200]);
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-white text-slate-800 font-sans selection:bg-red-500 selection:text-white overflow-hidden">
+    <div ref={containerRef} className="min-h-[100dvh] bg-white text-slate-800 font-sans selection:bg-red-500 selection:text-white overflow-hidden">
       
       {/* ─── 1. HERO: RED & WHITE SWISS VIBE ─── */}
       <section className="relative pt-32 pb-24 lg:pt-48 lg:pb-32 px-6 overflow-hidden">

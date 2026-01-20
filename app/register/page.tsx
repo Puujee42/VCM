@@ -36,7 +36,7 @@ export default function RegisterPage() {
   const [selected, setSelected] = useState<string>("new");
 
   return (
-    <div className="min-h-screen w-full flex bg-[#FDFBF7] font-sans selection:bg-red-500 selection:text-white overflow-hidden">
+    <div className="min-h-[100dvh] w-full flex bg-[#FDFBF7] font-sans selection:bg-red-500 selection:text-white overflow-hidden">
       
       {/* ─── LEFT: INTERACTIVE FORM (50%) ─── */}
       <div className="w-full lg:w-1/2 p-8 lg:p-20 flex flex-col justify-center relative z-10">

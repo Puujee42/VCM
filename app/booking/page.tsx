@@ -193,7 +193,7 @@ export default function BookingPage() {
    };
 
    return (
-      <div className="min-h-screen bg-[#F8F9FC] text-slate-800 font-sans selection:bg-red-500 selection:text-white pt-32 pb-20 px-4 md:px-8">
+      <div className="min-h-[100dvh] bg-[#F8F9FC] text-slate-800 font-sans selection:bg-red-500 selection:text-white pt-32 pb-20 px-4 md:px-8">
 
          <div className="max-w-6xl mx-auto">
             {/* Header */}

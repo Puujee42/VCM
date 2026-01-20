@@ -94,7 +94,7 @@ const Hero = () => {
   const activeSlide = HERO_SLIDES[slideIndex];
 
   return (
-    <section className="relative h-screen min-h-[700px] w-full bg-slate-900 text-white flex items-center justify-center overflow-hidden selection:bg-red-500 selection:text-white">
+    <section className="relative h-[100dvh] min-h-[700px] w-full bg-slate-900 text-white flex items-center justify-center overflow-hidden selection:bg-red-500 selection:text-white">
       
       {/* ─── 1. Background (Video/Image) ─── */}
       <div className="absolute inset-0 z-0">

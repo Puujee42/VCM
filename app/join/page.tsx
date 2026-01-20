@@ -69,7 +69,7 @@ export default function JoinPage() {
   };
 
   return (
-    <div className={`min-h-screen w-full flex overflow-hidden font-sans transition-colors duration-700
+    <div className={`min-h-[100dvh] w-full flex overflow-hidden font-sans transition-colors duration-700
       ${isDark ? "bg-[#001829] text-white" : "bg-slate-50 text-slate-900"}`}>
       
       {/* --- LEFT COLUMN: INTERACTION --- */}

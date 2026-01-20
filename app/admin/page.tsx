@@ -234,10 +234,10 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] flex font-sans text-slate-900 selection:bg-[#E31B23] selection:text-white overflow-hidden">
+    <div className="min-h-[100dvh] bg-[#FAFAFA] flex font-sans text-slate-900 selection:bg-[#E31B23] selection:text-white overflow-hidden">
       
       {/* ─── SIDEBAR ─── */}
-      <aside className="w-72 bg-[#F5F5F5] h-screen sticky top-0 p-6 flex flex-col justify-between hidden lg:flex border-r border-slate-200">
+      <aside className="w-72 bg-[#F5F5F5] h-[100dvh] sticky top-0 p-6 flex flex-col justify-between hidden lg:flex border-r border-slate-200">
         <div>
           <div className="flex items-center gap-3 mb-10 px-2">
             <div className="w-8 h-8 bg-[#E31B23] rounded-lg shadow-sm" />

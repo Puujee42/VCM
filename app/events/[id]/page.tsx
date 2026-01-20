@@ -122,14 +122,14 @@ export default function EventDetailPage() {
 
   if (!mounted || loading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${isDark ? "bg-[#001829]" : "bg-slate-50"}`}>
+      <div className={`min-h-[100dvh] flex items-center justify-center ${isDark ? "bg-[#001829]" : "bg-slate-50"}`}>
         <Loader2 className="w-10 h-10 text-[#00aeef] animate-spin" />
       </div>
     );
   }
 
   if (!event) return (
-    <div className={`min-h-screen flex flex-col items-center justify-center ${isDark ? "bg-[#001829] text-white" : "bg-slate-50 text-slate-900"}`}>
+    <div className={`min-h-[100dvh] flex flex-col items-center justify-center ${isDark ? "bg-[#001829] text-white" : "bg-slate-50 text-slate-900"}`}>
        <h1 className="text-2xl font-black mb-4">Event Not Found</h1>
        <Link href="/events" className="text-[#00aeef] font-bold">Return to Events</Link>
     </div>
@@ -142,7 +142,7 @@ export default function EventDetailPage() {
   });
 
   return (
-    <div className={`min-h-screen transition-colors duration-700 pt-20 pb-20 font-sans
+    <div className={`min-h-[100dvh] transition-colors duration-700 pt-20 pb-20 font-sans
       ${isDark ? "bg-[#001829] text-white" : "bg-white text-slate-900"}`}>
       
       {/* SCROLL PROGRESS BAR */}

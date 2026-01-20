@@ -75,7 +75,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#E31B23] selection:text-white pt-28 pb-12 px-6 overflow-hidden">
+    <div className="min-h-[100dvh] bg-[#FAFAFA] font-sans text-slate-900 selection:bg-[#E31B23] selection:text-white pt-28 pb-12 px-6 overflow-hidden">
       
       {/* ─── ATMOSPHERE ─── */}
       <div className="fixed inset-0 pointer-events-none">

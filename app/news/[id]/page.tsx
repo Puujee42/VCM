@@ -82,7 +82,7 @@ export default function NewsDetail() {
 
   if (!mounted || loading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center ${isDark ? "bg-[#001829]" : "bg-slate-50"}`}>
+      <div className={`min-h-[100dvh] flex items-center justify-center ${isDark ? "bg-[#001829]" : "bg-slate-50"}`}>
         <Loader2 className="w-10 h-10 text-[#00aeef] animate-spin" />
       </div>
     );
@@ -91,7 +91,7 @@ export default function NewsDetail() {
   if (!article) return null;
 
   return (
-    <div className={`min-h-screen transition-colors duration-700 pt-20 pb-20 font-sans
+    <div className={`min-h-[100dvh] transition-colors duration-700 pt-20 pb-20 font-sans
       ${isDark ? "bg-[#001829] text-white" : "bg-white text-slate-900"}`}>
       
       {/* READING PROGRESS BAR */}

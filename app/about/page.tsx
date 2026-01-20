@@ -97,7 +97,7 @@ export default function AboutPageRed() {
   return (
     <section 
       ref={containerRef} 
-      className="relative w-full min-h-screen bg-white overflow-hidden py-32 font-sans selection:bg-[#D93644] selection:text-white"
+      className="relative w-full min-h-[100dvh] bg-white overflow-hidden py-32 font-sans selection:bg-[#D93644] selection:text-white"
     >
       
       {/* ─── 1. WARM RED ATMOSPHERE ─── */}

@@ -81,14 +81,14 @@ export default function EventsPageRedGreen() {
 
   if (loading) {
       return (
-          <div className="min-h-screen flex items-center justify-center bg-white">
+          <div className="min-h-[100dvh] flex items-center justify-center bg-white">
               <Loader2 className="animate-spin text-red-600" size={48} />
           </div>
       );
   }
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-white text-slate-800 font-sans selection:bg-red-500 selection:text-white">
+    <div ref={containerRef} className="min-h-[100dvh] bg-white text-slate-800 font-sans selection:bg-red-500 selection:text-white">
       
       {/* ─── 1. HERO SECTION ─── */}
       <section className="relative pt-32 pb-20 px-6 overflow-hidden">
@@ -148,7 +148,7 @@ export default function EventsPageRedGreen() {
             >
                <AnimatePresence mode="popLayout">
                   {filteredEvents.map((event) => {
-                     const dateObj = new Date(event.date);
+                     const dateObj = new Date(typeof event.date === 'string' ? event.date.replace(/-/g, "/") : event.date);
                      const month = dateObj.toLocaleDateString('en-US', { month: 'short' }).toUpperCase();
                      const day = dateObj.getDate();
                      const category = mapCategory(event.category);

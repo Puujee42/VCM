@@ -124,7 +124,7 @@ export default function ApplyPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-slate-900 font-sans selection:bg-[#E31B23] selection:text-white pt-28 pb-20 px-6">
+    <div className="min-h-[100dvh] bg-[#FDFBF7] text-slate-900 font-sans selection:bg-[#E31B23] selection:text-white pt-28 pb-20 px-6">
       
       {/* ─── 1. HERO SECTION ─── */}
       <div className="max-w-7xl mx-auto mb-20 text-center relative z-10">

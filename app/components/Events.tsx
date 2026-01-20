@@ -76,7 +76,7 @@ const ContentCard = ({ item, lang, isDark, isMobile, type }: any) => {
 
   useEffect(() => {
      if (item.date) {
-        const d = new Date(item.date);
+        const d = new Date(typeof item.date === 'string' ? item.date.replace(/-/g, "/") : item.date);
         setDateObj({
            day: d.getDate().toString().padStart(2, '0'),
            month: d.toLocaleDateString(lang === 'mn' ? 'mn-MN' : 'en-US', { month: 'short' }).toUpperCase()

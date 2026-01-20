@@ -57,7 +57,7 @@ export default function SignInPage() {
   };
 
   return (
-    <div className="min-h-screen w-full flex font-sans selection:bg-red-500 selection:text-white overflow-hidden bg-[#FDFBF7]">
+    <div className="min-h-[100dvh] w-full flex font-sans selection:bg-red-500 selection:text-white overflow-hidden bg-[#FDFBF7]">
       
       {/* ─── LEFT: FORM SECTION (50%) ─── */}
       <div className="w-full lg:w-1/2 p-6 lg:p-16 flex flex-col justify-center relative z-20">

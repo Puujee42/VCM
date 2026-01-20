@@ -81,7 +81,7 @@ export default function OpportunityDetail() {
 
   if (!mounted || loading) {
     return (
-      <div className={`min-h-screen flex items-center justify-center transition-colors duration-700
+      <div className={`min-h-[100dvh] flex items-center justify-center transition-colors duration-700
         ${isDark ? "bg-[#001829]" : "bg-slate-50"}`}>
         <div className="flex flex-col items-center gap-4">
             <Loader2 className="w-8 h-8 text-[#00aeef] animate-spin" />
@@ -95,7 +95,7 @@ export default function OpportunityDetail() {
 
   if (!opportunity) {
     return (
-      <div className={`min-h-screen flex items-center justify-center transition-colors duration-700
+      <div className={`min-h-[100dvh] flex items-center justify-center transition-colors duration-700
         ${isDark ? "bg-[#001829]" : "bg-slate-50"}`}>
         <div className="text-center">
             <h2 className={`text-2xl font-black mb-4 ${isDark ? "text-white" : "text-[#001829]"}`}>Opportunity Not Found</h2>
@@ -110,7 +110,7 @@ export default function OpportunityDetail() {
   const typeBg = opportunity.type === 'scholarship' ? "bg-purple-500/10" : opportunity.type === 'internship' ? "bg-blue-500/10" : "bg-rose-500/10";
 
   return (
-    <div className={`min-h-screen transition-colors duration-700 pt-28 pb-20 px-6 font-sans
+    <div className={`min-h-[100dvh] transition-colors duration-700 pt-28 pb-20 px-6 font-sans
       ${isDark ? "bg-[#001829] text-white" : "bg-slate-50 text-slate-900"}`}>
       
       {/* Background Decor */}

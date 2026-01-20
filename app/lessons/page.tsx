@@ -107,7 +107,7 @@ export default function LessonsPageRedGreen() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-white text-slate-800 font-sans selection:bg-red-500 selection:text-white overflow-hidden">
+    <div ref={containerRef} className="min-h-[100dvh] bg-white text-slate-800 font-sans selection:bg-red-500 selection:text-white overflow-hidden">
       
       {/* ─── PROGRESS BAR ─── */}
       <motion.div 

@@ -29,7 +29,7 @@ export default function RootLayout({
           <LanguageProvider>
             
               <Navbar />
-            <main className="min-h-screen pb-24 lg:pb-0">
+            <main className="min-h-[100dvh] pb-24 lg:pb-0">
               {children}
             </main>
               <Footer/>

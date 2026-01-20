@@ -33,15 +33,15 @@ export default function MeetingPage({ params }: { params: Promise<{ roomId: stri
   );
 
   if (!isLoaded || !roomId) {
-    return <div className="h-screen flex items-center justify-center"><Loader2 className="animate-spin" /></div>;
+    return <div className="h-[100dvh] flex items-center justify-center"><Loader2 className="animate-spin" /></div>;
   }
 
   if (token === "") {
-    return <div className="h-screen flex items-center justify-center">Getting token...</div>;
+    return <div className="h-[100dvh] flex items-center justify-center">Getting token...</div>;
   }
 
   return (
-    <div className="h-screen w-full bg-slate-900" data-lk-theme="default">
+    <div className="h-[100dvh] w-full bg-slate-900" data-lk-theme="default">
       <LiveKitRoom
         video={true}
         audio={true}

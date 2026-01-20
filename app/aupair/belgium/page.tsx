@@ -88,7 +88,7 @@ export default function BelgiumConnectedPage() {
   });
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-[#FAFAFA] text-slate-800 font-sans overflow-hidden selection:bg-rose-400 selection:text-white">
+    <div ref={containerRef} className="min-h-[100dvh] bg-[#FAFAFA] text-slate-800 font-sans overflow-hidden selection:bg-rose-400 selection:text-white">
       
       {/* ─── SCROLL PROGRESS BAR (The Connection Line) ─── */}
       <motion.div 
