@@ -101,8 +101,8 @@ export default function Navbar() {
     { id: "home", icon: Home, href: "/", label: { mn: "Нүүр", en: "Home" } },
     { id: "aupair", icon: Plane, href: "/aupair", label: { mn: "Au Pair", en: "Au Pair" } },
     // Placeholders for spacing around the central button
-    { id: "booking", icon: CalendarClock, href: "/booking", label: { mn: "Цаг авах", en: "Book" }, isMain: true }, 
-    { id: "events", icon: Ticket, href: "/events", label: { mn: "Эвент", en: "Event" } },
+    { id: "booking", icon: CalendarClock, href: "/booking", label: { mn: "Цаг авах", en: "Booking" }, isMain: true }, 
+    { id: "events", icon: Ticket, href: "/events", label: { mn: "Эвент", en: "Events" } },
     { id: "news", icon: BookOpen, href: "/news", label: { mn: "Мэдээ", en: "News" } },
   ];
 
@@ -296,12 +296,12 @@ export default function Navbar() {
 
 
       {/* ========================================================= */}
-      {/* 3. MOBILE BOTTOM DOCK                                     */}
+      {/* 3. MOBILE BOTTOM DOCK (UPDATED WITH TEXT)                 */}
       {/* ========================================================= */}
-      <div className="lg:hidden fixed bottom-6 left-0 right-0 z-50 px-4 flex justify-center">
+      <div className="lg:hidden fixed bottom-6 left-0 right-0 z-50 px-2 flex justify-center">
         <nav className={`
-          flex items-end justify-between w-full max-w-[400px] px-2 py-3 pb-4 rounded-[2rem] border shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] backdrop-blur-3xl transition-all duration-700
-          ${isDark ? "bg-[#0F172A]/90 border-white/10 shadow-black text-slate-300" : "bg-white/95 border-slate-200 shadow-slate-200/50 text-slate-600"}
+          grid grid-cols-5 items-end justify-between w-full max-w-[420px] px-1 py-3 pb-3 rounded-[2rem] border shadow-[0_10px_40px_-10px_rgba(0,0,0,0.15)] backdrop-blur-3xl transition-all duration-700
+          ${isDark ? "bg-[#0F172A]/95 border-white/10 shadow-black text-slate-400" : "bg-white/95 border-slate-200 shadow-slate-200/50 text-slate-500"}
         `}>
           {mobileNav.map((item, index) => {
             const isActive = pathname === item.href;
@@ -309,28 +309,55 @@ export default function Navbar() {
             // Central Floating Action Button
             if (item.isMain) {
               return (
-                <div key={item.id} className="relative -top-10 mx-2">
-                   <Link href={item.href}>
+                <div key={item.id} className="relative -top-8 flex flex-col items-center justify-end h-full">
+                   <Link href={item.href} className="flex flex-col items-center">
                     <motion.div 
                         whileTap={{ scale: 0.9 }}
-                        className="w-16 h-16 rounded-full flex items-center justify-center shadow-2xl relative z-10 text-white border-4 border-[#FDFBF7]" // Matches page bg roughly
+                        className="w-14 h-14 rounded-full flex items-center justify-center shadow-2xl relative z-10 text-white border-4 border-[#FDFBF7]" 
                         style={{ backgroundColor: BRAND.RED }}
                     >
-                        <item.icon size={28} strokeWidth={2.5} />
+                        <item.icon size={24} strokeWidth={2.5} />
                         {/* Glow Ring */}
                         <div className="absolute inset-0 rounded-full animate-ping opacity-20" style={{ backgroundColor: BRAND.RED }} />
                     </motion.div>
+                    
+                    {/* Label for Main Button */}
+                    <span 
+                      className={`mt-2 text-[9px] font-bold uppercase tracking-wide transition-colors duration-300
+                      ${isActive ? "text-[#E31B23]" : "opacity-80"}`}
+                      style={{ color: isActive ? BRAND.RED : undefined }}
+                    >
+                      {item.label[lang]}
+                    </span>
                    </Link>
                 </div>
               );
             }
 
+            // Standard Icons with Labels
             return (
               <Link 
                 key={item.id} 
                 href={item.href} 
-                className="flex-1 flex flex-col items-center justify-end relative group h-full"
+                className="flex flex-col items-center justify-center gap-1 relative group p-1"
               >
+                {/* Icon */}
+                <div 
+                  className={`transition-all duration-300 ${isActive ? "-translate-y-1" : "opacity-70"}`}
+                  style={{ color: isActive ? BRAND.GREEN : "currentColor" }}
+                >
+                   <item.icon size={20} strokeWidth={isActive ? 2.5 : 2} />
+                </div>
+
+                {/* Text Label */}
+                <span 
+                  className={`text-[9px] font-bold leading-none tracking-wide transition-all duration-300 
+                  ${isActive ? "opacity-100" : "opacity-70 group-hover:opacity-100"}`}
+                  style={{ color: isActive ? BRAND.GREEN : "currentColor" }}
+                >
+                  {item.label[lang]}
+                </span>
+                
                 {/* Active Indicator Dot */}
                 {isActive && (
                    <motion.div 
@@ -339,13 +366,6 @@ export default function Navbar() {
                       style={{ backgroundColor: BRAND.GREEN }}
                    />
                 )}
-
-                <div 
-                  className={`transition-all duration-300 mb-1 ${isActive ? "scale-110 -translate-y-1" : "opacity-60"}`}
-                  style={{ color: isActive ? BRAND.GREEN : "currentColor" }}
-                >
-                   <item.icon size={20} strokeWidth={isActive ? 2.5 : 2} />
-                </div>
               </Link>
             );
           })}
