@@ -27,9 +27,9 @@ const HERO_SLIDES = [
   {
     id: 1,
     title: { mn: "ГЕРМАН УЛСАД Au Pair ХИЙХ", en: "Au Pair in Germany" },
-    desc: { 
-      mn: "Au-Pair хөтөлбөр нь Монгол залууст гадаадад амьдарч, шинэ соёл, хэл сурах, туршлага хуримтлуулах боломж олгодог тусгай хөтөлбөр юм.", 
-      en: "The Au-Pair program is a special opportunity for Mongolian youth to live abroad, learn new cultures and languages, and gain experience." 
+    desc: {
+      mn: "Au-Pair хөтөлбөр нь Монгол залууст гадаадад амьдарч, шинэ соёл, хэл сурах, туршлага хуримтлуулах боломж олгодог тусгай хөтөлбөр юм.",
+      en: "The Au-Pair program is a special opportunity for Mongolian youth to live abroad, learn new cultures and languages, and gain experience."
     },
     location: { mn: "Герман", en: "Germany" },
     author: "Mongolian AuPair",
@@ -39,9 +39,9 @@ const HERO_SLIDES = [
   {
     id: 2,
     title: { mn: "АВСТРИ УЛСАД Au Pair ХИЙХ", en: "Au Pair in Austria" },
-    desc: { 
-      mn: "Au-Pair хөтөлбөр нь Монгол залууст гадаадад амьдарч, шинэ соёл, хэл сурах, туршлага хуримтлуулах боломж олгодог тусгай хөтөлбөр юм.", 
-      en: "The Au-Pair program is a special opportunity for Mongolian youth to live abroad, learn new cultures and languages, and gain experience." 
+    desc: {
+      mn: "Au-Pair хөтөлбөр нь Монгол залууст гадаадад амьдарч, шинэ соёл, хэл сурах, туршлага хуримтлуулах боломж олгодог тусгай хөтөлбөр юм.",
+      en: "The Au-Pair program is a special opportunity for Mongolian youth to live abroad, learn new cultures and languages, and gain experience."
     },
     location: { mn: "Австри", en: "Austria" },
     author: "Mongolian AuPair",
@@ -95,7 +95,7 @@ const Hero = () => {
 
   return (
     <section className="relative h-[100dvh] min-h-[700px] w-full bg-slate-900 text-white flex items-center justify-center overflow-hidden selection:bg-red-500 selection:text-white">
-      
+
       {/* ─── 1. Background (Video/Image) ─── */}
       <div className="absolute inset-0 z-0">
         {/* Placeholder for Video - Replace src with your actual video file */}
@@ -106,9 +106,9 @@ const Hero = () => {
           playsInline
           className="w-full h-full object-cover opacity-50 scale-105" // Slight scale to avoid borders
         >
-          <source src="https://res.cloudinary.com/dxoxdiuwr/video/upload/v1768920602/A_cinematic_highquality_202601201908_j5s2n_kkoosh.mp4" type="video/mp4" />
+          <source src="https://res.cloudinary.com/dxoxdiuwr/video/upload/f_auto,q_auto/v1768920602/A_cinematic_highquality_202601201908_j5s2n_kkoosh.mp4" type="video/mp4" />
         </video>
-        
+
         {/* Gradient Overlay for Text Readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-transparent to-transparent opacity-80" />
@@ -116,7 +116,7 @@ const Hero = () => {
 
       {/* ─── 2. Main Content ─── */}
       <div className="relative z-10 container mx-auto px-6 max-w-7xl w-full grid grid-cols-1 lg:grid-cols-12 items-center h-full">
-        
+
         {/* LEFT COLUMN: Text Content */}
         <div className="lg:col-span-8 pt-20 lg:pt-0">
           <AnimatePresence mode="wait">
@@ -132,14 +132,14 @@ const Hero = () => {
               <motion.div variants={textVariants} className="flex flex-wrap items-center gap-3 mb-8">
                 {/* Location Badge */}
                 <span className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-bold uppercase tracking-widest text-white shadow-lg">
-                    <FaGlobeEurope className="text-[#00C896]" size={14} />
-                    {t(activeSlide.location)}
+                  <FaGlobeEurope className="text-[#00C896]" size={14} />
+                  {t(activeSlide.location)}
                 </span>
-                
+
                 {/* Verified Badge */}
                 <span className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00C896]/10 backdrop-blur-md border border-[#00C896]/20 text-xs font-bold uppercase tracking-widest text-[#00C896] shadow-lg">
-                    <FaUserCheck size={14} />
-                    Verified Program
+                  <FaUserCheck size={14} />
+                  Verified Program
                 </span>
               </motion.div>
 
@@ -164,24 +164,24 @@ const Hero = () => {
 
               {/* Description with Vertical Accent Line */}
               <motion.div variants={textVariants} className="flex gap-6 mb-10 pl-2">
-                 <div className="w-1 rounded-full bg-gradient-to-b from-[#E31B23] to-transparent h-auto min-h-[60px]" /> 
-                 <p className="text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed font-medium">
-                    {t(activeSlide.desc)}
-                 </p>
+                <div className="w-1 rounded-full bg-gradient-to-b from-[#E31B23] to-transparent h-auto min-h-[60px]" />
+                <p className="text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed font-medium">
+                  {t(activeSlide.desc)}
+                </p>
               </motion.div>
 
               {/* Metadata Stats */}
               <motion.div variants={textVariants} className="flex items-center gap-8 mb-10 text-sm font-bold text-slate-300">
                 <div className="flex items-center gap-3">
                   <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-[#E31B23]">
-                     <FaClock />
+                    <FaClock />
                   </div>
                   <span>{activeSlide.duration}</span>
                 </div>
                 <div className="w-px h-8 bg-slate-700" />
                 <div className="flex items-center gap-3">
-                   <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-[#00C896]">
-                     <FaMapMarkerAlt />
+                  <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-[#00C896]">
+                    <FaMapMarkerAlt />
                   </div>
                   <span>{t(activeSlide.location)}</span>
                 </div>
@@ -199,7 +199,7 @@ const Hero = () => {
                     <span className="relative z-10 p-1 bg-white/20 rounded-full group-hover:rotate-45 transition-transform duration-300">
                       <FaArrowRight size={12} />
                     </span>
-                    
+
                     {/* Shine Effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
                   </motion.button>
@@ -240,7 +240,7 @@ const Hero = () => {
                         animate={{ height: "100%" }}
                         transition={{ duration: AUTOPLAY_DURATION / 1000, ease: "linear" }}
                         // Force re-render on index change
-                        key={slideIndex} 
+                        key={slideIndex}
                       />
                     )}
                   </div>

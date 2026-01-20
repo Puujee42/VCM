@@ -25,16 +25,16 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
           <LanguageProvider>
             <SmoothScroll />
-              <Navbar/>
+            <Navbar />
             <main className="min-h-[100dvh] pb-24 lg:pb-0">
               {children}
             </main>
-              <Footer/>
-            
+            <Footer />
+
           </LanguageProvider>
         </body>
       </html>

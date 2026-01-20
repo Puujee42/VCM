@@ -5,6 +5,7 @@ import EventsSection from "./components/Events";
 import Expectations from "./components/Expectations";
 import UsSection from "./components/UseSection";
 import WhyChooseUs from "./components/WhyChooseUs";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
   return (
