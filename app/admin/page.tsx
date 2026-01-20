@@ -12,7 +12,6 @@ import {
   FaPlus, FaTrash, FaEdit, FaCalendarAlt, FaHandsHelping, 
   FaTimes, FaCloudUploadAlt, FaImage, FaSpinner 
 } from "react-icons/fa";
-import { useLanguage } from "../context/LanguageContext"; // Import useLanguage
 
 // --- BRAND CONSTANTS ---
 const BRAND = {
@@ -22,31 +21,10 @@ const BRAND = {
   LIGHT_BG: "#FAFAFA"
 };
 
-const COUNTRIES_TRANSLATIONS = [
-  { en: "Germany", mn: "Герман" }, 
-  { en: "Belgium", mn: "Бельги" }, 
-  { en: "Austria", mn: "Австри" }, 
-  { en: "Switzerland", mn: "Швейцар" }, 
-  { en: "General", mn: "Ерөнхий" }
-];
-const STEPS_TRANSLATIONS = [
-  { en: "Registration", mn: "Бүртгэл" }, 
-  { en: "Documents", mn: "Бичиг баримт" }, 
-  { en: "Interview", mn: "Ярилцлага" }, 
-  { en: "Matching", mn: "Тааруулалт" }, 
-  { en: "Visa Process", mn: "Визний үйл явц" }, 
-  { en: "Departure", mn: "Хөдлөх" }
-];
-const ROLES_TRANSLATIONS = [
-  { en: "Admin", mn: "Админ" }, 
-  { en: "Student", mn: "Оюутан" }, 
-  { en: "Guest", mn: "Зочин" }
-];
-const STATUSES_TRANSLATIONS = [
-  { en: "Active", mn: "Идэвхтэй" }, 
-  { en: "Pending", mn: "Хүлээгдэж байна" }, 
-  { en: "Suspended", mn: "Түдгэлзүүлсэн" }
-];
+const COUNTRIES = ["Germany", "Belgium", "Austria", "Switzerland", "General"];
+const STEPS = ["Registration", "Documents", "Interview", "Matching", "Visa Process", "Departure"];
+const ROLES = ["Admin", "Student", "Guest"];
+const STATUSES = ["Active", "Pending", "Suspended"];
 
 // --- REUSABLE COMPONENTS ---
 const SidebarItem = ({ icon: Icon, label, active, onClick }: any) => (
@@ -97,7 +75,6 @@ const TabButton = ({ active, onClick, icon: Icon, label }: any) => (
 
 // --- MAIN PAGE ---
 export default function AdminDashboard() {
-  const { t, language } = useLanguage(); // Use Language Context
   const [activeTab, setActiveTab] = useState("dashboard");
   const [loading, setLoading] = useState(true);
   
