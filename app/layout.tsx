@@ -6,6 +6,7 @@ import { LanguageProvider } from "./context/LanguageContext";
 import { ClerkProvider } from "@clerk/nextjs";
 import SmoothScroll from "./components/SmoothScroll";
 import Footer from "./components/Footer";
+import MotionProvider from "./components/MotionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,13 +29,14 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
           <LanguageProvider>
-            <SmoothScroll />
-            <Navbar />
-            <main className="min-h-[100dvh] pb-24 lg:pb-0">
-              {children}
-            </main>
-            <Footer />
-
+            <MotionProvider>
+              <SmoothScroll />
+              <Navbar />
+              <main className="min-h-[100dvh] pb-24 lg:pb-0">
+                {children}
+              </main>
+              <Footer />
+            </MotionProvider>
           </LanguageProvider>
         </body>
       </html>
