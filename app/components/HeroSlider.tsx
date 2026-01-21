@@ -12,7 +12,11 @@ import {
   FaGlobeEurope,
   FaUserCheck,
 } from "react-icons/fa";
-import CloudinaryPlayer from "./CloudinaryPlayer";
+import dynamic from "next/dynamic";
+const CloudinaryPlayer = dynamic(() => import("./CloudinaryPlayer"), {
+  ssr: false,
+  loading: () => <div className="w-full h-full bg-slate-900 animate-pulse" />
+});
 // Assuming you have a language context, otherwise use the fallback below
 // import { useLanguage } from "../context/LanguageContext";
 

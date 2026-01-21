@@ -243,12 +243,12 @@ const HeroSection = () => {
 
               {/* Main Headline */}
               <motion.div variants={textItemVariant} className="relative z-20">
-                <h1 className="text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 leading-[0.95] tracking-tight">
+                <h2 className="text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 leading-[0.95] tracking-tight">
                   Explore <br />
                   <span className={`text-transparent bg-clip-text bg-gradient-to-r ${active.colors.gradient}`}>
                     {t(active.title)}
                   </span>
-                </h1>
+                </h2>
                 {/* Decorative Underline */}
                 <motion.div
                   initial={{ width: 0 }}
@@ -381,12 +381,14 @@ const HeroSection = () => {
             <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 flex gap-4 z-30">
               <button
                 onClick={() => changeSlide(-1)}
+                aria-label="Previous slide"
                 className="w-14 h-14 rounded-full bg-white text-slate-400 hover:text-slate-900 flex items-center justify-center transition-all shadow-lg hover:scale-110 active:scale-95"
               >
                 <FaChevronLeft size={18} />
               </button>
               <button
                 onClick={() => changeSlide(1)}
+                aria-label="Next slide"
                 className="w-14 h-14 rounded-full text-white flex items-center justify-center transition-all shadow-lg hover:scale-110 active:scale-95"
                 style={{ backgroundColor: active.colors.primary }}
               >

@@ -198,12 +198,12 @@ export default function Navbar() {
                             >
                               <span className="text-3xl shadow-sm rounded-md overflow-hidden">{country.flag}</span>
                               <div>
-                                <h4 className="text-xs font-black uppercase tracking-wider mb-1 flex items-center gap-2 transition-colors group-hover:text-[var(--hover-color)]"
+                                <div className="text-xs font-black uppercase tracking-wider mb-1 flex items-center gap-2 transition-colors group-hover:text-[var(--hover-color)]"
                                   style={{ '--hover-color': BRAND.GREEN } as React.CSSProperties}
                                 >
                                   {country.name[lang]}
                                   <span className="opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all">→</span>
-                                </h4>
+                                </div>
                                 <p className="text-[10px] leading-relaxed opacity-60 font-medium">
                                   {country.desc[lang]}
                                 </p>
@@ -224,7 +224,11 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="flex items-center gap-2 shrink-0">
-            <button onClick={toggleLanguage} className="w-9 h-9 rounded-full border flex items-center justify-center border-current/10 hover:bg-current/10 transition-all active:scale-90">
+            <button
+              onClick={toggleLanguage}
+              aria-label={lang === "mn" ? "Switch to English" : "Switch to Mongolian"}
+              className="w-9 h-9 rounded-full border flex items-center justify-center border-current/10 hover:bg-current/10 transition-all active:scale-90"
+            >
               <Globe size={15} />
             </button>
 
@@ -293,6 +297,7 @@ export default function Navbar() {
 
           <button
             onClick={toggleLanguage}
+            aria-label={lang === 'mn' ? "Switch to English" : "Switch to Mongolian"}
             className={`w-9 h-9 rounded-full flex items-center justify-center transition-all border backdrop-blur-sm ${isDark ? "bg-black/80 border-white/10 text-white" : "bg-white/90 border-slate-100 text-slate-700 shadow-sm"
               }`}
           >
