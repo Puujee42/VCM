@@ -206,7 +206,7 @@ const UsSection = () => {
               <div className="text-4xl text-red-200"><FaQuoteRight /></div>
               <div>
                 <p className="relative z-10 font-semibold text-lg">"{t.quote}"</p>
-                <p className="text-xs font-bold text-slate-400 mt-2 uppercase tracking-wide">— Founder</p>
+                <p className="text-xs font-bold text-slate-600 mt-2 uppercase tracking-wide">— Founder</p>
               </div>
             </motion.div>
 
@@ -324,11 +324,11 @@ const UsSection = () => {
 
               <h4 className="text-4xl lg:text-5xl font-black text-slate-800 tracking-tight mb-2">
                 <CountUp end={stat.val} duration={2.5} enableScrollSpy scrollSpyOnce />
-                <span className={`text-2xl ml-0.5 ${idx % 2 === 0 ? 'text-red-300' : 'text-green-300'}`}>
+                <span className={`text-2xl ml-0.5 ${idx % 2 === 0 ? 'text-red-500' : 'text-green-500'}`}>
                   {stat.suffix}
                 </span>
               </h4>
-              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest group-hover:text-slate-600 transition-colors">
+              <p className="text-xs font-bold text-slate-600 uppercase tracking-widest group-hover:text-slate-800 transition-colors">
                 {stat.label}
               </p>
             </motion.div>

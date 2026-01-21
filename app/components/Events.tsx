@@ -163,7 +163,7 @@ const ContentCard = ({ item, lang, isDark, isMobile, type }: any) => {
           </h3>
 
           {/* Time or Read Time */}
-          <div className="text-xs font-bold flex items-center gap-2 mb-4 text-slate-400">
+          <div className="text-xs font-bold flex items-center gap-2 mb-4 text-slate-300">
             {isBlog ? (
               <> <BookOpen size={14} style={{ color: BRAND.GREEN }} /> {item.readTime || "5 min read"} </>
             ) : (
@@ -309,7 +309,7 @@ export default function LatestUpdatesSection() {
                     className={`relative px-8 py-3 rounded-full text-xs font-black uppercase tracking-widest transition-all z-10
                           ${isActive
                         ? "text-white"
-                        : (isDark ? "text-slate-400 hover:text-white" : "text-slate-400 hover:text-slate-900")
+                        : (isDark ? "text-slate-300 hover:text-white" : "text-slate-600 hover:text-slate-900")
                       }`}
                   >
                     {isActive && (
@@ -413,7 +413,7 @@ export default function LatestUpdatesSection() {
         >
           <Link href={activeTab === 'events' ? '/events' : '/news'} className="group relative inline-flex items-center gap-6">
             <span className={`text-xs font-black uppercase tracking-[0.25em] transition-colors
-                 ${isDark ? "text-slate-400 group-hover:text-white" : "text-slate-500 group-hover:text-slate-900"}`}>
+                 ${isDark ? "text-slate-300 group-hover:text-white" : "text-slate-700 group-hover:text-slate-900"}`}>
               {activeTab === 'events'
                 ? (lang === 'mn' ? 'Бүх арга хэмжээг харах' : 'View All Events')
                 : (lang === 'mn' ? 'Бүх нийтлэлийг унших' : 'View All Posts')

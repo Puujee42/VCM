@@ -242,9 +242,9 @@ const Hero = () => {
                     <p className="text-xs font-bold uppercase tracking-widest text-[#E31B23] mb-1">
                       0{index + 1}
                     </p>
-                    <h4 className="text-lg font-bold text-white">
+                    <h2 className="text-lg font-bold text-white">
                       {t(item.location)}
-                    </h4>
+                    </h2>
                   </div>
 
                   {/* Vertical Progress Bar */}

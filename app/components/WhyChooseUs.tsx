@@ -212,7 +212,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
               </div>
               <div>
                 <h3 className="text-lg font-bold text-slate-800 mb-1">{t.card3Title || "Fair Costs"}</h3>
-                <p className="text-slate-400 text-xs font-medium">{t.card3Desc || "No hidden fees. We prioritize clarity."}</p>
+                <p className="text-slate-600 text-xs font-medium">{t.card3Desc || "No hidden fees. We prioritize clarity."}</p>
               </div>
             </div>
           </AestheticCard>
@@ -259,7 +259,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
                   <h3 className="text-xl font-bold text-white group-hover:translate-x-1 transition-transform">
                     {t.card5Title || "Start Your Application"}
                   </h3>
-                  <p className="text-slate-400 text-sm font-medium mt-1">
+                  <p className="text-slate-600 text-sm font-medium mt-1">
                     {t.card5Desc || "It's free to create a profile."}
                   </p>
                 </div>

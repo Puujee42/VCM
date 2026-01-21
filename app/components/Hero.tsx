@@ -382,7 +382,7 @@ const HeroSection = () => {
               <button
                 onClick={() => changeSlide(-1)}
                 aria-label="Previous slide"
-                className="w-14 h-14 rounded-full bg-white text-slate-400 hover:text-slate-900 flex items-center justify-center transition-all shadow-lg hover:scale-110 active:scale-95"
+                className="w-14 h-14 rounded-full bg-white text-slate-600 hover:text-slate-900 flex items-center justify-center transition-all shadow-lg hover:scale-110 active:scale-95"
               >
                 <FaChevronLeft size={18} />
               </button>

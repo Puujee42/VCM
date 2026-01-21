@@ -21,6 +21,10 @@ const CloudinaryPlayer = ({ publicId, className, cloudName }: CloudinaryPlayerPr
                 muted={true}
                 controls={false}
                 className="object-cover w-full h-full"
+                sourceTypes={['hls', 'dash', 'mp4']}
+                onError={(error: any) => {
+                    console.warn('Video player error:', error);
+                }}
                 config={{
                     cloud: {
                         // Use provided cloudName or fallback to env var (or undefined to let CldVideoPlayer handle it)

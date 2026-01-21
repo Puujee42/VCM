@@ -27,6 +27,11 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
+        <head>
+          <link rel="preconnect" href="https://res.cloudinary.com" />
+          <link rel="preconnect" href="https://careful-beetle-54.clerk.accounts.dev" />
+          <link rel="dns-prefetch" href="https://grainy-gradients.vercel.app" />
+        </head>
         <body className={inter.className}>
           <LanguageProvider>
             <MotionProvider>
