@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { AnimatePresence, Variants } from "framer-motion";
+import { Motion as motion } from "./MotionProxy";
 import Image from "next/image";
 import {
   FaArrowRight,

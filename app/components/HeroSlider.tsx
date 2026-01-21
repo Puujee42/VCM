@@ -3,7 +3,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { AnimatePresence, Variants } from "framer-motion";
+import { Motion as motion } from "./MotionProxy";
 import {
   FaMapMarkerAlt,
   FaClock,

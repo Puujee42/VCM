@@ -15,7 +15,8 @@ import {
   Plane,
   ChevronDown,
 } from "lucide-react";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { Motion as motion } from "./MotionProxy";
 import { useTheme } from "next-themes";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { useLanguage } from "../context/LanguageContext";

@@ -2,7 +2,8 @@
 
 import { useRef, useState, useEffect } from "react";
 import Link from "next/link";
-import { motion, useScroll, useTransform, Variants, useSpring } from "framer-motion";
+import { useScroll, useTransform, Variants, useSpring } from "framer-motion";
+import { Motion as motion } from "./MotionProxy";
 import CountUp from "react-countup";
 import Image from "next/image";
 import { TypeAnimation } from "react-type-animation";

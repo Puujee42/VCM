@@ -14,12 +14,12 @@ import {
   PlayCircle
 } from "lucide-react";
 import {
-  motion,
   useMotionValue,
   useSpring,
   useTransform,
   AnimatePresence
 } from "framer-motion";
+import { Motion as motion } from "./MotionProxy";
 import { useTheme } from "next-themes";
 // Mock context if not available
 // import { useLanguage } from "../context/LanguageContext";
