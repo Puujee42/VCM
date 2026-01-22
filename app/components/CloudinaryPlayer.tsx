@@ -12,11 +12,11 @@ const CloudinaryPlayer = ({ publicId, className, cloudName = process.env.NEXT_PU
     const baseUrl = `https://res.cloudinary.com/${cName}/video/upload`;
     
     // Construct URLs with optimizations
-    // q_auto: Automatic quality adjustment
+    // q_auto:eco: High compression for background videos
     // vc_auto: Automatic video codec selection (h265/vp9/etc if supported)
-    // w_1280,c_limit: Limit width to 1280px to reduce file size for background use
+    // w_800,c_limit: Limit width to 800px for background use to drastically reduce file size
     
-    const posterUrl = `${baseUrl}/q_auto,f_auto,so_0/${publicId}.jpg`;
+    const posterUrl = `${baseUrl}/q_auto:best,f_auto,so_0,w_1000/${publicId}.jpg`;
 
     return (
         <div className={`${className} relative overflow-hidden`}>
@@ -33,9 +33,9 @@ const CloudinaryPlayer = ({ publicId, className, cloudName = process.env.NEXT_PU
                 fetchpriority="high" 
             >
                 {/* Prefer WebM for better compression/quality ratio on supported browsers */}
-                <source src={`${baseUrl}/q_auto,vc_auto,w_1280,c_limit,f_webm/${publicId}.webm`} type="video/webm" />
+                <source src={`${baseUrl}/q_auto:eco,vc_auto,w_800,c_limit,f_webm/${publicId}.webm`} type="video/webm" />
                 {/* Fallback to MP4 */}
-                <source src={`${baseUrl}/q_auto,vc_auto,w_1280,c_limit,f_mp4/${publicId}.mp4`} type="video/mp4" />
+                <source src={`${baseUrl}/q_auto:eco,vc_auto,w_800,c_limit,f_mp4/${publicId}.mp4`} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
         </div>
@@ -43,4 +43,6 @@ const CloudinaryPlayer = ({ publicId, className, cloudName = process.env.NEXT_PU
 };
 
 export default CloudinaryPlayer;
+
+
 

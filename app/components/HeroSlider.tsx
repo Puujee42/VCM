@@ -13,11 +13,9 @@ import {
   FaUserCheck,
 } from "react-icons/fa";
 import dynamic from "next/dynamic";
+import { useLanguage } from "../context/LanguageContext";
 
 const CloudinaryPlayer = dynamic(() => import("./CloudinaryPlayer"), { ssr: false });
-
-// Assuming you have a language context, otherwise use the fallback below
-// import { useLanguage } from "../context/LanguageContext";
 
 /* ────────────────────── Configuration ────────────────────── */
 const BRAND = {
@@ -73,26 +71,15 @@ const textVariants: Variants = {
 
 /* ────────────────────── Main Component ────────────────────── */
 const Hero = () => {
-  // Mock Language hook (Replace with your actual context)
-  const language = "mn"; // Change to "en" to test English
+  const { language, t } = useLanguage();
   const [slideIndex, setSlideIndex] = useState(0);
   const containerRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
-
-  // Helper for translations
-  const t = useCallback(
-    (input: any) => {
-      if (!input) return "";
-      if (typeof input === "object") {
-        return input[language as "mn" | "en"] || input.mn || "";
-      }
-      return input;
-    },
-    [language]
-  );
+  const [mounted, setMounted] = useState(false);
 
   // Auto-play logic
   useEffect(() => {
+    setMounted(true);
     const timer = setInterval(() => {
       setSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
     }, AUTOPLAY_DURATION);
@@ -101,13 +88,7 @@ const Hero = () => {
 
   const activeSlide = HERO_SLIDES[slideIndex];
 
-  const [isMobile, setIsMobile] = useState(true);
-
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    
     // Intersection Observer to lazy load video
     const observer = new IntersectionObserver(
       (entries) => {
@@ -124,7 +105,6 @@ const Hero = () => {
     }
 
     return () => {
-      window.removeEventListener("resize", checkMobile);
       observer.disconnect();
     };
   }, []);
@@ -134,10 +114,9 @@ const Hero = () => {
 
       {/* ─── 1. Background (Video/Image) ─── */}
       <div className="absolute inset-0 z-0">
-        {/* Placeholder for Video - Replace src with your actual video file */}
         {/* Desktop Video Background */}
         <div className="hidden md:block absolute inset-0 w-full h-full">
-          {!isMobile && inView && (
+          {mounted && inView && (
             <CloudinaryPlayer
               publicId="A_cinematic_highquality_202601201908_j5s2n_kkoosh"
               cloudName="dxoxdiuwr"
@@ -201,7 +180,6 @@ const Hero = () => {
               >
                 {t(activeSlide.title).split(" ").map((word: string, i: number) => (
                   <span key={i} className="inline-block mr-3">
-                    {/* Highlight "Au Pair" or key words if needed */}
                     {word === "Au" || word === "Pair" ? (
                       <span className="text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-400">
                         {word}

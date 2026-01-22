@@ -10,8 +10,8 @@ const UsSection = dynamic(() => import("./components/UseSection"));
 const WhyChooseUs = dynamic(() => import("./components/WhyChooseUs"));
 
 // Simple loading skeleton
-const SectionSkeleton = () => (
-  <div className="w-full h-64 bg-slate-100 animate-pulse rounded-3xl" />
+const SectionSkeleton = ({ height = "64" }: { height?: string }) => (
+  <div className={`w-full h-${height} bg-slate-100 animate-pulse rounded-3xl mb-12`} />
 );
 
 export default function Home() {
@@ -19,16 +19,16 @@ export default function Home() {
     <>
       <HeroSlider />
       <Hero />
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<div className="w-full h-[800px] bg-slate-50 animate-pulse" />}>
         <UsSection />
       </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<div className="w-full h-[700px] bg-slate-50 animate-pulse" />}>
         <EventsSection />
       </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<div className="w-full h-[600px] bg-slate-50 animate-pulse" />}>
         <Expectations />
       </Suspense>
-      <Suspense fallback={<SectionSkeleton />}>
+      <Suspense fallback={<div className="w-full h-[1200px] bg-slate-50 animate-pulse" />}>
         <WhyChooseUs />
       </Suspense>
     </>

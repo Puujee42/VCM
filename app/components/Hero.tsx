@@ -13,10 +13,7 @@ import {
   FaChevronLeft,
   FaCheckCircle
 } from "react-icons/fa";
-
-// ─── MOCK CONTEXT (Replace with your actual import) ───
-// import { useLanguage } from "../context/LanguageContext";
-const useLanguage = () => ({ language: "mn" });
+import { useLanguage } from "../context/LanguageContext";
 
 /* ────────────────────── Config & Data ────────────────────── */
 const COUNTRY_DATA = [
@@ -103,12 +100,14 @@ const COUNTRY_DATA = [
 ];
 
 const HeroSection = () => {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
     checkMobile();
     window.addEventListener("resize", checkMobile);
@@ -116,9 +115,6 @@ const HeroSection = () => {
   }, []);
 
   const active = COUNTRY_DATA[index];
-
-  // Safe translation helper
-  const t = (obj: any) => obj[language === "mn" ? "mn" : "en"] || obj.en;
 
   // Handle slide changes
   const changeSlide = (newDirection: number) => {
@@ -198,7 +194,7 @@ const HeroSection = () => {
         <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 mix-blend-soft-light" />
 
         {/* Animated Blobs - DISABLED ON MOBILE */}
-        {!isMobile && (
+        {mounted && !isMobile && (
           <>
             <motion.div
               animate={{
@@ -400,7 +396,7 @@ const HeroSection = () => {
           </div>
 
           {/* Decorative Card Stack (Visual Depth) - DISABLED ON MOBILE */}
-          {!isMobile && (
+          {mounted && !isMobile && (
             <motion.div
               animate={{
                 rotate: [6, 8, 6],

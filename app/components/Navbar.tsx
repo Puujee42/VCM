@@ -123,9 +123,10 @@ export default function Navbar() {
       {/* 1. DESKTOP HEADER                                         */}
       {/* ========================================================= */}
       <motion.header
-        className="fixed top-0 left-0 right-0 hidden lg:flex justify-center pointer-events-none z-[999]"
-        animate={{ y: 20 }}
-        transition={{ type: "spring", stiffness: 200, damping: 25 }}
+        className="fixed top-5 left-0 right-0 hidden lg:flex justify-center pointer-events-none z-[999]"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
       >
         <nav
           onMouseLeave={() => setHoveredNav(null)}
