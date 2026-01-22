@@ -258,14 +258,17 @@ export default function Navbar() {
                 >
                   {CONTENT.dashboard[lang]}
                 </Link>
-                <div className="scale-100"><UserButton /></div>
+                {/* Reserve space for UserButton to prevent CLS */}
+                <div className="w-8 h-8 flex items-center justify-center">
+                  <UserButton />
+                </div>
               </div>
             </SignedIn>
 
             <SignedOut>
               <Link href="/sign-in">
                 <button
-                  className="px-5 py-2 rounded-full text-white text-[9px] font-black uppercase tracking-widest shadow-xl shadow-red-900/20 transition-all active:scale-95 hover:brightness-110"
+                  className="px-5 py-2 min-w-[80px] rounded-full text-white text-[9px] font-black uppercase tracking-widest shadow-xl shadow-red-900/20 transition-all active:scale-95 hover:brightness-110"
                   style={{ backgroundColor: BRAND.RED }}
                 >
                   {CONTENT.login[lang]}

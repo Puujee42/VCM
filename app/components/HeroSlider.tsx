@@ -131,14 +131,14 @@ const Hero = () => {
             src="A_cinematic_highquality_202601201908_j5s2n_kkoosh"
             alt="Hero Background"
             fill
-            quality={50}
-            className="object-cover opacity-50 scale-105"
+            className="object-cover opacity-50 transition-transform duration-700 will-change-transform"
             priority
             loading="eager"
             fetchPriority="high"
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
             sizes="100vw"
+            style={{ transform: 'scale(1.05)' }}
           />
         </div>
 
@@ -263,7 +263,7 @@ const Hero = () => {
                   </div>
 
                   {/* Vertical Progress Bar */}
-                  <div className={`relative w-1.5 h-20 rounded-full overflow-hidden transition-all duration-500 bg-slate-800 ${isActive ? "scale-y-110" : "scale-y-90"}`}>
+                  <div className="relative w-[6px] h-[80px] rounded-full overflow-hidden transition-all duration-500 bg-slate-800 shrink-0">
                     {isActive && (
                       <motion.div
                         layoutId="activeGlow"
@@ -271,7 +271,6 @@ const Hero = () => {
                         initial={{ height: "0%" }}
                         animate={{ height: "100%" }}
                         transition={{ duration: AUTOPLAY_DURATION / 1000, ease: "linear" }}
-                        // Force re-render on index change
                         key={slideIndex}
                       />
                     )}
