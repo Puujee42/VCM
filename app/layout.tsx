@@ -8,7 +8,11 @@ import SmoothScroll from "./components/SmoothScroll";
 import Footer from "./components/Footer";
 import MotionProvider from "./components/MotionProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: "Aupair Mongolia",
@@ -30,13 +34,14 @@ export default function RootLayout({
         <head>
           <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="anonymous" />
           <link rel="preconnect" href="https://careful-beetle-54.clerk.accounts.dev" />
+          <link rel="preconnect" href="https://grainy-gradients.vercel.app" />
           <link rel="dns-prefetch" href="https://careful-beetle-54.clerk.accounts.dev" />
           <link rel="dns-prefetch" href="https://img.clerk.com" />
           <link rel="dns-prefetch" href="https://res.cloudinary.com" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         </head>
-        <body className={inter.className}>
+        <body className={`${inter.variable} font-sans`}>
           <LanguageProvider>
             <MotionProvider>
               <SmoothScroll />

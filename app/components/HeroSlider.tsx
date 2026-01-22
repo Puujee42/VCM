@@ -128,13 +128,16 @@ const Hero = () => {
         {/* Mobile Static Image Background */}
         <div className="block md:hidden absolute inset-0 w-full h-full">
           <Image
-            src="https://res.cloudinary.com/dxoxdiuwr/video/upload/f_auto,q_auto,so_0/v1/A_cinematic_highquality_202601201908_j5s2n_kkoosh.jpg"
+            src="https://res.cloudinary.com/dxoxdiuwr/video/upload/f_auto,q_auto:eco,so_0,w_600/v1/A_cinematic_highquality_202601201908_j5s2n_kkoosh.jpg"
             alt="Hero Background"
             fill
-            quality={75}
+            quality={60}
             className="object-cover opacity-50 scale-105"
             priority
+            loading="eager"
             fetchPriority="high"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
             sizes="100vw"
           />
         </div>

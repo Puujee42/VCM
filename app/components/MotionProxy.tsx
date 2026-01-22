@@ -1,7 +1,7 @@
 "use client";
 
 import { m, MotionProps } from "framer-motion";
-import React, { useEffect, useState, ForwardRefExoticComponent, RefAttributes } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 
 // Hook to detect mobile
 const useIsMobile = () => {
@@ -54,7 +54,7 @@ const motionProps = new Set([
     "onTapCancel",
     "onHoverStart",
     "onHoverEnd",
-    "viewport", // for whileInView options
+    "viewport", 
 ]);
 
 // Helper to filter props
@@ -68,23 +68,27 @@ const filterProps = (props: any) => {
     return newProps;
 };
 
-// Create a proxy that intercepts property access
+// Component cache to ensure stable references
+const componentCache: Record<string, React.ForwardRefExoticComponent<any>> = {};
+
 const Motion = new Proxy(m, {
     get: (target: any, prop: string) => {
-        // Return a Functional Component that decides what to render
+        if (typeof prop !== 'string') return target[prop];
+        
+        if (componentCache[prop]) {
+            return componentCache[prop];
+        }
+
         const Component = React.forwardRef((props: any, ref: any) => {
             const isMobile = useIsMobile();
 
             if (isMobile) {
-                // If mobile, render the native HTML tag (e.g., 'div', 'span') with filtered props
                 const Tag = prop as any;
                 const nativeProps = filterProps(props);
                 return <Tag {...nativeProps} ref={ref} />;
             }
 
-            // If desktop, render the original motion component
             const MotionComponent = target[prop];
-            // Safety check in case m[prop] is undefined
             if (!MotionComponent) {
                 return React.createElement(prop, props, props.children);
             }
@@ -92,6 +96,7 @@ const Motion = new Proxy(m, {
         });
 
         Component.displayName = `MotionProxy.${prop}`;
+        componentCache[prop] = Component;
         return Component;
     }
 });
