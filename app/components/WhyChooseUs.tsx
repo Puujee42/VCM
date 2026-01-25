@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { useScroll, useTransform, useSpring, useMotionValue } from "framer-motion";
 import { useIsMobile, Motion as motion } from "./MotionProxy";
 import {
@@ -9,10 +9,10 @@ import {
   FaWallet,
   FaGlobeEurope,
   FaArrowRight,
-  FaHeart,
   FaCheck,
   FaStar
 } from "react-icons/fa";
+import { useTranslations } from "next-intl";
 
 /* ────────────────────── SOFT PALETTE ────────────────────── */
 const PALETTE = {
@@ -25,11 +25,6 @@ const PALETTE = {
   DARK: "#1E293B",
   WHITE: "#FFFFFF",
 };
-
-// FIX: Make dictionary optional in the type definition
-interface WhyChooseUsProps {
-  dictionary?: any;
-}
 
 const DreamyAtmosphere = ({ containerRef }: { containerRef: React.RefObject<any> }) => {
   const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start end", "end start"] });
@@ -63,10 +58,9 @@ const DreamyAtmosphere = ({ containerRef }: { containerRef: React.RefObject<any>
   );
 };
 
-const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
-  // Safe fallback if dictionary is undefined
-  const t = dictionary || {};
-
+// FIX: Removed dictionary prop as we now use hook
+const WhyChooseUs = () => {
+  const t = useTranslations("WhyChooseUs");
   const containerRef = useRef(null);
   const isMobile = useIsMobile();
 
@@ -95,7 +89,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
           >
             <FaStar className="text-yellow-400 text-sm" />
             <span className="text-xs font-bold uppercase tracking-widest text-slate-500">
-              {t.badge || "Why Choose Us"}
+              {t("badge")}
             </span>
           </motion.div>
 
@@ -106,10 +100,10 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
             transition={{ delay: 0.1 }}
             className="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight"
           >
-            Your journey, <br />
+            {t("title_pre")} <br />
             <span className="relative inline-block mt-2">
               <span className="relative z-10 text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-red-400">
-                Beautifully Secured.
+                {t("title_highlight")}
               </span>
               {/* Soft Underline */}
               <motion.svg
@@ -132,7 +126,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
             transition={{ delay: 0.2 }}
             className="text-slate-500 text-lg md:text-xl font-medium leading-relaxed max-w-2xl mx-auto"
           >
-            {t.desc || "We combine heartfelt care with rigorous safety standards to give you the most trusted Au Pair experience."}
+            {t("desc")}
           </motion.p>
         </div>
 
@@ -160,9 +154,9 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
                   </div>
                 </div>
 
-                <h3 className="text-3xl font-bold text-slate-800 mb-3">{t.card1Title || "Global Network"}</h3>
+                <h3 className="text-3xl font-bold text-slate-800 mb-3">{t("card1_title")}</h3>
                 <p className="text-slate-500 font-medium leading-relaxed text-lg">
-                  {t.card1Desc || "Connecting you to verified families across Europe's most beautiful cities."}
+                  {t("card1_desc")}
                 </p>
               </div>
 
@@ -201,13 +195,13 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
                 </motion.div>
               </motion.div>
 
-              <h3 className="text-2xl font-bold text-slate-900 mb-3">{t.card2Title || "Human Support"}</h3>
+              <h3 className="text-2xl font-bold text-slate-900 mb-3">{t("card2_title")}</h3>
               <p className="text-slate-500 text-sm mb-8 leading-relaxed">
-                {t.card2Desc || "No bots here. Just real people ready to help you 24/7."}
+                {t("card2_desc")}
               </p>
 
               <button className="w-full py-3 rounded-xl bg-rose-500 text-white hover:bg-rose-600 hover:shadow-lg hover:shadow-rose-200 transition-all font-bold text-sm">
-                {t.card2Btn || "Chat Now"}
+                {t("card2_btn")}
               </button>
             </div>
           </AestheticCard>
@@ -224,8 +218,8 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
                 </div>
               </div>
               <div>
-                <h3 className="text-lg font-bold text-slate-800 mb-1">{t.card3Title || "Fair Costs"}</h3>
-                <p className="text-slate-600 text-xs font-medium">{t.card3Desc || "No hidden fees. We prioritize clarity."}</p>
+                <h3 className="text-lg font-bold text-slate-800 mb-1">{t("card3_title")}</h3>
+                <p className="text-slate-600 text-xs font-medium">{t("card3_desc")}</p>
               </div>
             </div>
           </AestheticCard>
@@ -237,10 +231,10 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
             <div className="p-8 h-full flex items-center justify-between z-10">
               <div className="max-w-xs">
                 <h3 className="text-xl font-bold mb-2 flex items-center gap-3 text-slate-900">
-                  <FaShieldAlt className="text-rose-500" /> {t.card4Title || "Safety First"}
+                  <FaShieldAlt className="text-rose-500" /> {t("card4_title")}
                 </h3>
                 <p className="text-slate-500 text-sm font-medium leading-relaxed">
-                  {t.card4Desc || "Strict vetting process for every family. Your safety is our obsession."}
+                  {t("card4_desc")}
                 </p>
               </div>
 
@@ -270,10 +264,10 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = ({ dictionary }) => {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white group-hover:translate-x-1 transition-transform">
-                    {t.card5Title || "Start Your Application"}
+                    {t("card5_title")}
                   </h3>
                   <p className="text-slate-600 text-sm font-medium mt-1">
-                    {t.card5Desc || "It's free to create a profile."}
+                    {t("card5_desc")}
                   </p>
                 </div>
               </div>

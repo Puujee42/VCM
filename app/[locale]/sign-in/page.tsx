@@ -224,7 +224,7 @@ export default function SignInPage() {
           <div className="text-center relative z-10">
             <h3 className="text-2xl font-black text-slate-800 mb-2">Secure Access</h3>
             <div className="flex items-center justify-center gap-2 text-emerald-600 bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100 shadow-sm">
-              <BeforeLoginNews />
+              <Lock size={24} />
               <span className="text-[10px] font-black uppercase tracking-widest">Encrypted</span>
             </div>
           </div>

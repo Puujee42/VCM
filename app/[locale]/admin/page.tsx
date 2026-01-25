@@ -1,41 +1,41 @@
 "use client";
 
-import { 
-  Heart, 
-  Settings, 
-  User, 
-  X, 
-  MapPin, 
-  GraduationCap, 
-  Baby, 
-  Bell, 
-  Users, 
-  UserCheck, 
-  FileText, 
-  Clock, 
-  Check, 
-  Plus, 
-  Eye, 
-  Search, 
-  Globe, 
-  Edit3, 
-  Trash2, 
-  ChevronDown, 
-  LayoutDashboard, 
-  ClipboardList, 
-  Calendar
+import {
+   Heart,
+   Settings,
+   User,
+   X,
+   MapPin,
+   GraduationCap,
+   Baby,
+   Bell,
+   Users,
+   UserCheck,
+   FileText,
+   Clock,
+   Check,
+   Plus,
+   Eye,
+   Search,
+   Globe,
+   Edit3,
+   Trash2,
+   ChevronDown,
+   LayoutDashboard,
+   ClipboardList,
+   Calendar
 } from "lucide-react";
-import { 
-  FaBook, 
-  FaCalendarAlt, 
-  FaHandsHelping, 
-  FaPlus, 
-  FaTimes, 
-  FaSpinner, 
-  FaCloudUploadAlt, 
-  FaEdit, 
-  FaTrash, 
-  FaImage 
+import {
+   FaBook,
+   FaCalendarAlt,
+   FaHandsHelping,
+   FaPlus,
+   FaTimes,
+   FaSpinner,
+   FaCloudUploadAlt,
+   FaEdit,
+   FaTrash,
+   FaImage
 } from "react-icons/fa";
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -48,74 +48,72 @@ const STATUSES = ["Active", "Pending", "Suspended"];
 const COUNTRIES = ["Germany", "Belgium", "Austria", "Switzerland"];
 const STEPS = ["Registration", "Documents", "Interview", "Matching", "Visa Process", "Departure"];
 const BRAND = {
-  RED: "#E31B23",
-  GREEN: "#00C896",
-  DARK: "#0F172A",
+   RED: "#E31B23",
+   GREEN: "#00C896",
+   DARK: "#0F172A",
 };
 
 // --- HELPER COMPONENTS ---
 const Input = ({ label, value, onChange, type = "text", placeholder }: any) => (
-  <div className="space-y-1">
-    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{label}</label>
-    <input
-      type={type}
-      value={value}
-      placeholder={placeholder}
-      onChange={(e) => onChange(e.target.value)}
-      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23] transition-all"
-    />
-  </div>
+   <div className="space-y-1">
+      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{label}</label>
+      <input
+         type={type}
+         value={value}
+         placeholder={placeholder}
+         onChange={(e) => onChange(e.target.value)}
+         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23] transition-all"
+      />
+   </div>
 );
 
 const TextArea = ({ label, value, onChange, placeholder }: any) => (
-  <div className="space-y-1">
-    <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{label}</label>
-    <textarea
-      value={value}
-      placeholder={placeholder}
-      onChange={(e) => onChange(e.target.value)}
-      rows={4}
-      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23] transition-all resize-none"
-    />
-  </div>
+   <div className="space-y-1">
+      <label className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest ml-1">{label}</label>
+      <textarea
+         value={value}
+         placeholder={placeholder}
+         onChange={(e) => onChange(e.target.value)}
+         rows={4}
+         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23] transition-all resize-none"
+      />
+   </div>
 );
 
 const StatCard = ({ label, val, icon: Icon, color }: any) => (
-  <div className="bg-white p-6 rounded-4xl shadow-sm border border-slate-100 flex items-center gap-5">
-    <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg" style={{ backgroundColor: color }}>
-      <Icon size={24} />
-    </div>
-    <div>
-      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</p>
-      <p className="text-2xl font-black text-slate-900">{val}</p>
-    </div>
-  </div>
+   <div className="bg-white p-6 rounded-4xl shadow-sm border border-slate-100 flex items-center gap-5">
+      <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-white shadow-lg" style={{ backgroundColor: color }}>
+         <Icon size={24} />
+      </div>
+      <div>
+         <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{label}</p>
+         <p className="text-2xl font-black text-slate-900">{val}</p>
+      </div>
+   </div>
 );
 
 const SidebarItem = ({ icon: Icon, label, active, onClick }: any) => (
-  <button
-    onClick={onClick}
-    className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-bold transition-all ${
-      active 
-        ? "bg-white text-slate-900 shadow-sm" 
-        : "text-slate-500 hover:bg-slate-200/50 hover:text-slate-700"
-    }`}
-  >
-    <Icon size={18} className={active ? "text-[#E31B23]" : "text-slate-400"} />
-    {label}
-  </button>
+   <button
+      onClick={onClick}
+      className={`w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-sm font-bold transition-all ${active
+            ? "bg-white text-slate-900 shadow-sm"
+            : "text-slate-500 hover:bg-slate-200/50 hover:text-slate-700"
+         }`}
+   >
+      <Icon size={18} className={active ? "text-[#E31B23]" : "text-slate-400"} />
+      {label}
+   </button>
 );
 
 const TabButton = ({ active, onClick, icon: Icon, label }: any) => (
-  <button
-    onClick={onClick}
-    className={`flex items-center gap-2 px-6 py-2 rounded-lg text-xs font-black uppercase transition-all ${
-      active ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"
-    }`}
-  >
-    <Icon size={14} />
-    {label}
-  </button>
+   <button
+      onClick={onClick}
+      className={`flex items-center gap-2 px-6 py-2 rounded-lg text-xs font-black uppercase transition-all ${active ? "bg-white text-slate-900 shadow-sm" : "text-slate-400 hover:text-slate-600"
+         }`}
+   >
+      <Icon size={14} />
+      {label}
+   </button>
 );
 
 const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClose: () => void; onSave: (data: any) => void }) => {
@@ -141,7 +139,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="absolute inset-0 bg-slate-900/60 backdrop-blur-md" />
          <motion.div initial={{ opacity: 0, scale: 0.95, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 20 }} className="relative bg-white rounded-[3rem] w-full max-w-5xl shadow-2xl overflow-hidden max-h-[95vh] flex flex-col">
-            
+
             <div className="p-8 border-b border-slate-100 bg-[#FDFBF7] flex justify-between items-center">
                <div className="flex items-center gap-4">
                   <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center text-white"><Settings size={24} /></div>
@@ -312,12 +310,12 @@ const ApplicationDetailsModal = ({ app, onClose, onMasterEdit }: { app: any; onC
                </div>
                <div className="flex items-center gap-3">
                   <button onClick={() => onMasterEdit(app)} className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#E31B23] transition-all shadow-md">
-                    <Settings size={14} /> Full Control
+                     <Settings size={14} /> Full Control
                   </button>
                   <button onClick={onClose} className="p-2 hover:bg-slate-200 rounded-full transition-colors"><X size={24} /></button>
                </div>
             </div>
-            
+
             <div className="flex-1 overflow-y-auto p-8 md:p-10 space-y-10 custom-scrollbar">
                <section className="grid grid-cols-2 md:grid-cols-4 gap-6 bg-slate-50 p-6 rounded-2xl border border-slate-100">
                   <div>
@@ -406,6 +404,8 @@ export default function AdminDashboard() {
    // Data State
    const [users, setUsers] = useState<any[]>([]);
    const [blogs, setBlogs] = useState<any[]>([]);
+   const [upcomingBookings, setUpcomingBookings] = useState<any[]>([]);
+   const [pastBookings, setPastBookings] = useState<any[]>([]);
    const [bookings, setBookings] = useState<any[]>([]);
    const [applications, setApplications] = useState<any[]>([]);
    const [events, setEvents] = useState<any[]>([]);
@@ -444,7 +444,7 @@ export default function AdminDashboard() {
             setUsers(data.map((u: any) => ({
                ...u, // Keep original for master edit
                id: u._id,
-               name: u.fullName || u.firstName || "Unknown User", 
+               name: u.fullName || u.firstName || "Unknown User",
                role: u.role ? (u.role.charAt(0).toUpperCase() + u.role.slice(1)) : "Guest",
                email: u.email || "No Email",
                status: u.status ? (u.status.charAt(0).toUpperCase() + u.status.slice(1)) : "Active",
@@ -457,14 +457,33 @@ export default function AdminDashboard() {
 
          if (bookingsRes.ok) {
             const bookingsData = await bookingsRes.json();
-            setBookings(bookingsData.map((b: any) => ({
+            const processedBookings = bookingsData.map((b: any) => ({
                id: b._id,
                user: b.name || "Unknown",
                type: b.serviceTitle,
                time: b.time,
                date: b.date,
-               status: b.status
-            })));
+               status: b.status,
+               email: b.email,
+               phone: b.phone
+            }));
+
+            setBookings(processedBookings);
+
+            // Filter Upcoming vs Past
+            const now = new Date();
+            const upcoming = processedBookings.filter((b: any) => {
+               const bookingDate = new Date(`${b.date}T${b.time}`);
+               return bookingDate >= now && b.status !== 'cancelled' && b.status !== 'rejected';
+            }).sort((a: any, b: any) => new Date(`${a.date}T${a.time}`).getTime() - new Date(`${b.date}T${b.time}`).getTime());
+
+            const past = processedBookings.filter((b: any) => {
+               const bookingDate = new Date(`${b.date}T${b.time}`);
+               return bookingDate < now || b.status === 'cancelled' || b.status === 'rejected' || b.status === 'completed';
+            }).sort((a: any, b: any) => new Date(`${b.date}T${b.time}`).getTime() - new Date(`${a.date}T${a.time}`).getTime());
+
+            setUpcomingBookings(upcoming);
+            setPastBookings(past);
          }
          if (appsRes.ok) setApplications(await appsRes.json());
          if (eventsRes.ok) setEvents(await eventsRes.json());
@@ -647,27 +666,65 @@ export default function AdminDashboard() {
                      <div className="lg:col-span-2 bg-white rounded-[2.5rem] p-8 shadow-sm border border-slate-100">
                         <div className="flex justify-between items-center mb-6">
                            <h3 className="font-black text-lg text-slate-800">Booking Queue</h3>
-                           <button onClick={() => setActiveTab("dashboard")} className="text-[10px] font-black bg-slate-50 px-3 py-1 rounded-lg uppercase text-slate-400">View All</button>
+                           <button onClick={() => setActiveTab("bookings")} className="text-[10px] font-black bg-slate-50 px-3 py-1 rounded-lg uppercase text-slate-400">View All</button>
                         </div>
-                        <div className="space-y-3">
-                           {bookings.filter(b => b.status === 'pending').slice(0, 5).map((b: any) => (
-                              <div key={b.id} className="flex items-center justify-between p-4 bg-[#FAFAFA] rounded-2xl border border-slate-50 hover:bg-white hover:shadow-md transition-all group">
-                                 <div className="flex items-center gap-4">
-                                    <div className="w-10 h-10 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-400 font-bold shadow-sm">{b.user.charAt(0)}</div>
-                                    <div>
-                                       <p className="font-bold text-slate-900 text-sm">{b.user}</p>
-                                       <p className="text-xs text-slate-400 font-medium">{b.type} • <span className="text-[#E31B23]">{b.time}</span></p>
+
+                        {/* --- UPCOMING BOOKINGS --- */}
+                        <div className="mb-8">
+                           <h4 className="text-xs font-black text-[#E31B23] uppercase tracking-widest mb-4">Upcoming Appointments</h4>
+                           <div className="space-y-3">
+                              {upcomingBookings.length > 0 ? upcomingBookings.slice(0, 3).map((b: any) => (
+                                 <div key={b.id} className="flex items-center justify-between p-4 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md transition-all">
+                                    <div className="flex items-center gap-4">
+                                       <div className="w-12 h-12 bg-red-50 rounded-xl flex flex-col items-center justify-center text-[#E31B23] border border-red-100">
+                                          <span className="text-[10px] font-bold uppercase">{new Date(b.date).toLocaleString('default', { month: 'short' })}</span>
+                                          <span className="text-lg font-black leading-none">{new Date(b.date).getDate()}</span>
+                                       </div>
+                                       <div>
+                                          <p className="font-bold text-slate-900 text-sm">{b.user}</p>
+                                          <p className="text-xs text-slate-500 font-medium">{b.type} • {b.time}</p>
+                                       </div>
+                                    </div>
+                                    <div className="flex gap-2">
+                                       {b.status === 'pending' ? (
+                                          <>
+                                             <button onClick={() => handleUpdateBooking(b.id, 'confirmed')} className="px-3 py-1.5 rounded-lg bg-green-50 text-[#00C896] text-[10px] font-black uppercase hover:bg-[#00C896] hover:text-white transition-colors">Confirm</button>
+                                             <button onClick={() => handleUpdateBooking(b.id, 'rejected')} className="px-3 py-1.5 rounded-lg bg-red-50 text-[#E31B23] text-[10px] font-black uppercase hover:bg-[#E31B23] hover:text-white transition-colors">Reject</button>
+                                          </>
+                                       ) : (
+                                          <span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${b.status === 'confirmed' ? 'bg-green-100 text-green-700' : 'bg-slate-100 text-slate-500'}`}>
+                                             {b.status}
+                                          </span>
+                                       )}
                                     </div>
                                  </div>
-                                 <div className="flex gap-2">
-                                    <button onClick={() => handleUpdateBooking(b.id, 'confirmed')} className="p-2 rounded-xl bg-green-50 text-[#00C896] hover:bg-[#00C896] hover:text-white transition-colors"><Check size={16} /></button>
-                                    <button onClick={() => handleUpdateBooking(b.id, 'rejected')} className="p-2 rounded-xl bg-red-50 text-[#E31B23] hover:bg-[#E31B23] hover:text-white transition-colors"><X size={16} /></button>
+                              )) : (
+                                 <p className="text-sm text-slate-400 font-medium italic">No upcoming appointments.</p>
+                              )}
+                           </div>
+                        </div>
+
+                        {/* --- PAST / HISTORY --- */}
+                        <div>
+                           <h4 className="text-xs font-black text-slate-400 uppercase tracking-widest mb-4">Recent History</h4>
+                           <div className="space-y-3 opacity-80 hover:opacity-100 transition-opacity">
+                              {pastBookings.length > 0 ? pastBookings.slice(0, 3).map((b: any) => (
+                                 <div key={b.id} className="flex items-center justify-between p-3 bg-[#FAFAFA] rounded-xl border border-slate-50">
+                                    <div className="flex items-center gap-3">
+                                       <div className="w-8 h-8 bg-slate-200 rounded-lg flex items-center justify-center text-slate-500 text-[10px] font-bold">
+                                          {new Date(b.date).getDate()}
+                                       </div>
+                                       <div>
+                                          <p className="font-bold text-slate-700 text-xs">{b.user}</p>
+                                          <p className="text-[10px] text-slate-400">{b.type}</p>
+                                       </div>
+                                    </div>
+                                    <span className={`text-[10px] font-bold uppercase ${b.status === 'completed' ? 'text-green-600' : 'text-slate-400'}`}>{b.status}</span>
                                  </div>
-                              </div>
-                           ))}
-                           {bookings.filter(b => b.status === 'pending').length === 0 && (
-                              <p className="text-center py-10 text-slate-400 text-sm font-medium">No pending bookings.</p>
-                           )}
+                              )) : (
+                                 <p className="text-sm text-slate-400 font-medium italic">No history available.</p>
+                              )}
+                           </div>
                         </div>
                      </div>
 
@@ -756,7 +813,7 @@ export default function AdminDashboard() {
                         <tbody className="divide-y divide-slate-50">
                            {users.map((u: any) => (
                               <React.Fragment key={u.id}>
-                                 <tr 
+                                 <tr
                                     className={`hover:bg-slate-50 transition-colors cursor-pointer ${expandedUser === u.id ? 'bg-slate-50' : ''}`}
                                     onClick={() => setExpandedUser(expandedUser === u.id ? null : u.id)}
                                  >
@@ -795,7 +852,7 @@ export default function AdminDashboard() {
                                        </div>
                                     </td>
                                  </tr>
-                                 
+
                                  {/* --- EXPANDED STUDENT INFO --- */}
                                  {expandedUser === u.id && u.role === 'Student' && (
                                     <tr>

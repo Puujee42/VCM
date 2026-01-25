@@ -2,89 +2,45 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { 
-  Globe, 
-  Rocket, 
-  Smartphone, 
-  ShieldCheck, 
+import {
+  Globe,
+  Rocket,
+  Smartphone,
+  ShieldCheck,
   Star,
   ArrowRight
 } from "lucide-react";
-import { useLanguage } from "../context/LanguageContext";
+import { useTranslations } from "next-intl";
 
-const CONTENT = {
-  header: {
-    mn: "Гадаад дахь аялалаа эхлүүлээрэй!",
-    en: "Start Your Adventure Abroad!"
-  },
-  subheader: {
-    mn: <><strong>Mongolian Aupair</strong>-д тавтай морил! Бид таны гадаадад гарах замыг урьд өмнөхөөс илүү хялбар болгох болно.</>,
-    en: <>Welcome to <strong>Mongolian Aupair</strong>! We make your path abroad easier than ever before.</>
-  },
-  features: [
+const BeforeLoginNews = () => {
+  const t = useTranslations("BeforeLoginNews");
+
+  const features = [
     {
       icon: Rocket,
       iconColor: "text-emerald-500",
-      title: {
-        mn: "Хялбар & Заавартай",
-        en: "Simple & Guided"
-      },
-      desc: {
-        mn: "Манай систем танд алхам алхмаар зааварчилж, ухаалаг зөвлөгөөг өгөх болно.",
-        en: "Our system guides you step-by-step through your application with smart hints."
-      }
+      title: t("simple_title"),
+      desc: t("simple_desc")
     },
     {
       icon: Smartphone,
       iconColor: "text-blue-500",
-      title: {
-        mn: "Бүрэн Уян Хатан",
-        en: "Full Flexibility"
-      },
-      desc: {
-        mn: "Гар утас, таблет, компьютер гээд хүссэн төхөөрөмжөөсөө өөрийн хурдаар профайлаа удирдаарай.",
-        en: "Manage your profile on mobile, tablet, or PC – at your own pace."
-      }
+      title: t("flex_title"),
+      desc: t("flex_desc")
     },
     {
       icon: ShieldCheck,
       iconColor: "text-emerald-600",
-      title: {
-        mn: "Аюулгүй Байдал",
-        en: "Security First"
-      },
-      desc: {
-        mn: "Орчин үеийн шифрлэлт болон мэдээллийн аюулгүй байдлыг бид чандлан хангана.",
-        en: "State-of-the-art encryption and strict data protection to keep your info safe."
-      }
+      title: t("security_title"),
+      desc: t("security_desc")
     },
     {
       icon: Globe,
       iconColor: "text-orange-500",
-      title: {
-        mn: "Үнэ Төлбөргүй Бүртгэл",
-        en: "No Obligations"
-      },
-      desc: {
-        mn: "Бүртгүүлэхэд 100% үнэгүй. Зөвхөн хөтөлбөрт тэнцсэн үедээ л баталгаажуулна.",
-        en: "Registration is 100% free. It only becomes binding upon successful placement."
-      }
+      title: t("free_title"),
+      desc: t("free_desc")
     }
-  ],
-  footer: {
-    ready: {
-      mn: "Бэлэн үү?",
-      en: "Ready?"
-    },
-    scroll: {
-      mn: "Дэлгэрэнгүйг гүйлгэх",
-      en: "Scroll for more"
-    }
-  }
-};
-
-const BeforeLoginNews = () => {
-  const { t } = useLanguage();
+  ];
 
   return (
     <motion.div
@@ -100,30 +56,32 @@ const BeforeLoginNews = () => {
       <div className="mb-8 relative z-10">
         <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-4">
           <Star size={12} fill="currentColor" />
-          <span>News & Updates</span>
+          <span>{t("badge")}</span>
         </div>
         <h2 className="text-3xl font-black text-slate-900 leading-[1.1] tracking-tight">
-          {t(CONTENT.header)} 🌍
+          {t("header")} 🌍
         </h2>
       </div>
 
       {/* Scrollable Content */}
       <div className="flex-1 overflow-y-auto pr-4 space-y-8 custom-scrollbar relative z-10">
         <p className="text-slate-600 font-bold text-sm leading-relaxed">
-          {t(CONTENT.subheader)}
+          {t.rich("subheader", {
+            strong: (chunks) => <strong>{chunks}</strong>
+          })}
         </p>
 
-        {CONTENT.features.map((feature, index) => (
+        {features.map((feature, index) => (
           <div key={index} className="flex gap-4">
             <div className="w-12 h-12 shrink-0 bg-white rounded-2xl flex items-center justify-center shadow-sm border border-slate-100">
               <feature.icon className={feature.iconColor} size={24} />
             </div>
             <div>
               <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider mb-1">
-                {t(feature.title)}
+                {feature.title}
               </h3>
               <p className="text-xs text-slate-500 font-medium leading-relaxed">
-                {t(feature.desc)}
+                {feature.desc}
               </p>
             </div>
           </div>
@@ -134,10 +92,10 @@ const BeforeLoginNews = () => {
       <div className="mt-8 pt-6 border-t border-white/40 relative z-10">
         <div className="flex items-center justify-between">
           <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
-            {t(CONTENT.footer.ready)}
+            {t("ready")}
           </p>
           <div className="flex items-center gap-2 text-emerald-600 font-black text-[10px] uppercase tracking-widest animate-pulse">
-            {t(CONTENT.footer.scroll)} <ArrowRight size={12} />
+            {t("scroll")} <ArrowRight size={12} />
           </div>
         </div>
       </div>

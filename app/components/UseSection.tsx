@@ -16,10 +16,7 @@ import {
   FaQuoteRight,
   FaCheckCircle
 } from "react-icons/fa";
-
-// ─── Mock Context (Replace with your actual context import) ───
-// import { useLanguage } from "../context/LanguageContext";
-const useLanguage = () => ({ language: "mn" });
+import { useTranslations, useLocale } from "next-intl";
 
 /* ────────────────────── Design System ────────────────────── */
 const COLORS = {
@@ -46,14 +43,12 @@ const ParallaxBackground = ({ containerRef }: { containerRef: React.RefObject<an
 };
 
 const UsSection = () => {
-  const { language } = useLanguage(); // "mn" or "en"
+  const t = useTranslations("UsSection");
+  const locale = useLocale();
   const containerRef = useRef(null);
   const isMobile = useIsMobile();
 
   // ─── Parallax & Scroll Hooks (Desktop only) ───
-  // We use a separate component for Background to keep it clean.
-  // For the image parallax, we'll conditionally use the hooks or just use values.
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -64,58 +59,18 @@ const UsSection = () => {
   const rotateImage = useTransform(scrollYProgress, [0, 1], [-3, 3]);
 
   // ─── Content Strategy ───
-  const content = {
-    mn: {
-      badge: "Бидний Түүх",
-      heading: {
-        pre: "Бид Монгол Залуусыг",
-        post: "хөтөлнө.",
-        sequence: [
-          "Дэлхийн боловсрол руу", 2500,
-          "Европын соёл руу", 2500,
-          "Амжилттай ирээдүй рүү", 2500
-        ]
-      },
-      desc: [
-        "2005 онд эхэлсэн бидний түүх бол зүгээр нэг бизнесийн түүх биш, харин боломжийн тухай түүх юм.",
-        "Герман улсын Au-Pair хөтөлбөрт хамрагдаж, дэлхийн соёлтой танилцсан үүсгэн байгуулагчийн маань туршлага өнөөдөр мянга мянган залууст шинэ хаалгыг нээж өгч байна.",
-      ],
-      quote: "Туршлага бол ирээдүйг харах хамгийн тод дуран юм.",
-      cta: "Илүү ихийг мэдэх",
-      stats: [
-        { id: 1, val: 20, suffix: "жил", label: "Туршлага", icon: FaHourglassHalf },
-        { id: 2, val: 3000, suffix: "+", label: "Оролцогч", icon: FaUserGraduate },
-        { id: 3, val: 55, suffix: "жил", label: "Олон Улсад", icon: FaGlobeEurope },
-        { id: 4, val: 100, suffix: "%", label: "Найдвартай", icon: FaAward },
-      ]
-    },
-    en: {
-      badge: "Our Legacy",
-      heading: {
-        pre: "Guiding Youth Towards",
-        post: ".",
-        sequence: [
-          "Global Education", 2500,
-          "European Culture", 2500,
-          "A Brighter Future", 2500
-        ]
-      },
-      desc: [
-        "Established in 2005, our story isn't just about business—it's about opening doors to global opportunities.",
-        "Born from the personal Au-Pair experience of our founder in Germany, we bridge the gap between Mongolian ambition and European opportunity.",
-      ],
-      quote: "Experience is the clearest lens through which to see the future.",
-      cta: "Discover More",
-      stats: [
-        { id: 1, val: 20, suffix: "Years", label: "Experience", icon: FaHourglassHalf },
-        { id: 2, val: 3000, suffix: "+", label: "Participants", icon: FaUserGraduate },
-        { id: 3, val: 55, suffix: "Years", label: "Global History", icon: FaGlobeEurope },
-        { id: 4, val: 100, suffix: "%", label: "Reliability", icon: FaAward },
-      ]
-    },
-  };
+  const stats = [
+    { id: 1, val: 20, suffix: t("years"), label: t("stat_exp"), icon: FaHourglassHalf },
+    { id: 2, val: 3000, suffix: "+", label: t("stat_participants"), icon: FaUserGraduate },
+    { id: 3, val: 55, suffix: t("years"), label: t("stat_global"), icon: FaGlobeEurope },
+    { id: 4, val: 100, suffix: "%", label: t("stat_reliable"), icon: FaAward },
+  ];
 
-  const t = content[language === "mn" ? "mn" : "en"] || content.mn;
+  const headingSequence = [
+    t("heading_seq1"), 2500,
+    t("heading_seq2"), 2500,
+    t("heading_seq3"), 2500
+  ];
 
   // ─── Animation Variants ───
   const containerVar: Variants = {
@@ -168,13 +123,13 @@ const UsSection = () => {
                 <FaAward size={14} />
               </span>
               <span className="text-sm font-bold uppercase tracking-widest text-slate-500 font-sans">
-                {t.badge}
+                {t("badge")}
               </span>
             </motion.div>
 
             {/* Headline with TypeAnimation */}
             <motion.h2 variants={textVar} className="text-4xl lg:text-6xl font-black text-slate-900 leading-[1.1] mb-8 min-h-[3.3em] lg:min-h-[2.5em]">
-              {t.heading.pre} <br className="hidden md:block" />
+              {t("heading_pre")} <br className="hidden md:block" />
               <span className="inline-block relative">
                 {/* Highlighter Effect */}
                 <motion.span
@@ -184,32 +139,33 @@ const UsSection = () => {
                   className="absolute bottom-1 lg:bottom-3 left-0 w-full h-3 lg:h-5 bg-[#00C896]/20 -z-10 origin-left -skew-x-6"
                 />
                 <TypeAnimation
-                  key={language}
-                  sequence={t.heading.sequence}
+                  key={locale}
+                  sequence={headingSequence}
                   wrapper="span"
                   speed={50}
                   repeat={Infinity}
                   className="text-transparent bg-clip-text bg-gradient-to-r from-slate-900 to-slate-600"
                 />
               </span>
-              <span className="text-[#E31B23] ml-1">{t.heading.post}</span>
+              <span className="text-[#E31B23] ml-1">{t("heading_post")}</span>
             </motion.h2>
 
             {/* Paragraphs */}
             <div className="space-y-6 text-lg text-slate-600 leading-relaxed font-medium">
-              {t.desc.map((p: string, i: number) => (
-                <motion.p key={i} variants={textVar} className="border-l-2 border-transparent hover:border-slate-300 pl-0 hover:pl-6 transition-all duration-300">
-                  {p}
-                </motion.p>
-              ))}
+              <motion.p variants={textVar} className="border-l-2 border-transparent hover:border-slate-300 pl-0 hover:pl-6 transition-all duration-300">
+                {t("desc1")}
+              </motion.p>
+              <motion.p variants={textVar} className="border-l-2 border-transparent hover:border-slate-300 pl-0 hover:pl-6 transition-all duration-300">
+                {t("desc2")}
+              </motion.p>
             </div>
 
             {/* Quote Box */}
             <motion.div variants={textVar} className="mt-10 p-6 bg-white border border-slate-100 rounded-2xl shadow-sm relative italic text-slate-700 flex gap-4">
               <div className="text-4xl text-red-200"><FaQuoteRight /></div>
               <div>
-                <p className="relative z-10 font-semibold text-lg">"{t.quote}"</p>
-                <p className="text-xs font-bold text-slate-600 mt-2 uppercase tracking-wide">— Founder</p>
+                <p className="relative z-10 font-semibold text-lg">"{t("quote")}"</p>
+                <p className="text-xs font-bold text-slate-600 mt-2 uppercase tracking-wide">— {t("founder")}</p>
               </div>
             </motion.div>
 
@@ -218,7 +174,7 @@ const UsSection = () => {
               <Link href="/contact" className="inline-block group">
                 <div className="relative overflow-hidden rounded-full px-10 py-4 bg-[#E31B23] text-white font-bold text-lg shadow-xl shadow-red-500/30 hover:shadow-2xl hover:shadow-red-500/40 transition-all duration-300 transform hover:-translate-y-1">
                   <span className="relative z-10 flex items-center gap-3">
-                    {t.cta}
+                    {t("cta")}
                     <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </span>
                   {/* Button Shine */}
@@ -255,7 +211,7 @@ const UsSection = () => {
 
                   {/* Name Tag on Image */}
                   <div className="absolute bottom-6 left-6 text-white">
-                    <p className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">Founder</p>
+                    <p className="text-xs font-bold uppercase tracking-widest opacity-80 mb-1">{t("founder")}</p>
                     <p className="text-2xl font-bold">Mongolian AuPair</p>
                   </div>
                 </div>
@@ -271,7 +227,7 @@ const UsSection = () => {
                   <div className="bg-green-100 text-[#00C896] p-2.5 rounded-xl">
                     <FaCheckCircle className="text-xl" />
                   </div>
-                  <span className="text-xs font-bold text-slate-500 uppercase leading-tight">Officially<br />Accredited</span>
+                  <span className="text-xs font-bold text-slate-500 uppercase leading-tight">{t("certified")}</span>
                 </div>
                 <p className="text-sm text-slate-600 font-semibold leading-snug">
                   Recognized by international Au Pair associations for safety & quality.
@@ -313,7 +269,7 @@ const UsSection = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-6"
         >
-          {t.stats.map((stat: any, idx: number) => (
+          {stats.map((stat: any, idx: number) => (
             <motion.div
               key={stat.id}
               variants={cardVar}

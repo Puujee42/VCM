@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
@@ -36,6 +36,7 @@ interface DateOption {
    day: string;
    date: string;
    full: string;
+   isToday: boolean;
 }
 
 interface BookingFormData {
@@ -85,16 +86,7 @@ const SERVICES: Service[] = [
    }
 ];
 
-const DATES: DateOption[] = [
-   { day: "Дав", date: "20", full: "2025-01-20" },
-   { day: "Мяг", date: "21", full: "2025-01-21" },
-   { day: "Лха", date: "22", full: "2025-01-22" },
-   { day: "Пүр", date: "23", full: "2025-01-23" },
-   { day: "Баа", date: "24", full: "2025-01-24" },
-   { day: "Бям", date: "25", full: "2025-01-25" },
-];
-
-const TIMES = [
+const ALL_TIMES = [
    "10:00", "11:00", "13:00", "14:00", "15:30", "16:30", "18:00"
 ];
 
@@ -122,6 +114,61 @@ export default function BookingPage() {
 
    const [myBookings, setMyBookings] = useState<any[]>([]);
    const [isSubmitting, setIsSubmitting] = useState(false);
+   const [dates, setDates] = useState<DateOption[]>([]);
+
+   // Generate Dates (Next 5 Days)
+   useEffect(() => {
+      const generateDates = () => {
+         const arr: DateOption[] = [];
+         const today = new Date();
+
+         for (let i = 0; i < 5; i++) {
+            const d = new Date(today);
+            d.setDate(today.getDate() + i);
+
+            // Skip Sundays if needed (optional logic, kept simple for now)
+            if (d.getDay() === 0) {
+               // i--; // Uncomment to skip Sunday but create dynamic loop carefully
+               // continue; 
+            }
+
+            const dayName = d.toLocaleDateString('mn-MN', { weekday: 'short' });
+            const dateNum = d.getDate().toString();
+            // YYYY-MM-DD format
+            const fullDate = d.toISOString().split('T')[0];
+
+            arr.push({
+               day: dayName.charAt(0).toUpperCase() + dayName.slice(1),
+               date: dateNum,
+               full: fullDate,
+               isToday: i === 0
+            });
+         }
+         return arr;
+      };
+      setDates(generateDates());
+   }, []);
+
+   // Filter Times based on selected date
+   const availableTimes = useMemo(() => {
+      if (!formData.date) return ALL_TIMES;
+
+      if (formData.date.isToday) {
+         const now = new Date();
+         const currentHour = now.getHours();
+         const currentMinute = now.getMinutes();
+
+         return ALL_TIMES.filter(t => {
+            const [h, m] = t.split(':').map(Number);
+            if (h > currentHour) return true;
+            if (h === currentHour && m > currentMinute) return true;
+            return false;
+         });
+      }
+
+      return ALL_TIMES;
+   }, [formData.date]);
+
 
    // Autofill form when user loads
    useEffect(() => {
@@ -147,7 +194,14 @@ export default function BookingPage() {
    }, [isSignedIn]);
 
    const handleSelect = (key: keyof BookingFormData, value: any) => {
-      setFormData(prev => ({ ...prev, [key]: value }));
+      // If changing date, reset time if it becomes invalid? 
+      // For UX, if they pick a new date, maybe keep time unless it's past.
+      // But simpler to just set it.
+      if (key === 'date') {
+         setFormData(prev => ({ ...prev, date: value, time: null }));
+      } else {
+         setFormData(prev => ({ ...prev, [key]: value }));
+      }
    };
 
    const nextStep = () => setStep(prev => prev + 1);
@@ -270,26 +324,27 @@ export default function BookingPage() {
                            <div>
                               <h2 className="text-2xl font-black text-slate-900 mb-6">Өдрөө сонгоно уу</h2>
                               <div className="flex gap-3 overflow-x-auto pb-4 no-scrollbar">
-                                 {DATES.map((d) => (
+                                 {dates.map((d) => (
                                     <button
-                                       key={d.date}
+                                       key={d.full}
                                        onClick={() => handleSelect('date', d)}
-                                       className={`min-w-20 p-4 rounded-3xl border-2 flex flex-col items-center justify-center transition-all ${formData.date?.date === d.date
+                                       className={`min-w-24 p-4 rounded-3xl border-2 flex flex-col items-center justify-center transition-all ${formData.date?.full === d.full
                                           ? "border-emerald-500 bg-emerald-500 text-white shadow-lg shadow-emerald-200"
                                           : "border-slate-100 bg-white hover:border-emerald-200"
                                           }`}
                                     >
-                                       <span className={`text-xs font-bold uppercase mb-1 ${formData.date?.date === d.date ? "text-emerald-100" : "text-slate-400"}`}>{d.day}</span>
+                                       <span className={`text-xs font-bold uppercase mb-1 ${formData.date?.full === d.full ? "text-emerald-100" : "text-slate-400"}`}>{d.day}</span>
                                        <span className="text-2xl font-black">{d.date}</span>
+                                       {d.isToday && <span className="text-[10px] mt-1 bg-white/20 px-2 rounded-full font-bold">Today</span>}
                                     </button>
                                  ))}
                               </div>
                            </div>
 
                            <div>
-                              <h2 className="text-2xl font-black text-slate-900 mb-6">Цагаа сонгоно уу</h2>
+                              <h2 className="text-2xl font-black text-slate-900 mb-6 font-sans">Цагаа сонгоно уу</h2>
                               <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                                 {TIMES.map((t) => (
+                                 {availableTimes.length > 0 ? availableTimes.map((t) => (
                                     <button
                                        key={t}
                                        onClick={() => handleSelect('time', t)}
@@ -300,7 +355,11 @@ export default function BookingPage() {
                                     >
                                        {t}
                                     </button>
-                                 ))}
+                                 )) : (
+                                    <div className="col-span-4 text-center text-slate-400 py-4 font-medium italic bg-slate-50 rounded-2xl">
+                                       Уучлаарай, өнөөдөр сул цаг алга байна.
+                                    </div>
+                                 )}
                               </div>
                            </div>
                         </motion.div>

@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
-import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import { Link } from "@/navigation";
 import Image from "next/image";
 import { AnimatePresence, Variants } from "framer-motion";
 import { Motion as motion } from "./MotionProxy";
@@ -13,46 +13,12 @@ import {
   FaUserCheck,
 } from "react-icons/fa";
 import dynamic from "next/dynamic";
-import { useLanguage } from "../context/LanguageContext";
+import { useTranslations, useLocale } from "next-intl";
 
 const CloudinaryPlayer = dynamic(() => import("./CloudinaryPlayer"), { ssr: false });
 
 /* ────────────────────── Configuration ────────────────────── */
-const BRAND = {
-  RED: "#E31B23",      // Primary Action Color
-  GREEN: "#00C896",    // Success/Accent Color
-  WHITE: "#FFFFFF",
-};
-
 const AUTOPLAY_DURATION = 8000; // 8 Seconds per slide
-
-// STATIC DATA based on your request
-const HERO_SLIDES = [
-  {
-    id: 1,
-    title: { mn: "ОЛОН УЛСЫН AU PAIR ХӨТӨЛБӨР", en: "International Au Pair Program" },
-    desc: {
-      mn: "Монгол залууст Европын орнуудад амьдрангаа хэл сурч, дэлхийн соёлтой танилцах шилдэг боломжийг олгож байна. Сүүлийн 20 жилийн турш бид 3,000 гаруй залуусыг хөгжлийн замд нь хөтөллөө.",
-      en: "We offer Mongolian youth the best opportunity to live in European countries while learning a language and experiencing world culture. Over the last 20 years, we have guided more than 3,000 young people on their path of development."
-    },
-    location: { mn: "Герман", en: "Germany" },
-    author: "Mongolian AuPair",
-    path: "/aupair/germany",
-    duration: "12 Months"
-  },
-  {
-    id: 2,
-    title: { mn: "ЕВРОПООР АЯЛЖ, ТУРШЛАГА ХУРИМТЛУУЛ", en: "Travel Europe & Gain Experience" },
-    desc: {
-      mn: "Au Pair хөтөлбөрт хамрагдсанаар та зочин айлын гишүүн болж, Европын ёс заншлыг дотроос нь мэдэрнэ. Сар бүрийн халаасны мөнгө, үнэ төлбөргүй байр хоол болон аялах эрх таныг хүлээж байна.",
-      en: "By joining the Au Pair program, you become a member of a host family and experience European customs from within. Monthly pocket money, free room and board, and travel rights await you."
-    },
-    location: { mn: "Австри", en: "Austria" },
-    author: "Mongolian AuPair",
-    path: "/aupair/austria",
-    duration: "12 Months"
-  }
-];
 
 /* ────────────────────── Animation Variants ────────────────────── */
 const containerVariants: Variants = {
@@ -66,27 +32,47 @@ const containerVariants: Variants = {
 
 const textVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } }, // Custom cubic-bezier for "luxurious" feel
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] } },
 };
 
 /* ────────────────────── Main Component ────────────────────── */
-const Hero = () => {
-  const { language, t } = useLanguage();
+const HeroSlider = () => {
+  const t = useTranslations("HeroSlider");
+  const locale = useLocale();
   const [slideIndex, setSlideIndex] = useState(0);
   const containerRef = useRef<HTMLElement>(null);
   const [inView, setInView] = useState(false);
   const [mounted, setMounted] = useState(false);
 
+  const slides = [
+    {
+      id: 1,
+      title: t("slide1_title"),
+      desc: t("slide1_desc"),
+      location: t("slide1_location"),
+      path: "/aupair/germany",
+      duration: "12 Months"
+    },
+    {
+      id: 2,
+      title: t("slide2_title"),
+      desc: t("slide2_desc"),
+      location: t("slide2_location"),
+      path: "/aupair/austria",
+      duration: "12 Months"
+    }
+  ];
+
   // Auto-play logic
   useEffect(() => {
     setMounted(true);
     const timer = setInterval(() => {
-      setSlideIndex((prev) => (prev + 1) % HERO_SLIDES.length);
+      setSlideIndex((prev) => (prev + 1) % slides.length);
     }, AUTOPLAY_DURATION);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
-  const activeSlide = HERO_SLIDES[slideIndex];
+  const activeSlide = slides[slideIndex];
 
   useEffect(() => {
     // Intersection Observer to lazy load video
@@ -134,7 +120,6 @@ const Hero = () => {
             className="object-cover opacity-50 transition-transform duration-700 will-change-transform"
             priority
             loading="eager"
-            fetchPriority="high"
             placeholder="blur"
             blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg=="
             sizes="100vw"
@@ -166,13 +151,13 @@ const Hero = () => {
                 {/* Location Badge */}
                 <span className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-bold uppercase tracking-widest text-white shadow-lg">
                   <FaGlobeEurope className="text-[#00C896]" size={14} />
-                  {t(activeSlide.location)}
+                  {activeSlide.location}
                 </span>
 
                 {/* Verified Badge */}
                 <span className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#00C896]/10 backdrop-blur-md border border-[#00C896]/20 text-xs font-bold uppercase tracking-widest text-[#00C896] shadow-lg">
                   <FaUserCheck size={14} />
-                  Verified Program
+                  {t("verified")}
                 </span>
               </motion.div>
 
@@ -181,7 +166,7 @@ const Hero = () => {
                 variants={textVariants}
                 className="text-5xl md:text-7xl font-black leading-[1.1] mb-8 tracking-tight drop-shadow-2xl"
               >
-                {t(activeSlide.title).split(" ").map((word: string, i: number) => (
+                {activeSlide.title.split(" ").map((word: string, i: number) => (
                   <span key={i} className="inline-block mr-3">
                     {word === "Au" || word === "Pair" ? (
                       <span className="text-transparent bg-clip-text bg-gradient-to-br from-white to-slate-400">
@@ -198,7 +183,7 @@ const Hero = () => {
               <motion.div variants={textVariants} className="flex gap-6 mb-10 pl-2">
                 <div className="w-1 rounded-full bg-gradient-to-b from-[#E31B23] to-transparent h-auto min-h-[60px]" />
                 <p className="text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed font-medium">
-                  {t(activeSlide.desc)}
+                  {activeSlide.desc}
                 </p>
               </motion.div>
 
@@ -215,7 +200,7 @@ const Hero = () => {
                   <div className="p-2.5 rounded-xl bg-slate-800 border border-slate-700 text-[#00C896]">
                     <FaMapMarkerAlt />
                   </div>
-                  <span>{t(activeSlide.location)}</span>
+                  <span>{activeSlide.location}</span>
                 </div>
               </motion.div>
 
@@ -227,7 +212,7 @@ const Hero = () => {
                     whileTap={{ scale: 0.98 }}
                     className="group relative inline-flex items-center gap-4 px-8 py-4 bg-[#E31B23] text-white rounded-full font-bold text-lg overflow-hidden transition-all duration-300"
                   >
-                    <span className="relative z-10">{language === 'mn' ? 'Дэлгэрэнгүй' : 'Learn More'}</span>
+                    <span className="relative z-10">{t("learnMore")}</span>
                     <span className="relative z-10 p-1 bg-white/20 rounded-full group-hover:rotate-45 transition-transform duration-300">
                       <FaArrowRight size={12} />
                     </span>
@@ -245,7 +230,7 @@ const Hero = () => {
         {/* RIGHT COLUMN: Cinematic Pagination */}
         <div className="hidden lg:flex lg:col-span-4 h-full flex-col justify-center items-end pl-12">
           <div className="flex flex-col gap-6">
-            {HERO_SLIDES.map((item, index) => {
+            {slides.map((item, index) => {
               const isActive = index === slideIndex;
               return (
                 <button
@@ -258,7 +243,7 @@ const Hero = () => {
                       0{index + 1}
                     </p>
                     <h2 className="text-lg font-bold text-white">
-                      {t(item.location)}
+                      {item.location}
                     </h2>
                   </div>
 
@@ -285,4 +270,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default HeroSlider;

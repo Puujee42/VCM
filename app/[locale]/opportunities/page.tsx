@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
-import { useLanguage } from "../../context/LanguageContext";
+import { useTranslations, useLocale } from "next-intl";
 
 // --- TYPES ---
 type OpportunityType = 'all' | 'scholarship' | 'internship' | 'volunteer';
@@ -24,38 +24,26 @@ type OpportunityType = 'all' | 'scholarship' | 'internship' | 'volunteer';
 interface Opportunity {
   id: string;
   type: 'scholarship' | 'internship' | 'volunteer';
-  title: { en: string; mn: string };
-  provider: { en: string; mn: string };
-  location: { en: string; mn: string };
+  title: { en: string; mn: string; de: string };
+  provider: { en: string; mn: string; de: string };
+  location: { en: string; mn: string; de: string };
   deadline: string;
-  description: { en: string; mn: string };
+  description: { en: string; mn: string; de: string };
   tags: string[];
   link: string;
 }
 
-// --- TRANSLATIONS ---
-const TRANSLATIONS = {
-  badge: { mn: "Боломжууд", en: "Opportunities" },
-  titleMain: { mn: "Ирээдүйгээ", en: "Unlock Your" },
-  titleHighlight: { mn: "Бүтээ", en: "Potential" },
-  titleEnd: { mn: ".", en: "Today." },
-  searchPlaceholder: { mn: "Хайх...", en: "Search opportunities..." },
-  found: { mn: "Боломж олдлоо", en: "Opportunities Found" },
-  noResults: { mn: "Илэрц олдсонгүй.", en: "No opportunities found." },
-  provider: { mn: "Зарлагч", en: "Provider" },
-  deadline: { mn: "Дуусах хугацаа", en: "Deadline" },
-  details: { mn: "Дэлгэрэнгүй", en: "View Details" },
-  all: { mn: "Бүгд", en: "All" },
-  scholarships: { mn: "Тэтгэлэг", en: "Scholarships" },
-  internships: { mn: "Дадлага", en: "Internships" },
-  volunteering: { mn: "Сайн дурын ажил", en: "Volunteering" }
-};
-
 // --- SUB-COMPONENT: OPPORTUNITY CARD ---
-const OpportunityCard = ({ opp, lang, isDark }: { opp: Opportunity, lang: 'en' | 'mn', isDark: boolean }) => {
+const OpportunityCard = ({ opp, locale, isDark }: { opp: Opportunity, locale: string, isDark: boolean }) => {
+  const t = useTranslations("opportunities");
   const Icon = opp.type === 'scholarship' ? GraduationCap : opp.type === 'internship' ? Briefcase : Heart;
   const typeColor = opp.type === 'scholarship' ? "text-purple-500" : opp.type === 'internship' ? "text-blue-500" : "text-rose-500";
   const typeBg = opp.type === 'scholarship' ? "bg-purple-500/10" : opp.type === 'internship' ? "bg-blue-500/10" : "bg-rose-500/10";
+
+  // Safely access localized content
+  const title = opp.title[locale as keyof typeof opp.title] || opp.title.en;
+  const provider = opp.provider[locale as keyof typeof opp.provider] || opp.provider.en;
+  const description = opp.description[locale as keyof typeof opp.description] || opp.description.en;
 
   return (
     <motion.div
@@ -76,25 +64,25 @@ const OpportunityCard = ({ opp, lang, isDark }: { opp: Opportunity, lang: 'en' |
           <div className={`flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 ${isDark ? "bg-white/5" : "bg-slate-50"}`}>
              <Clock size={12} className="text-[#00aeef]" />
              <span className="text-[10px] font-black uppercase tracking-widest opacity-60">
-                {TRANSLATIONS.deadline[lang]}: {opp.deadline}
+                {t('deadline')}: {opp.deadline}
              </span>
           </div>
         </div>
 
         <div className="mb-4">
           <h3 className={`text-xl font-black mb-2 tracking-tight leading-tight line-clamp-2 ${isDark ? "text-white" : "text-[#001829]"}`}>
-            {opp.title[lang]}
+            {title}
           </h3>
           <p className={`text-xs font-bold flex items-center gap-2 ${isDark ? "text-[#00aeef]" : "text-[#00aeef]"}`}>
             <span className={`opacity-40 text-[10px] font-black uppercase tracking-widest ${isDark ? "text-white" : "text-slate-900"}`}>
-                {TRANSLATIONS.provider[lang]}:
+                {t('provider')}:
             </span>
-            {opp.provider[lang]}
+            {provider}
           </p>
         </div>
 
         <p className={`text-sm opacity-60 leading-relaxed mb-6 line-clamp-3 ${isDark ? "text-white" : "text-slate-600"}`}>
-          {opp.description[lang]}
+          {description}
         </p>
 
         <div className="mt-auto">
@@ -110,7 +98,7 @@ const OpportunityCard = ({ opp, lang, isDark }: { opp: Opportunity, lang: 'en' |
             ${isDark 
               ? "border-white/10 text-white hover:bg-[#00aeef] hover:border-[#00aeef]" 
               : "border-slate-200 text-[#001829] hover:bg-[#001829] hover:text-white"}`}>
-            {TRANSLATIONS.details[lang]}
+            {t('details')}
             <ArrowRight size={14} />
           </Link>
         </div>
@@ -121,7 +109,8 @@ const OpportunityCard = ({ opp, lang, isDark }: { opp: Opportunity, lang: 'en' |
 
 // --- MAIN PAGE ---
 export default function OpportunitiesPage() {
-  const { language: lang } = useLanguage();
+  const t = useTranslations("opportunities");
+  const locale = useLocale();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const [search, setSearch] = useState("");
@@ -153,17 +142,20 @@ export default function OpportunitiesPage() {
   const isDark = theme === "dark" || !theme;
 
   const filteredOpps = opportunities.filter(opp => {
-    const matchesSearch = opp.title[lang].toLowerCase().includes(search.toLowerCase()) || 
-                         opp.provider[lang].toLowerCase().includes(search.toLowerCase());
+    const title = opp.title[locale as keyof typeof opp.title] || opp.title.en;
+    const provider = opp.provider[locale as keyof typeof opp.provider] || opp.provider.en;
+    
+    const matchesSearch = title.toLowerCase().includes(search.toLowerCase()) || 
+                         provider.toLowerCase().includes(search.toLowerCase());
     const matchesFilter = filter === 'all' || opp.type === filter;
     return matchesSearch && matchesFilter;
   });
 
   const filterTabs = [
-    { id: 'all', label: TRANSLATIONS.all[lang] },
-    { id: 'scholarship', label: TRANSLATIONS.scholarships[lang] },
-    { id: 'internship', label: TRANSLATIONS.internships[lang] },
-    { id: 'volunteer', label: TRANSLATIONS.volunteering[lang] }
+    { id: 'all', label: t('all') },
+    { id: 'scholarship', label: t('scholarships') },
+    { id: 'internship', label: t('internships') },
+    { id: 'volunteer', label: t('volunteering') }
   ] as const;
 
   return (
@@ -188,7 +180,7 @@ export default function OpportunitiesPage() {
           >
             <Zap size={14} className="fill-current" />
             <span className="font-black text-[10px] uppercase tracking-[0.2em]">
-               {TRANSLATIONS.badge[lang]}
+               {t('badge')}
             </span>
           </motion.div>
 
@@ -198,7 +190,7 @@ export default function OpportunitiesPage() {
             className={`text-5xl md:text-7xl font-black tracking-tighter mb-8 leading-[0.9]
               ${isDark ? "text-white" : "text-[#001829]"}`}
           >
-            {TRANSLATIONS.titleMain[lang]} <span className="text-[#00aeef]">{TRANSLATIONS.titleHighlight[lang]}</span>{TRANSLATIONS.titleEnd[lang]}
+            {t('titleMain')} <span className="text-[#00aeef]">{t('titleHighlight')}</span>{t('titleEnd')}
           </motion.h1>
 
           {/* SEARCH BAR */}
@@ -211,7 +203,7 @@ export default function OpportunitiesPage() {
               ${isDark ? "text-white/20 group-focus-within:text-[#00aeef]" : "text-slate-400 group-focus-within:text-[#00aeef]"}`} size={20} />
             <input 
               type="text" 
-              placeholder={TRANSLATIONS.searchPlaceholder[lang]}
+              placeholder={t('searchPlaceholder')}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className={`w-full py-6 pl-16 pr-6 rounded-[2rem] border text-sm font-bold transition-all focus:outline-none focus:ring-4
@@ -247,7 +239,7 @@ export default function OpportunitiesPage() {
         <div className="flex items-center gap-4 mb-8 px-4">
             <Filter size={14} className="opacity-40" />
             <span className="text-xs font-black uppercase tracking-widest opacity-40">
-                {filteredOpps.length} {TRANSLATIONS.found[lang]}
+                {filteredOpps.length} {t('found')}
             </span>
             {loading && <span className="text-xs font-bold text-[#00aeef] animate-pulse ml-2">Syncing...</span>}
         </div>
@@ -264,7 +256,7 @@ export default function OpportunitiesPage() {
                 <OpportunityCard 
                     key={opp.id} 
                     opp={opp} 
-                    lang={lang} 
+                    locale={locale} 
                     isDark={isDark} 
                 />
               ))
@@ -277,7 +269,7 @@ export default function OpportunitiesPage() {
                 <div className="w-20 h-20 rounded-full bg-white/5 flex items-center justify-center mx-auto mb-6">
                     <Briefcase className="opacity-20" size={40} />
                 </div>
-                <p className="opacity-30 italic font-medium">{TRANSLATIONS.noResults[lang]}</p>
+                <p className="opacity-30 italic font-medium">{t('noResults')}</p>
               </motion.div>
             )}
           </AnimatePresence>

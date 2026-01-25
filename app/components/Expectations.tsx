@@ -17,9 +17,7 @@ import {
 } from "framer-motion";
 import { Motion as motion } from "./MotionProxy";
 import { useTheme } from "next-themes";
-// Mock context
-// import { useLanguage } from "../context/LanguageContext";
-const useLanguage = () => ({ language: "mn" as "mn" | "en" });
+import { useTranslations, useLocale } from "next-intl";
 
 // --- BRAND CONFIG ---
 const BRAND = {
@@ -30,61 +28,8 @@ const BRAND = {
   DARK: "#0F172A"
 };
 
-const CONTENT = {
-  header: {
-    badge: { en: "The Process", mn: "Хөтөлбөрийн алхам" },
-    title: { en: "Your Journey Abroad", mn: "Таны Аялал Эндээс Эхэлнэ" },
-    subtitle: {
-      en: "Four simple steps to start your new life in Europe.",
-      mn: "Мөрөөдлийн амьдрал руугаа алхах 4 энгийн алхам."
-    }
-  },
-  steps: [
-    {
-      id: 1,
-      icon: GraduationCap,
-      title: { en: "Training", mn: "Сургалтад суух" },
-      desc: {
-        en: "Intensive 17-day language course.",
-        mn: "Герман хэлний 17 хоногийн эрчимжүүлсэн хэлний курст сууна."
-      },
-      duration: "17 Days",
-    },
-    {
-      id: 2,
-      icon: FileCheck,
-      title: { en: "Proficiency Exam", mn: "Шалгалт өгөх" },
-      desc: {
-        en: "Take the entry-level proficiency test.",
-        mn: "Хэлний анхан шатны түвшин тогтоох Гёте А1 шалгалт өгнө."
-      },
-      duration: "Exam Day",
-    },
-    {
-      id: 3,
-      icon: Search,
-      title: { en: "Find Family", mn: "Айлаа сонгох" },
-      desc: {
-        en: "We help you match with a host family.",
-        mn: "Бид таны хүсэл сонирхолд нийцсэн хамгийн найдвартай зочин айлыг олж өгнө."
-      },
-      duration: "Matching",
-    },
-    {
-      id: 4,
-      icon: Plane,
-      title: { en: "Visa & Go", mn: "Виз мэдүүлэх" },
-      desc: {
-        en: "Guidance on visa and travel.",
-        mn: "Визний бичиг баримт бүрдүүлэх болон аяллын бэлтгэлд мэргэжлийн зөвлөгөө өгнө."
-      },
-      duration: "Departure",
-    }
-  ]
-};
-
 // --- 3D STEP CARD ---
-const StepCard = ({ step, index, lang, isDark }: any) => {
+const StepCard = ({ step, index, isDark }: any) => {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -156,12 +101,12 @@ const StepCard = ({ step, index, lang, isDark }: any) => {
                ${isDark ? "text-white" : "text-slate-900"} 
                group-hover:text-[#E31B23]`}
           >
-            {step.title[lang]}
+            {step.title}
           </h3>
 
           <p className={`text-sm font-medium leading-relaxed
                ${isDark ? "text-slate-400" : "text-slate-500"}`}>
-            {step.desc[lang]}
+            {step.desc}
           </p>
         </div>
       </div>
@@ -171,13 +116,45 @@ const StepCard = ({ step, index, lang, isDark }: any) => {
 };
 
 // --- MAIN SECTION ---
-export default function ProcessSteps() {
-  const { language: lang } = useLanguage();
+export default function Expectations() {
+  const t = useTranslations("Expectations");
+  const locale = useLocale();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => setMounted(true), []);
   const isDark = mounted && (theme === 'dark');
+
+  const steps = [
+    {
+      id: 1,
+      icon: GraduationCap,
+      title: t("step1_title"),
+      desc: t("step1_desc"),
+      duration: t("step1_duration"),
+    },
+    {
+      id: 2,
+      icon: FileCheck,
+      title: t("step2_title"),
+      desc: t("step2_desc"),
+      duration: t("step2_duration"),
+    },
+    {
+      id: 3,
+      icon: Search,
+      title: t("step3_title"),
+      desc: t("step3_desc"),
+      duration: t("step3_duration"),
+    },
+    {
+      id: 4,
+      icon: Plane,
+      title: t("step4_title"),
+      desc: t("step4_desc"),
+      duration: t("step4_duration"),
+    }
+  ];
 
   if (!mounted) return null;
 
@@ -219,7 +196,7 @@ export default function ProcessSteps() {
             >
               <div className="w-10 h-[2px]" style={{ backgroundColor: BRAND.GREEN }} />
               <span className="text-xs font-black uppercase tracking-[0.25em]" style={{ color: BRAND.GREEN }}>
-                {CONTENT.header.badge[lang]}
+                {t("badge")}
               </span>
             </motion.div>
 
@@ -230,7 +207,7 @@ export default function ProcessSteps() {
               className={`text-5xl md:text-7xl font-black tracking-tighter leading-[0.9] mb-6
                        ${isDark ? "text-white" : "text-slate-900"}`}
             >
-              {CONTENT.header.title[lang]}<span style={{ color: BRAND.RED }}>.</span>
+              {t("title")}<span style={{ color: BRAND.RED }}>.</span>
             </motion.h2>
 
             <motion.p
@@ -239,7 +216,7 @@ export default function ProcessSteps() {
               transition={{ delay: 0.2 }}
               className={`text-lg md:text-xl font-medium max-w-xl ${isDark ? "text-slate-400" : "text-slate-500"}`}
             >
-              {CONTENT.header.subtitle[lang]}
+              {t("subtitle")}
             </motion.p>
           </div>
 
@@ -256,7 +233,7 @@ export default function ProcessSteps() {
               <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-500" />
 
               <span className="relative z-10 text-xs font-bold uppercase tracking-[0.15em] text-white">
-                {lang === 'mn' ? 'Эхлэх' : 'Start Now'}
+                {t("start")}
               </span>
               <div className="relative z-10 w-6 h-6 rounded-full bg-white text-[#E31B23] flex items-center justify-center group-hover:scale-110 group-hover:rotate-[-45deg] transition-transform duration-300">
                 <ArrowRight size={12} strokeWidth={3} />
@@ -276,8 +253,8 @@ export default function ProcessSteps() {
             }}
           />
 
-          {CONTENT.steps.map((step, index) => (
-            <StepCard key={step.id} step={step} index={index} lang={lang} isDark={isDark} />
+          {steps.map((step, index) => (
+            <StepCard key={step.id} step={step} index={index} isDark={isDark} />
           ))}
         </div>
 
