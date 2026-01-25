@@ -5,16 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSignIn } from "@clerk/nextjs";
 import { motion } from "framer-motion";
-import {
-  ChevronLeft,
-  Mail,
-  Lock,
-  ArrowRight,
-  Loader2,
-  ShieldCheck,
-  KeyRound,
-  Fingerprint
-} from "lucide-react";
+import BeforeLoginNews from "../components/BeforeLoginNews";
+import { ArrowRight, ChevronLeft, Fingerprint, KeyRound, Loader2, Lock, Mail, ShieldCheck } from "lucide-react";
 
 export default function SignInPage() {
   const router = useRouter();

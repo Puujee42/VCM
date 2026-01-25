@@ -1,39 +1,29 @@
-Act as a Senior SEO Copywriter and Editor for the German market.
+# Starten Sie Ihr Auslandsabenteuer – Einfach, Sicher & Flexibel! 🌍
 
-Your goal is to rewrite the German content provided below. You must improve the ranking on Google (SEO) while making the text much easier to read ("Simple German").
+Willkommen bei **Mongolian Aupair**! Wir machen Ihren Weg ins Ausland so leicht wie nie zuvor. Egal ob Au-Pair, Freiwilligenarbeit, Sprachtutorium oder Praktikum – hier beginnt Ihre Reise.
 
-Please follow these specific instructions:
+## 🚀 Einfach & Geführt
+Schluss mit komplizierten Formularen! Unser System führt Sie **Schritt für Schritt** durch Ihre Bewerbung.
+*   **Intelligente Hilfestellungen:** Tipps genau dort, wo Sie sie brauchen.
+*   **Persönlicher Support:** Haben Sie Fragen? Ihr Ansprechpartner bei *Kulturist* ist für Sie da.
 
-1. **SEO OPTIMIZATION:**
-   - Identify the primary topic (Au-Pair/Volunteering/Internships) and keywords.
-   - Naturally include keywords in the first paragraph and headers.
-   - Use HTML Headings (H1, H2) to structure the text.
-   - Write a compelling Meta Description in German (under 160 characters).
+## 📱 Volle Flexibilität – Überall & Jederzeit
+Starten Sie am Laptop, machen Sie weiter am Tablet.
+*   **Geräteunabhängig:** Verwalten Sie Ihr Profil auf Handy, Tablet oder PC.
+*   **Ihr Tempo:** Speichern Sie Ihren Fortschritt und machen Sie weiter, wann es Ihnen passt. Kein Zeitdruck!
 
-2. **READABILITY & SIMPLIFICATION (The "Replace" Phase):**
-   - **Replace** complex sentence structures with simple, direct German.
-   - **Replace** passive voice with active voice (e.g., instead of "wird ermöglicht", use "wir ermöglichen").
-   - **Replace** long paragraphs with bullet points or short, punchy sentences.
-   - **Fix** any grammar errors in the original text (e.g., the double use of "müssen" in the "Sicher" section).
-   - Ensure the tone is welcoming ("Du" or polite "Sie" depending on typical Au-Pair demographic, but let's stick to a friendly "Sie" as per the original).
+## 🔒 Sicherheit an erster Stelle
+Ihre Privatsphäre ist uns heilig.
+*   **Verschlüsselte Daten:** Modernste Verschlüsselung bei Übertragung und Speicherung.
+*   **DSGVO-Konform:** Wir halten uns strikt an alle Datenschutzrichtlinien. Ihre Daten gehören Ihnen.
 
-Here is the source text:
+## ✨ Kostenlos & Unverbindlich Testen
+Probieren Sie es risikofrei aus.
+*   **Gratis Account:** Die Registrierung und Profilerstellung ist 100% kostenlos.
+*   **Fair:** Verbindlich wird es erst, wenn Sie erfolgreich vermittelt wurden und Sie unser Angebot annehmen.
 
-[CONTENT START]
-Herzlich willkommen! Mongolian Aupair ermöglicht Ihnen, Bewerbungen für ein Au-Pair-, Freiwilligen- und Sprachtutorenprogramm, oder auch für Praktika zu erstellen.
+---
+### Bereit für den ersten Schritt?
+Erstellen Sie jetzt Ihr Profil und entdecken Sie Ihre Möglichkeiten!
 
-Einfach
-Die Handhabung ist denkbar einfach – wir führen Sie Schritt für Schritt durch den Bewerbungsprozess. Es gibt viele Tipps und Hilfestellungen, sollte etwas nicht funktionieren, oder sollten Sie zu einzelnen Punkten Fragen haben, so finden Sie stets die Kontaktdaten Ihrer Ansprechperson bei Kulturist. Eine komfortable Handhabung von „mein Kulturist“ ist uns sehr wichtig, deswegen freuen wir uns jederzeit über Rückmeldungen!
-
-Flexibel
-Unabhängig davon, ob Sie ein Mobilgerät, Tablet oder einen PC benutzen, können Sie ihr Konto verwalten, Dateien hochladen, erstellen oder verändern. Sie müssen auch nicht alle Unterlagen auf einmal erstellen, sondern können das problemlos in Ihrem eigenen Tempo tun.
-
-Sicher
-Selbstverständlich sind sowohl die Übertragung Ihrer Daten, als auch deren Speicherung verschlüsselt. Sie müssen sich keine Sorgen darüber machen müssen, dass Ihre Daten in falsche Hände geraten könnten. Wir halten zu Ihrem Schutz alle Bestimmungen der aktuellen Datenschutz-Grundverordnung ein.
-
-Unverbindlich
-Sie können sich hier völlig unverbindlich ein Konto einrichten. Erst dann, wenn Sie eine Bewerbung abgeschlossen haben und von uns eine Nachricht darüber erhalten, dass Sie in das von Ihnen gewählte Programm aufgenommen wurden, wird es verbindlich.
-
-Worauf warten Sie noch? Den ersten Schritt zu Ihrem Auslandsaufenthalt tun Sie hier.
-Los geht's!
-[CONTENT END]
+[**Los geht's! – Jetzt kostenlos registrieren**]

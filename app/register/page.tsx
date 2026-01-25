@@ -2,17 +2,15 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   UserPlus,
   LogIn,
   ArrowRight,
   CheckCircle2,
-  Sparkles,
-  Globe,
   ChevronLeft
 } from "lucide-react";
-import { FaPlaneDeparture } from "react-icons/fa";
+import BeforeLoginNews from "../components/BeforeLoginNews";
 
 // --- OPTIONS ---
 const OPTIONS = [
@@ -127,7 +125,7 @@ export default function RegisterPage() {
           </div>
 
           {/* CTA Button */}
-          <Link href={selected === "new" ? "/sign-up" : "/login"}>
+          <Link href={selected === "new" ? "/sign-up" : "/sign-in"}>
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
@@ -158,43 +156,7 @@ export default function RegisterPage() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]" />
         </div>
 
-        {/* The Glass Card */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 20 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
-          className="relative z-10 w-[480px] aspect-[4/5] bg-white/20 backdrop-blur-lg border border-white/40 rounded-[3rem] shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] p-12 flex flex-col justify-between overflow-hidden group"
-        >
-          {/* Glossy overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent opacity-50 pointer-events-none" />
-
-          {/* Floating Icon */}
-          <motion.div
-            animate={{ y: [0, -15, 0], rotate: [0, 5, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="w-24 h-24 bg-gradient-to-tr from-emerald-400 to-teal-500 rounded-[2rem] flex items-center justify-center text-white text-4xl shadow-lg shadow-emerald-200/50 mx-auto"
-          >
-            <FaPlaneDeparture />
-          </motion.div>
-
-          {/* Content */}
-          <div className="text-center relative z-10">
-            <h2 className="text-5xl font-black text-slate-800 mb-2 leading-[0.9]">
-              Au Pair <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-rose-500">Journey</span>
-            </h2>
-            <p className="text-slate-600 font-medium text-lg mt-6 leading-relaxed">
-              Join a global network of changemakers. Explore new cultures, learn languages, and grow.
-            </p>
-          </div>
-
-          {/* Decor Line */}
-          <div className="w-16 h-1.5 bg-slate-200 rounded-full mx-auto" />
-
-          {/* Floating Particles decoration */}
-          <div className="absolute top-10 left-10 text-red-400 animate-pulse"><Sparkles size={24} /></div>
-          <div className="absolute bottom-10 right-10 text-emerald-400 animate-pulse delay-700"><Globe size={32} /></div>
-        </motion.div>
+        <BeforeLoginNews />
 
       </div>
 
