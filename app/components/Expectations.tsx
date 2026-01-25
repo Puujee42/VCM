@@ -32,11 +32,11 @@ const BRAND = {
 
 const CONTENT = {
   header: {
-    badge: { en: "The Process", mn: "Үйл явц" },
+    badge: { en: "The Process", mn: "Хөтөлбөрийн алхам" },
     title: { en: "Your Journey Abroad", mn: "Таны Аялал Эндээс Эхэлнэ" },
     subtitle: {
       en: "Four simple steps to start your new life in Europe.",
-      mn: "Мөрөөдлийн амьдрал руугаа алхах 4 алхам."
+      mn: "Мөрөөдлийн амьдрал руугаа алхах 4 энгийн алхам."
     }
   },
   steps: [
@@ -46,7 +46,7 @@ const CONTENT = {
       title: { en: "Training", mn: "Сургалтад суух" },
       desc: {
         en: "Intensive 17-day language course.",
-        mn: "Нийт 17 хоногийн турш хэлний курст сууна."
+        mn: "Герман хэлний 17 хоногийн эрчимжүүлсэн хэлний курст сууна."
       },
       duration: "17 Days",
     },
@@ -56,17 +56,17 @@ const CONTENT = {
       title: { en: "Proficiency Exam", mn: "Шалгалт өгөх" },
       desc: {
         en: "Take the entry-level proficiency test.",
-        mn: "Хэлний анхан шатны түвшин тогтоох шалгалт өгнө."
+        mn: "Хэлний анхан шатны түвшин тогтоох Гёте А1 шалгалт өгнө."
       },
       duration: "Exam Day",
     },
     {
       id: 3,
       icon: Search,
-      title: { en: "Find Family", mn: "Амьдрах айлаа хайх" },
+      title: { en: "Find Family", mn: "Айлаа сонгох" },
       desc: {
         en: "We help you match with a host family.",
-        mn: "Шалгалтдаа тэнцсэний дараа хамт амьдрах айлаа хайна."
+        mn: "Бид таны хүсэл сонирхолд нийцсэн хамгийн найдвартай зочин айлыг олж өгнө."
       },
       duration: "Matching",
     },
@@ -76,7 +76,7 @@ const CONTENT = {
       title: { en: "Visa & Go", mn: "Виз мэдүүлэх" },
       desc: {
         en: "Guidance on visa and travel.",
-        mn: "Виз мэдүүлэхэд хэрэгцээт мэдээллээр хангана."
+        mn: "Визний бичиг баримт бүрдүүлэх болон аяллын бэлтгэлд мэргэжлийн зөвлөгөө өгнө."
       },
       duration: "Departure",
     }

@@ -31,7 +31,7 @@ const COUNTRY_DATA = [
     title: { mn: "Герман", en: "Germany" },
     subtitle: { mn: "Европын Эдийн Засгийн Төв", en: "Economic Heart of Europe" },
     desc: {
-      mn: "Дэлхийн тэргүүлэгч улсад хэл сурангаа, Европын соёлтой танилцаж, ирээдүйн карьераа эхлүүл.",
+      mn: "Дэлхийн тэргүүлэгч улсад хэл сурангаа, Европын соёлтой танилцаж, ирээдүйн карьераа эхлүүл. Герман хэлний мэдлэгээ орчинд нь дээшлүүлэх шилдэг боломж.",
       en: "Master the language in a world-leading nation while experiencing European culture and kickstarting your career."
     },
     stat: "12-24 Months",
@@ -51,7 +51,7 @@ const COUNTRY_DATA = [
     title: { mn: "Австри", en: "Austria" },
     subtitle: { mn: "Сонгодог Урлагийн Өлгий", en: "Cradle of Classical Art" },
     desc: {
-      mn: "Альпийн нурууны байгалийн үзэсгэлэн дунд амьдарч, Герман хэлийг төгс эзэмших алтан боломж.",
+      mn: "Альпийн нурууны байгалийн үзэсгэлэн дунд амьдарч, Герман хэлийг төгс эзэмших алтан боломж. Вена хотын түүх соёлтой танилцаж, мартагдашгүй дурсамж бүтээ.",
       en: "A golden opportunity to master German while living amidst the breathtaking beauty of the Alps."
     },
     stat: "High Safety",
@@ -71,7 +71,7 @@ const COUNTRY_DATA = [
     title: { mn: "Бельги", en: "Belgium" },
     subtitle: { mn: "Олон Улсын Төв", en: "International Hub" },
     desc: {
-      mn: "Европын холбооны төв байранд ажиллаж, олон хэл, олон соёлыг нэг дор мэдрэх боломж.",
+      mn: "Европын холбооны төв байранд ажиллаж, олон хэл, олон соёлыг нэг дор мэдрэх боломж. Франц, Герман, Голланд хэлийг нэгэн зэрэг суралцах таатай орчин.",
       en: "Experience multilingual culture at the headquarters of the European Union."
     },
     stat: "Multi-Lang",
@@ -91,7 +91,7 @@ const COUNTRY_DATA = [
     title: { mn: "Швейцарь", en: "Switzerland" },
     subtitle: { mn: "Амьдралын Чанар", en: "Highest Quality of Life" },
     desc: {
-      mn: "Дэлхийн хамгийн өндөр цалин, хамгийн цэвэр агаар, хамгийн аюулгүй орчинд амьдрах боломж.",
+      mn: "Дэлхийн хамгийн өндөр халаасны мөнгө, хамгийн цэвэр агаар, хамгийн аюулгүй орчинд амьдрах боломж. Альпийн нурууны байгаль, өндөр амьжиргааг мэдэр.",
       en: "Live with the world's highest allowance, purest air, and safest environment."
     },
     stat: "Top Allowance",

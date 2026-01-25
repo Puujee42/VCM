@@ -30,10 +30,10 @@ const AUTOPLAY_DURATION = 8000; // 8 Seconds per slide
 const HERO_SLIDES = [
   {
     id: 1,
-    title: { mn: "ГЕРМАН УЛСАД Au Pair ХИЙХ", en: "Au Pair in Germany" },
+    title: { mn: "ОЛОН УЛСЫН AU PAIR ХӨТӨЛБӨР", en: "International Au Pair Program" },
     desc: {
-      mn: "Au-Pair хөтөлбөр нь Монгол залууст гадаадад амьдарч, шинэ соёл, хэл сурах, туршлага хуримтлуулах боломж олгодог тусгай хөтөлбөр юм.",
-      en: "The Au-Pair program is a special opportunity for Mongolian youth to live abroad, learn new cultures and languages, and gain experience."
+      mn: "Монгол залууст Европын орнуудад амьдрангаа хэл сурч, дэлхийн соёлтой танилцах шилдэг боломжийг олгож байна. Сүүлийн 20 жилийн турш бид 3,000 гаруй залуусыг хөгжлийн замд нь хөтөллөө.",
+      en: "We offer Mongolian youth the best opportunity to live in European countries while learning a language and experiencing world culture. Over the last 20 years, we have guided more than 3,000 young people on their path of development."
     },
     location: { mn: "Герман", en: "Germany" },
     author: "Mongolian AuPair",
@@ -42,10 +42,10 @@ const HERO_SLIDES = [
   },
   {
     id: 2,
-    title: { mn: "АВСТРИ УЛСАД Au Pair ХИЙХ", en: "Au Pair in Austria" },
+    title: { mn: "ЕВРОПООР АЯЛЖ, ТУРШЛАГА ХУРИМТЛУУЛ", en: "Travel Europe & Gain Experience" },
     desc: {
-      mn: "Au-Pair хөтөлбөр нь Монгол залууст гадаадад амьдарч, шинэ соёл, хэл сурах, туршлага хуримтлуулах боломж олгодог тусгай хөтөлбөр юм.",
-      en: "The Au-Pair program is a special opportunity for Mongolian youth to live abroad, learn new cultures and languages, and gain experience."
+      mn: "Au Pair хөтөлбөрт хамрагдсанаар та зочин айлын гишүүн болж, Европын ёс заншлыг дотроос нь мэдэрнэ. Сар бүрийн халаасны мөнгө, үнэ төлбөргүй байр хоол болон аялах эрх таныг хүлээж байна.",
+      en: "By joining the Au Pair program, you become a member of a host family and experience European customs from within. Monthly pocket money, free room and board, and travel rights await you."
     },
     location: { mn: "Австри", en: "Austria" },
     author: "Mongolian AuPair",
@@ -128,7 +128,7 @@ const Hero = () => {
         {/* Mobile Static Image Background */}
         <div className="block md:hidden absolute inset-0 w-full h-full">
           <Image
-            src="A_cinematic_highquality_202601201908_j5s2n_kkoosh"
+            src="https://res.cloudinary.com/dxoxdiuwr/video/upload/f_auto,q_auto,so_0/v1/A_cinematic_highquality_202601201908_j5s2n_kkoosh.jpg"
             alt="Hero Background"
             fill
             className="object-cover opacity-50 transition-transform duration-700 will-change-transform"
