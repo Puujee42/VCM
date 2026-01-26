@@ -83,7 +83,7 @@ const HeroSection = () => {
   const t = useTranslations("hero");
   const common = useTranslations("common");
   const locale = useLocale();
-  
+
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -297,8 +297,9 @@ const HeroSection = () => {
                       fill
                       unoptimized
                       className="object-cover transform scale-105 group-hover:scale-110 transition-transform duration-700"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 400px"
+                      sizes="(max-width: 768px) 320px, 380px"
                       priority={index === 0}
+                      quality={75}
                     />
                   </div>
                   <div className={`absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/80`} />

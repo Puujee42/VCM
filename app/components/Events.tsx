@@ -21,9 +21,7 @@ import {
 } from "framer-motion";
 import { useIsMobile, Motion as motion } from "./MotionProxy";
 import { useTheme } from "next-themes";
-// Mock context if not available
-// import { useLanguage } from "../context/LanguageContext";
-const useLanguage = () => ({ language: "mn" as "mn" | "en" });
+import { useLocale } from "next-intl";
 
 // --- CONFIG & BRAND ---
 const BRAND = {
@@ -35,23 +33,23 @@ const BRAND = {
 };
 
 const TABS = [
-  { id: 'blogs', en: 'News & Blogs', mn: 'Мэдээлэл' },
-  { id: 'events', en: 'Events', mn: 'Арга Хэмжээ' },
-];
+  { id: 'blogs', en: 'News & Blogs', mn: 'Мэдээлэл', de: 'Nachrichten & Blogs' },
+  { id: 'events', en: 'Events', mn: 'Арга Хэмжээ', de: 'Veranstaltungen' },
+] as const;
 
 const EVENT_CATEGORIES = [
-  { id: 'all', en: 'All Events', mn: 'Бүгд' },
-  { id: 'campaign', en: 'Campaigns', mn: 'Аяны Ажил' },
-  { id: 'workshop', en: 'Workshops', mn: 'Сургалт' },
-  { id: 'fundraiser', en: 'Fundraisers', mn: 'Хандив' },
-];
+  { id: 'all', en: 'All Events', mn: 'Бүгд', de: 'Alle Veranstaltungen' },
+  { id: 'campaign', en: 'Campaigns', mn: 'Аяны Ажил', de: 'Kampagnen' },
+  { id: 'workshop', en: 'Workshops', mn: 'Сургалт', de: 'Workshops' },
+  { id: 'fundraiser', en: 'Fundraisers', mn: 'Хандив', de: 'Spendenaktionen' },
+] as const;
 
 const BLOG_CATEGORIES = [
-  { id: 'all', en: 'All Posts', mn: 'Бүгд' },
-  { id: 'tips', en: 'Guides & Tips', mn: 'Зөвлөгөө' },
-  { id: 'vlog', en: 'Vlogs', mn: 'Влог' },
-  { id: 'news', en: 'Company News', mn: 'Мэдээ' },
-];
+  { id: 'all', en: 'All Posts', mn: 'Бүгд', de: 'Alle Beiträge' },
+  { id: 'tips', en: 'Guides & Tips', mn: 'Зөвлөгөө', de: 'Anleitungen & Tipps' },
+  { id: 'vlog', en: 'Vlogs', mn: 'Влог', de: 'Vlogs' },
+  { id: 'news', en: 'Company News', mn: 'Мэдээ', de: 'Unternehmens-News' },
+] as const;
 
 // --- SUB-COMPONENT: BRANDED CARD ---
 
@@ -120,7 +118,10 @@ const ContentCard = ({ item, lang, isDark, isMobile, type }: any) => {
           src={item.image || "/logo.jpg"}
           alt={item.title[lang] || "Content"}
           fill
+          priority={false}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 sm:group-hover:scale-110 opacity-100"
+          quality={75}
         />
 
         {/* Gradient Overlay - Stronger at bottom for text readability */}
@@ -203,7 +204,7 @@ const ContentCard = ({ item, lang, isDark, isMobile, type }: any) => {
 
 // --- MAIN SECTION ---
 export default function LatestUpdatesSection() {
-  const { language: lang } = useLanguage();
+  const lang = useLocale();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -329,7 +330,7 @@ export default function LatestUpdatesSection() {
                         style={{ backgroundColor: BRAND.RED }}
                       />
                     )}
-                    {tab[lang]}
+                    {(tab as any)[lang]}
                   </button>
                 )
               })}
@@ -372,7 +373,7 @@ export default function LatestUpdatesSection() {
                     `}
                   style={{ backgroundColor: isActive ? BRAND.GREEN : 'transparent' }}
                 >
-                  {cat[lang]}
+                  {(cat as any)[lang]}
                 </button>
               )
             })}

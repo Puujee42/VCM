@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Motion as motion } from "./MotionProxy";
 
 interface AuthActionsProps {
-  lang: "mn" | "en"| "de";
+  lang: "mn" | "en" | "de";
   BRAND: { RED: string };
   CONTENT: any;
   isMobile?: boolean;

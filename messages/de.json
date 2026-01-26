@@ -1,4 +1,10 @@
 {
+  "HomePage": {
+    "metadata": {
+      "title": "Mongolian Au Pair | Tor nach Europa",
+      "description": "Verbindet mongolische Jugendliche seit 2005 mit internationalen Au-Pair-Möglichkeiten in Deutschland, Österreich, der Schweiz und Belgien."
+    }
+  },
   "common": {
     "startJourney": "Reise beginnen",
     "howItWorks": "Wie es funktioniert",
@@ -6,7 +12,167 @@
     "openNow": "Jetzt geöffnet",
     "explore": "Entdecken",
     "trusted": "Weltweit von Familien und Studenten geschätzt.",
-    "loading": "Profil wird geladen..."
+    "loading": "Profil wird geladen...",
+    "action": "Aktion",
+    "contact": "Kontakt",
+    "phone": "Telefon",
+    "email": "E-Mail",
+    "address": "Adresse",
+    "send": "Senden"
+  },
+  "Footer": {
+    "weeklyUpdates": "Wöchentliche Updates",
+    "dontMiss": "Verpasse nicht",
+    "yourChance": "Deine Chance",
+    "enterEmail": "E-Mail eingeben...",
+    "explore": "Entdecken",
+    "action": "Aktion",
+    "contact": "Kontakt",
+    "rights": "© 2024 Mongolian Au Pair.",
+    "links": {
+      "aboutUs": "Über uns",
+      "auPairProgram": "Au-Pair-Programm",
+      "successStories": "Erfolgsgeschichten",
+      "applyNow": "Jetzt bewerben",
+      "findFamily": "Familie finden",
+      "faq": "FAQ"
+    }
+  },
+  "EventsPage": {
+    "metadata": {
+      "title": "Veranstaltungen | Mongolian Au Pair",
+      "description": "Entdecken Sie kommende Veranstaltungen, Workshops und Sprachclubs."
+    },
+    "upcoming": "Kommende Veranstaltungen 2025",
+    "heroTitle": "Gemeinsam",
+    "heroTitleHighlight": "Wachsen",
+    "heroDesc": "Erfahren Sie mehr über das Au-Pair-Programm, treten Sie Sprachclubs bei und nehmen Sie an kulturellen Veranstaltungen teil.",
+    "online": "Online",
+    "inPerson": "Persönlich",
+    "regClosed": "Anmeldung geschlossen",
+    "regOpen": "Anmeldung offen",
+    "full": "Voll",
+    "register": "Registrieren",
+    "newsletterTitle": "Verpasse nicht das",
+    "newsletterTitleHighlight": "nächste Event!",
+    "newsletterDesc": "Lassen Sie sich per E-Mail über neue Veranstaltungen und Schulungstermine informieren.",
+    "emailPlaceholder": "Deine E-Mail-Adresse",
+    "joinBtn": "Beitreten",
+    "categories": {
+      "all": "Alle",
+      "campaign": "Kampagne",
+      "workshop": "Workshop",
+      "meeting": "Club",
+      "fundraiser": "Spendenaktion",
+      "others": "Andere"
+    }
+  },
+  "BookingPage": {
+    "metadata": {
+      "title": "Termin buchen | Mongolian Au Pair",
+      "description": "Vereinbaren Sie ein Beratungsgespräch oder ein Interview mit unseren Experten."
+    },
+    "badge": "Online-Buchung",
+    "heroTitle": "Termin",
+    "heroTitleHighlight": "buchen",
+    "heroDesc": "Wählen Sie einen Service und eine Zeit, die Ihnen passt. Wir werden Sie umgehend kontaktieren.",
+    "steps": {
+      "service": "Service",
+      "time": "Zeit wählen",
+      "info": "Informationen"
+    },
+    "step1Title": "Wählen Sie einen Service",
+    "step2Title": "Wählen Sie ein Datum",
+    "step3Title": "Persönliche Informationen",
+    "timeTitle": "Wählen Sie eine Zeit",
+    "noSlots": "Entschuldigung, heute sind keine Termine verfügbar.",
+    "labels": {
+      "name": "Ihr Name",
+      "phone": "Telefonnummer",
+      "email": "E-Mail",
+      "note": "Zusätzliche Anmerkung (Optional)"
+    },
+    "placeholders": {
+      "name": "Max Mustermann",
+      "phone": "0123-456789",
+      "email": "name@beispiel.de",
+      "note": "Weitere Details..."
+    },
+    "buttons": {
+      "back": "Zurück",
+      "continue": "Weiter",
+      "confirm": "Bestätigen"
+    },
+    "summary": {
+      "title": "Buchungsinformationen",
+      "service": "Service",
+      "dateTime": "Datum & Uhrzeit",
+      "notSelected": "Nicht ausgewählt...",
+      "quickContact": "Direktkontakt"
+    },
+    "success": "Erfolgreich gebucht! Bitte warten Sie auf die Bestätigung durch den Admin.",
+    "error": "Ein Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "today": "Heute",
+    "services": {
+      "consultation": {
+        "title": "Allgemeine Beratung",
+        "duration": "30 Min",
+        "price": "Kostenlos",
+        "desc": "Allgemeine Informationen zum Programm und Q&A."
+      },
+      "interview": {
+        "title": "Aufnahmegespräch",
+        "duration": "45 Min",
+        "price": "20.000₮",
+        "desc": "Erstgespräch zur Einschätzung des Sprachniveaus und zur Anmeldung."
+      },
+      "visa": {
+        "title": "Visa-Beratung",
+        "duration": "60 Min",
+        "price": "50.000₮",
+        "desc": "Vorbereitung der Visumsunterlagen, Überprüfung und Beratung."
+      }
+    }
+  },
+  "NewsPage": {
+    "metadata": {
+      "title": "Neuigkeiten | Mongolian Au Pair",
+      "description": "Bleiben Sie auf dem Laufenden mit den neuesten Nachrichten und Geschichten aus Europa."
+    },
+    "badge": "Mongolisches Au-Pair Blog",
+    "heroTitle": "News &",
+    "heroTitleHighlight": "Updates",
+    "featured": "Mehr lesen",
+    "searchTitle": "Neue Artikel",
+    "searchPlaceholder": "News suchen...",
+    "readMore": "Lesen",
+    "viewAll": "Alle News anzeigen",
+    "newsletterTitle": "Bleib auf dem Laufenden!",
+    "newsletterDesc": "Erhalten Sie die neuesten Artikel und Programmsankündigungen direkt in Ihren Posteingang.",
+    "emailPlaceholder": "Deine E-Mail-Adresse...",
+    "register": "Abonnieren"
+  },
+  "LessonsPage": {
+    "metadata": {
+      "title": "Sprachlektionen | Mongolian Au Pair",
+      "description": "Greifen Sie auf exklusive Sprach- und Kulturlektionen für Au-Pairs zu."
+    },
+    "badge": "Au-Pair-Akademie",
+    "heroTitle": "Sprach",
+    "heroTitleHighlight": "lektionen",
+    "heroDesc": "Spezielle Lektionen zur Vermittlung von Sprachkenntnissen und kulturellem Verständnis für das Au-Pair-Programm.",
+    "registered": "Registriert",
+    "joined": "Beigetreten",
+    "joinClass": "Kurs beitreten",
+    "noLessons": "Zur Zeit sind keine Lektionen verfügbar.",
+    "difficulty": {
+      "beginner": "Anfänger",
+      "intermediate": "Mittelstufe",
+      "advanced": "Fortgeschritten"
+    },
+    "category": {
+      "language": "Sprache"
+    }
   },
   "BeforeLoginNews": {
     "badge": "Neuigkeiten & Updates",
@@ -87,6 +253,423 @@
     "card5_title": "Bewerbung starten",
     "card5_desc": "Kostenlos ein Profil erstellen."
   },
+  "GermanyPage": {
+    "metadata": {
+      "title": "Au-Pair in Deutschland | Mongolian Au Pair",
+      "description": "Erleben Sie das Leben im Herzen Europas. Meistern Sie Deutsch, entdecken Sie die Kultur und starten Sie Ihre Karriere."
+    },
+    "hero": {
+      "tag": "Deutschland Programm",
+      "title": "Au-Pair in",
+      "highlight": "Deutschland",
+      "sub": "Eine einmalige Gelegenheit, im Herzen Europas zu leben, ein weltweit führendes Bildungssystem zu erleben und neue Kulturen zu entdecken. Meistern Sie Ihre Deutschkenntnisse in einer muttersprachlichen Umgebung und starten Sie Ihre Karriere.",
+      "cta": "Jetzt registrieren",
+      "about": "Über uns"
+    },
+    "info": {
+      "title": "Über Deutschland",
+      "desc": "Deutschland ist eine weltweit führende Nation in Technologie und Ingenieurwesen mit 83 Millionen Einwohnern. Bekannt für sein kostenloses Bildungssystem, wunderschöne Natur und reiches kulturelles Erbe.",
+      "stats": {
+        "capital": {
+          "label": "Hauptstadt",
+          "val": "Berlin"
+        },
+        "population": {
+          "label": "Einwohner",
+          "val": "83 Millionen"
+        },
+        "language": {
+          "label": "Sprache",
+          "val": "Deutsch"
+        }
+      }
+    },
+    "intro": {
+      "title_pre": "Bildung,",
+      "title_mid": "Kultur,",
+      "title_post": "Erfahrung",
+      "desc": "Das Au-Pair-Programm ist ein internationaler Kulturaustausch für junge Menschen zwischen 18 und 26 Jahren. Als Mitglied einer Gastfamilie verbessern Sie Ihre Deutschkenntnisse und lernen Selbstständigkeit. Während des Programms sind Sie von Wohn- und Verpflegungskosten befreit und erhalten monatliches Taschengeld.",
+      "age": "18-26 Jahre",
+      "native": "Lernen im Umfeld"
+    },
+    "programs": {
+      "tag": "Programme für Sie",
+      "title_pre": "3 Arten von",
+      "title_post": "Programmen",
+      "list": [
+        {
+          "title": "Deutsch A1+",
+          "target": "Anfänger",
+          "desc": "Für Teilnehmer ohne Vorkenntnisse. Trainiert Deutsch von Anfänger bis A2-Niveau.",
+          "duration": "Vorbereitung: 6 Monate",
+          "age": "Alter: 18+"
+        },
+        {
+          "title": "Englisch B2",
+          "target": "Mittelstufe",
+          "desc": "Mit Flugticket-Bonus. Für Jugendliche mit Englischkenntnissen; Deutsch A1 erforderlich.",
+          "duration": "Vorbereitung: 4-6 Monate",
+          "age": "Alter: 20+"
+        },
+        {
+          "title": "Au-Pair Boy",
+          "target": "Männlich",
+          "desc": "Programm für männliche Teilnehmer. Erfordert Englisch B2 / Deutsch A2+ und Führerschein.",
+          "duration": "Vorbereitung: 3-8 Monate",
+          "age": "Führerschein"
+        }
+      ]
+    },
+    "duties": {
+      "childcare": {
+        "title": "Kinderbetreuung",
+        "items": [
+          "Spielen & Beschäftigen",
+          "Wecken & Anziehen",
+          "Schulwege",
+          "Hausaufgabenhilfe"
+        ]
+      },
+      "household": {
+        "title": "Hausarbeit",
+        "items": [
+          "Spülmaschine",
+          "Staubsaugen",
+          "Kinderwäsche",
+          "Leichte Einkäufe"
+        ]
+      }
+    },
+    "contract": {
+      "title_pre": "Vertrag &",
+      "title_post": "Bedingungen",
+      "desc": "Standards gemäß den deutschen Au-Pair-Bestimmungen.",
+      "items": {
+        "hours": {
+          "title": "Arbeitszeit",
+          "desc": "Bis zu 30 Stunden pro Woche."
+        },
+        "money": {
+          "title": "Taschengeld",
+          "desc": "Fix 280 Euro monatlich."
+        },
+        "course": {
+          "title": "Kursgebühren",
+          "desc": "Gastfamilie zahlt 70 Euro monatlich."
+        },
+        "vacation": {
+          "title": "Urlaub",
+          "desc": "4 Wochen bezahlter Urlaub pro Jahr."
+        }
+      }
+    },
+    "housing": {
+      "title": "Unterkunft & Verpflegung",
+      "sub": "100% von der Gastfamilie gestellt",
+      "items": [
+        "Eigenes Zimmer (mit Fenster)",
+        "Abschließbare Tür",
+        "Warm & möbliert",
+        "Freie Kost & Logis"
+      ]
+    }
+  },
+  "AustriaPage": {
+    "metadata": {
+      "title": "Au-Pair in Österreich | Mongolian Au Pair",
+      "description": "Leben Sie inmitten der Alpen und Wiener Walzer. Verbessern Sie Ihr Deutsch und erleben Sie die europäische Kultur."
+    },
+    "hero": {
+      "tag": "Österreich Programm",
+      "title": "Au-Pair in",
+      "highlight": "Österreich",
+      "sub": "Alpen, Wiener Walzer und ein geschichtsträchtiges Land. Verbessern Sie Ihr Deutsch und entdecken Sie die europäische Kultur, während Sie in Österreich leben und lernen.",
+      "cta": "Jetzt registrieren",
+      "about": "Über uns"
+    },
+    "info": {
+      "title": "Über Österreich",
+      "desc": "Österreich liegt in Mitteleuropa und ist bekannt für seine atemberaubenden Landschaften, hohe Lebensqualität und reiche Musikgeschichte als Heimat von Mozart.",
+      "stats": {
+        "capital": {
+          "label": "Hauptstadt",
+          "val": "Wien"
+        },
+        "population": {
+          "label": "Einwohner",
+          "val": "8.9 Millionen"
+        },
+        "language": {
+          "label": "Sprache",
+          "val": "Deutsch"
+        }
+      }
+    },
+    "requirements": {
+      "title": "Programm",
+      "highlight": "Anforderungen",
+      "list": [
+        "Alter: 18-26",
+        "Ledig",
+        "Gute Gesundheit",
+        "Keine Vorstrafen",
+        "Grundkenntnisse Deutsch"
+      ]
+    },
+    "duties": {
+      "childcare": {
+        "title": "Kinderbetreuung",
+        "items": [
+          "Spielen & Beschäftigen",
+          "Füttern & Anziehen",
+          "Schulwege",
+          "Hausaufgabenhilfe"
+        ]
+      },
+      "household": {
+        "title": "Leichte Hausarbeit",
+        "items": [
+          "Geschirr spülen",
+          "Staubsaugen",
+          "Kinderwäsche",
+          "Leichte Einkäufe"
+        ]
+      }
+    },
+    "contract": {
+      "title_pre": "Vertrag",
+      "title_post": "Bedingungen",
+      "desc": "Wichtige Vereinbarungspunkte nach österreichischem Recht.",
+      "items": {
+        "hours": {
+          "title": "Arbeitszeit",
+          "desc": "Bis zu 18 Stunden pro Woche."
+        },
+        "money": {
+          "title": "Tasgeld",
+          "desc": "Fix 520 Euro monatlich."
+        },
+        "course": {
+          "title": "Bildung",
+          "desc": "Familie zahlt 50% des Sprachkurses."
+        },
+        "duration": {
+          "title": "Dauer",
+          "desc": "Vertrag läuft 6-12 Monate."
+        }
+      }
+    },
+    "housing": {
+      "title": "Unterkunft & Verpflegung",
+      "sub": "Völlig kostenlos",
+      "items": [
+        "Separates Zimmer",
+        "Privatsphäre",
+        "Essen mit der Familie",
+        "Freie Kost & Logis"
+      ]
+    }
+  },
+  "BelgiumPage": {
+    "metadata": {
+      "title": "Au-Pair in Belgien | Mongolian Au Pair",
+      "description": "Werden Sie Teil einer Gastfamilie im Herzen Europas. Lernen Sie Französisch, Niederländisch oder Deutsch."
+    },
+    "hero": {
+      "tag": "Leben in Europa",
+      "title": "Belgien:",
+      "highlight": "Dein nächstes Zuhause",
+      "sub": "Schließen Sie sich einer Gastfamilie im Herzen Europas an, inmitten von köstlicher Schokolade und historischer Kultur. Eine goldene Gelegenheit.",
+      "cta": "Reise beginnen"
+    },
+    "info": {
+      "title": "Belgien entdecken",
+      "desc": "Belgien ist ein multikulturelles Zentrum in Westeuropa. Als Hauptstadt der EU bietet Brüssel einzigartige Erfahrungen.",
+      "stats": {
+        "capital": {
+          "label": "Hauptstadt",
+          "val": "Brüssel"
+        },
+        "hours": {
+          "label": "Arbeitszeit",
+          "val": "20h/Woche"
+        },
+        "language": {
+          "label": "Sprachen",
+          "val": "3 Arten"
+        }
+      }
+    },
+    "culture": [
+      {
+        "name": "Herz Europas",
+        "desc": "EU-Hauptstadt"
+      },
+      {
+        "name": "Süßes Paradies",
+        "desc": "Waffeln & Schokolade"
+      },
+      {
+        "name": "Historische Juwelen",
+        "desc": "Diamanten & Schlösser"
+      },
+      {
+        "name": "Kunst & Comics",
+        "desc": "Kulturzentrum"
+      }
+    ],
+    "duties": {
+      "childcare": {
+        "title": "Kinderbetreuung",
+        "desc": "Spielen, Schulwege, gemeinsames Lernen"
+      },
+      "household": {
+        "title": "Hausarbeit",
+        "desc": "Leichte Reinigung, kleine Einkäufe"
+      }
+    },
+    "benefits": [
+      {
+        "title": "20h Arbeit",
+        "sub": "Geringste in Europa"
+      },
+      {
+        "title": "450€ Taschengeld",
+        "sub": "Regelmäßiges Einkommen"
+      },
+      {
+        "title": "1000€ Kursbonus",
+        "sub": "Sprachgebühren inklusive"
+      }
+    ]
+  },
+  "SwitzerlandPage": {
+    "metadata": {
+      "title": "Au-Pair in der Schweiz | Mongolian Au Pair",
+      "description": "Hohe Lebensqualität und atemberaubende Natur. Lernen Sie Sprachen in einem der reichsten Länder der Welt."
+    },
+    "hero": {
+      "tag": "Swiss Excellence 2025",
+      "title": "Au-Pair in der",
+      "highlight": "Schweiz",
+      "sub": "Atemberaubende Alpennatur, hoher Lebensstandard und 4-Sprachen-Kultur. Meistern Sie Sprachen in einer der sichersten Umgebungen der Welt.",
+      "cta": "Jetzt registrieren",
+      "about": "Über uns"
+    },
+    "info": {
+      "title": "Über die Schweiz",
+      "desc": "Die Schweiz ist führend in Stabilität und hochwertiger Bildung. Heimat von Weltmarken wie Rolex und Nestlé.",
+      "stats": {
+        "capital": {
+          "label": "Hauptstadt",
+          "val": "Bern"
+        },
+        "city": {
+          "label": "Großstadt",
+          "val": "Zürich"
+        },
+        "languages": {
+          "label": "Sprachen",
+          "val": "4 Arten"
+        }
+      },
+      "quality": "Lebensqualität"
+    },
+    "highlights": [
+      {
+        "title": "990 CHF",
+        "sub": "Monatliches Gehalt"
+      },
+      {
+        "title": "120 Stunden",
+        "sub": "Kostenloser Sprachkurs"
+      },
+      {
+        "title": "4 Wochen",
+        "sub": "Bezahlter Urlaub"
+      }
+    ],
+    "contract": {
+      "title_pre": "Vertrag",
+      "title_post": "Bedingungen",
+      "desc": "Vereinbarungsstandards gemäß den Schweizer Bestimmungen.",
+      "items": {
+        "hours": {
+          "title": "Arbeitszeit",
+          "desc": "30 Stunden pro Woche."
+        },
+        "money": {
+          "title": "Taschengeld",
+          "desc": "990 CHF monatlich."
+        },
+        "course": {
+          "title": "Sprachkurs",
+          "desc": "Von der Gastfamilie bezahlt."
+        },
+        "vacation": {
+          "title": "Urlaub",
+          "desc": "4 Wochen bezahlter Urlaub."
+        }
+      }
+    },
+    "housing": {
+      "title": "Unterkunft & Verpflegung",
+      "sub": "100% kostenlos",
+      "items": [
+        "Eigenes Zimmer (mit Fenster)",
+        "Abschließbar",
+        "Warm & möbliert",
+        "Freie Kost & Logis"
+      ]
+    }
+  },
+  "ContactPage": {
+    "metadata": {
+      "title": "Kontaktieren Sie uns | Mongolian Au Pair",
+      "description": "Kontaktieren Sie unsere Experten bei Fragen zum Au-Pair-Programm oder Ihrer Bewerbung."
+    },
+    "badge": "Kontakt",
+    "heroTitle": "IN KONTAKT",
+    "heroTitleHighlight": "TRETEN",
+    "heroDesc": "Reisen Sie ins Ausland und lernen Sie kostenlos Sprachen. Wir sind hier, um Ihnen bei jedem Schritt zu helfen.",
+    "info": {
+      "phone": {
+        "label": "Rufen Sie uns an",
+        "value": "+976 7711 6906"
+      },
+      "email": {
+        "label": "E-Mail an uns",
+        "value": "info@mongolianaupair.com"
+      },
+      "address": {
+        "label": "Besuchen Sie uns",
+        "value": "Sukhbaatar street-Baga Toiruu, Tsetsee Gun office, 300A#"
+      }
+    },
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "openLink": "Link öffnen",
+    "followTitle": "Folgen Sie unserer Reise",
+    "followHandle": "@MongolianAuPair",
+    "formTitle": "Kontaktformular",
+    "formDesc": "Haben Sie eine Frage? Wir antworten innerhalb von 24 Stunden.",
+    "successTitle": "Nachricht gesendet!",
+    "successDesc": "Wir werden Sie in Kürze kontaktieren.",
+    "sendAnother": "In Kontakt bleiben",
+    "labels": {
+      "name": "Ihr Name",
+      "email": "E-Mail-Adresse",
+      "message": "Nachricht"
+    },
+    "placeholders": {
+      "name": "Name eingeben",
+      "email": "name@email.com",
+      "message": "Wofür interessieren Sie sich?"
+    },
+    "buttons": {
+      "send": "Senden"
+    }
+  },
   "AuPair": {
     "cultureExchange": "Kulturaustausch",
     "heroTitlePrefix": "Internationales",
@@ -102,6 +685,10 @@
     "stat_intl_hist_sub": "Internationale Geschichte",
     "stat_iapa_years": "Jahre",
     "stat_iapa_member": "IAPA Mitglied",
+    "metadata": {
+      "title": "Au-Pair-Programm | Mongolian Au Pair",
+      "description": "Umfassender Leitfaden zum internationalen Au-Pair-Programm. Vorteile, Voraussetzungen und Anmeldung."
+    },
     "whatIsTitle": "Was ist",
     "whatIsTitleHighlight": "Au-Pair?",
     "whatIsP1": "Das Au-Pair-Programm ist ein internationales Kulturaustauschprogramm für junge Menschen im Alter von 18-26 Jahren. Das Wort Au-Pair kommt aus dem Französischen und bedeutet",
@@ -125,7 +712,7 @@
     "benefit3_title": "Reise nach Wunsch",
     "benefit3_desc": "Möglichkeit, frei in Europa und der Welt zu reisen.",
     "benefit4_title": "Eigenes Geld verdienen",
-    "benefit4_desc": "Erhalte jeden Monat ein regelmäßiges Taschengeld und werde finanziell unabhängig.",
+    "benefit4_desc": "Erhalte jeden Monat ein regelmäßiges Tasgeld und werde finanziell unabhängig.",
     "benefit5_title": "Lebenslauf bereichern",
     "benefit5_desc": "Internationale Arbeitserfahrung wird ein großer Vorteil für deine zukünftige Karriere sein.",
     "benefit6_title": "Internationale Freunde finden",
@@ -154,6 +741,10 @@
     "ecaps_list3": "Sicherheit"
   },
   "About": {
+    "metadata": {
+      "title": "Über uns | Mongolian Au Pair",
+      "description": "Erfahren Sie mehr über unsere Mission, Jugendliche durch kulturellen Austausch und Bildung in Europa zu fördern."
+    },
     "tag": "Über Uns",
     "heroTitle": "Zukunft",
     "heroHighlight": "Gestalten",
@@ -283,6 +874,11 @@
         "title": "Finale Abreise",
         "action": "Visum erteilt! Packen Sie Ihre Koffer und prüfen Sie den Leitfaden für Ihre Reise nach Europa.",
         "button": "Reiseführer"
+      },
+      "DocumentsPhase": {
+        "title": "Dokumentenphase",
+        "action": "Erforderliche Dokumente hochladen.",
+        "button": "Hochladen"
       }
     }
   },

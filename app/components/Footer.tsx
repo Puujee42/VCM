@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import Link from "next/link";
+import { Link } from "@/navigation";
 import {
   ArrowUp,
   Mail,
@@ -11,13 +11,11 @@ import {
   LucideIcon
 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useLanguage } from "../context/LanguageContext";
+import { useTranslations, useLocale } from "next-intl";
 
 // --- TYPES ---
-type LanguageKey = 'en' | 'mn';
-
 interface LinkItem {
-  label: Record<LanguageKey, string>;
+  labelKey: string;
   href: string;
 }
 
@@ -35,20 +33,21 @@ const BRAND = {
 
 const LINKS: Links = {
   about: [
-    { label: { en: "About Us", mn: "Бидний тухай" }, href: "/about" },
-    { label: { en: "Au Pair Program", mn: "Au pair хөтөлбөр" }, href: "/program" },
-    { label: { en: "Success Stories", mn: "Амжилтын түүх" }, href: "/stories" },
+    { labelKey: "aboutUs", href: "/about" },
+    { labelKey: "auPairProgram", href: "/aupair" },
+    { labelKey: "successStories", href: "/stories" },
   ],
   action: [
-    { label: { en: "Apply Now", mn: "Бүртгүүлэх" }, href: "/apply" },
-    { label: { en: "Find Family", mn: "Айл хайх" }, href: "/find" },
-    { label: { en: "FAQ", mn: "Түгээмэл асуулт" }, href: "/faq" },
+    { labelKey: "applyNow", href: "/apply" },
+    { labelKey: "findFamily", href: "/find" },
+    { labelKey: "faq", href: "/faq" },
   ],
 };
 
 export default function AestheticFooter() {
-  const { language } = useLanguage();
-  const lang = language as LanguageKey;
+  const t = useTranslations("Footer");
+  const common = useTranslations("common");
+  const locale = useLocale();
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
@@ -92,12 +91,12 @@ export default function AestheticFooter() {
               {/* Left Text */}
               <div className="space-y-4">
                 <span className="inline-block px-4 py-1.5 rounded-full bg-rose-50 text-[#E31B23] text-xs font-bold uppercase tracking-widest ring-1 ring-rose-100">
-                  {lang === 'mn' ? "Долоо хоногийн мэдээ" : "Weekly Updates"}
+                  {t("weeklyUpdates")}
                 </span>
                 <h2 className={`text-4xl md:text-5xl font-black leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
-                  {lang === 'mn' ? "Боломжийг" : "Don't Miss"} <br />
+                  {t("dontMiss")} <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E31B23] to-rose-400">
-                    {lang === 'mn' ? "Бүү Алд" : "Your Chance"}
+                    {t("yourChance")}
                   </span>
                 </h2>
               </div>
@@ -108,11 +107,11 @@ export default function AestheticFooter() {
                   <Mail className="ml-4 text-slate-400 shrink-0" size={20} />
                   <input
                     type="email"
-                    placeholder={lang === 'mn' ? "И-мэйл хаягаа оруулна уу..." : "Enter your email..."}
+                    placeholder={t("enterEmail")}
                     className={`w-full bg-transparent px-4 py-3 text-sm font-semibold outline-none ${isDark ? "text-white placeholder:text-slate-600" : "text-slate-800 placeholder:text-slate-400"}`}
                   />
                   <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#E31B23] text-white font-bold text-xs uppercase tracking-widest hover:bg-rose-600 hover:scale-105 transition-all shadow-lg shadow-rose-500/30">
-                    {lang === 'mn' ? "Илгээх" : "Send"} <Send size={14} className="-rotate-12 group-hover:rotate-0 transition-transform" />
+                    {common("send")} <Send size={14} className="-rotate-12 group-hover:rotate-0 transition-transform" />
                   </button>
                 </div>
               </div>
@@ -147,18 +146,18 @@ export default function AestheticFooter() {
           {/* LINKS AREA */}
           <div className="md:col-span-12 lg:col-span-5 grid grid-cols-2 gap-8">
             <div>
-              <SectionHeader color={BRAND.GREEN} label={lang === 'mn' ? "Цэс" : "Explore"} />
+              <SectionHeader color={BRAND.GREEN} label={t("explore")} />
               <ul className="space-y-3">
                 {LINKS.about.map((l, i) => (
-                  <SimpleLink key={i} href={l.href} text={l.label[lang]} isDark={isDark} color={BRAND.GREEN} />
+                  <SimpleLink key={i} href={l.href} text={t(`links.${l.labelKey}`)} isDark={isDark} color={BRAND.GREEN} />
                 ))}
               </ul>
             </div>
             <div>
-              <SectionHeader color={BRAND.RED} label={lang === 'mn' ? "Үйлдэл" : "Action"} />
+              <SectionHeader color={BRAND.RED} label={t("action")} />
               <ul className="space-y-3">
                 {LINKS.action.map((l, i) => (
-                  <SimpleLink key={i} href={l.href} text={l.label[lang]} isDark={isDark} color={BRAND.RED} />
+                  <SimpleLink key={i} href={l.href} text={t(`links.${l.labelKey}`)} isDark={isDark} color={BRAND.RED} />
                 ))}
               </ul>
             </div>
@@ -166,11 +165,11 @@ export default function AestheticFooter() {
 
           {/* CONTACT AREA */}
           <div className="md:col-span-12 lg:col-span-3">
-            <SectionHeader color={BRAND.PURPLE} label={lang === 'mn' ? "Холбоо барих" : "Contact"} />
+            <SectionHeader color={BRAND.PURPLE} label={t("contact")} />
             <div className="space-y-3 mt-4">
               <ContactItem
                 icon={Phone}
-                title="Phone"
+                title={common("phone")}
                 value="+976 7711 6906"
                 isDark={isDark}
                 // Keeping background subtle but text colored
@@ -179,7 +178,7 @@ export default function AestheticFooter() {
               />
               <ContactItem
                 icon={Mail}
-                title="Email"
+                title={common("email")}
                 value="info@mongolianaupair.com"
                 isDark={isDark}
                 bgColor="bg-rose-50"
@@ -187,7 +186,7 @@ export default function AestheticFooter() {
               />
               <ContactItem
                 icon={MapPin}
-                title="Address"
+                title={common("address")}
                 value="Ulaanbaatar, Mongolia"
                 isDark={isDark}
                 bgColor="bg-emerald-50"
@@ -200,11 +199,11 @@ export default function AestheticFooter() {
         {/* ─── 3. BOTTOM BAR ─── */}
         <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className={`text-xs font-bold uppercase tracking-widest opacity-60 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
-            © 2024 Mongolian Au Pair.
+            {t("rights")}
           </p>
 
           <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Scroll to top"
             className={`p-3 rounded-full transition-colors hover:shadow-lg group
                 ${isDark ? "bg-slate-800 text-white hover:bg-slate-700" : "bg-white text-slate-800 hover:bg-slate-50 border border-slate-100"}`}>
@@ -224,8 +223,6 @@ export default function AestheticFooter() {
 
 // ─── HELPER COMPONENTS ───
 
-// ─── HELPER COMPONENTS ───
-
 const SectionHeader = ({ color, label }: { color: string, label: string }) => (
   <div className="flex items-center gap-3 mb-4">
     <span
@@ -233,7 +230,7 @@ const SectionHeader = ({ color, label }: { color: string, label: string }) => (
       style={{
         backgroundColor: color,
         // FIX: Use the Tailwind CSS variable for ring color
-        '--tw-ring-color': color
+        "--tw-ring-color": color
       } as React.CSSProperties}
     />
     <h3 className="text-xs font-black uppercase tracking-[0.15em]" style={{ color }}>{label}</h3>

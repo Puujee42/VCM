@@ -1,4 +1,10 @@
 {
+  "HomePage": {
+    "metadata": {
+      "title": "Mongolian Au Pair | Gateway to Europe",
+      "description": "Connecting Mongolian youth with international Au Pair opportunities in Germany, Austria, Switzerland, and Belgium since 2005."
+    }
+  },
   "common": {
     "startJourney": "Start Journey",
     "howItWorks": "How it works",
@@ -6,7 +12,167 @@
     "openNow": "Open Now",
     "explore": "Explore",
     "trusted": "Trusted by families & students worldwide.",
-    "loading": "Loading Profile..."
+    "loading": "Loading Profile...",
+    "action": "Action",
+    "contact": "Contact",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "send": "Send"
+  },
+  "Footer": {
+    "weeklyUpdates": "Weekly Updates",
+    "dontMiss": "Don't Miss",
+    "yourChance": "Your Chance",
+    "enterEmail": "Enter your email...",
+    "explore": "Explore",
+    "action": "Action",
+    "contact": "Contact",
+    "rights": "© 2024 Mongolian Au Pair.",
+    "links": {
+      "aboutUs": "About Us",
+      "auPairProgram": "Au Pair Program",
+      "successStories": "Success Stories",
+      "applyNow": "Apply Now",
+      "findFamily": "Find Family",
+      "faq": "FAQ"
+    }
+  },
+  "EventsPage": {
+    "metadata": {
+      "title": "Events | Mongolian Au Pair",
+      "description": "Discover upcoming events, workshops, and language clubs."
+    },
+    "upcoming": "Upcoming Events 2025",
+    "heroTitle": "Grow",
+    "heroTitleHighlight": "Together",
+    "heroDesc": "Learn about the Au Pair program, join language clubs, and participate in cultural events to plan your future.",
+    "online": "Online",
+    "inPerson": "In-Person",
+    "regClosed": "Registration Closed",
+    "regOpen": "Registration Open",
+    "full": "Full",
+    "register": "Register",
+    "newsletterTitle": "Don't miss the",
+    "newsletterTitleHighlight": "next event!",
+    "newsletterDesc": "Get notified about new events and training schedules via email.",
+    "emailPlaceholder": "Your email address",
+    "joinBtn": "Join",
+    "categories": {
+      "all": "All",
+      "campaign": "Campaign",
+      "workshop": "Workshop",
+      "meeting": "Club",
+      "fundraiser": "Fundraiser",
+      "others": "Others"
+    }
+  },
+  "BookingPage": {
+    "metadata": {
+      "title": "Book an Appointment | Mongolian Au Pair",
+      "description": "Schedule a consultation or interview with our experts."
+    },
+    "badge": "Online Booking",
+    "heroTitle": "Book",
+    "heroTitleHighlight": "an Appointment",
+    "heroDesc": "Choose a service and time that suits you. We will contact you promptly.",
+    "steps": {
+      "service": "Service",
+      "time": "Choose Time",
+      "info": "Information"
+    },
+    "step1Title": "Choose a Service",
+    "step2Title": "Choose a Date",
+    "step3Title": "Personal Information",
+    "timeTitle": "Choose a Time",
+    "noSlots": "Sorry, no slots available today.",
+    "labels": {
+      "name": "Your Name",
+      "phone": "Phone Number",
+      "email": "Email",
+      "note": "Additional Note (Optional)"
+    },
+    "placeholders": {
+      "name": "John Doe",
+      "phone": "8888-8888",
+      "email": "name@example.com",
+      "note": "Any details..."
+    },
+    "buttons": {
+      "back": "Back",
+      "continue": "Continue",
+      "confirm": "Confirm"
+    },
+    "summary": {
+      "title": "Booking Information",
+      "service": "Service",
+      "dateTime": "Date & Time",
+      "notSelected": "Not selected...",
+      "quickContact": "Quick Contact"
+    },
+    "success": "Successfully booked! Please wait for admin confirmation.",
+    "error": "An error occurred. Please try again.",
+    "today": "Today",
+    "services": {
+      "consultation": {
+        "title": "General Consultation",
+        "duration": "30 min",
+        "price": "Free",
+        "desc": "General information about the program and Q&A."
+      },
+      "interview": {
+        "title": "Admission Interview",
+        "duration": "45 min",
+        "price": "20,000₮",
+        "desc": "Initial interview for language level assessment and registration."
+      },
+      "visa": {
+        "title": "Visa Consultation",
+        "duration": "60 min",
+        "price": "50,000₮",
+        "desc": "Visa document preparation, review, and advice."
+      }
+    }
+  },
+  "NewsPage": {
+    "metadata": {
+      "title": "News & Blog | Mongolian Au Pair",
+      "description": "Stay updated with the latest news, tips, and stories from Europe."
+    },
+    "badge": "Mongolian Au Pair Blog",
+    "heroTitle": "News &",
+    "heroTitleHighlight": "Updates",
+    "featured": "Read More",
+    "searchTitle": "New Articles",
+    "searchPlaceholder": "Search news...",
+    "readMore": "Read",
+    "viewAll": "View All News",
+    "newsletterTitle": "Stay updated!",
+    "newsletterDesc": "Get the latest articles, tips, and program announcements delivered to your inbox.",
+    "emailPlaceholder": "Your email address...",
+    "register": "Subscribe"
+  },
+  "LessonsPage": {
+    "metadata": {
+      "title": "Language Lessons | Mongolian Au Pair",
+      "description": "Access exclusive language and culture lessons for Au Pairs."
+    },
+    "badge": "Au Pair Academy",
+    "heroTitle": "Language",
+    "heroTitleHighlight": "Lessons",
+    "heroDesc": "Special lessons to provide language knowledge and cultural understanding necessary for the Au Pair program.",
+    "registered": "Registered",
+    "joined": "Joined",
+    "joinClass": "Join Class",
+    "noLessons": "No lessons available at the moment.",
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "category": {
+      "language": "Language"
+    }
   },
   "BeforeLoginNews": {
     "badge": "News & Updates",
@@ -87,6 +253,423 @@
     "card5_title": "Start Your Application",
     "card5_desc": "It's free to create a profile."
   },
+  "GermanyPage": {
+    "metadata": {
+      "title": "Au Pair in Germany | Mongolian Au Pair",
+      "description": "Experience life in the heart of Europe. Master German, explore culture, and kickstart your future career."
+    },
+    "hero": {
+      "tag": "Germany Program",
+      "title": "Au Pair in",
+      "highlight": "Germany",
+      "sub": "A golden opportunity to live in the heart of Europe, experience a world-leading education system, and discover new cultures. Master your German language skills in a native environment and kickstart your future career.",
+      "cta": "Register Now",
+      "about": "About Us"
+    },
+    "info": {
+      "title": "About Germany",
+      "desc": "Germany is a world-leading nation in technology and engineering with a population of 83 million. Known for its tuition-free education system, beautiful nature, historical landmarks, and rich cultural heritage.",
+      "stats": {
+        "capital": {
+          "label": "Capital",
+          "val": "Berlin"
+        },
+        "population": {
+          "label": "Population",
+          "val": "83 Million"
+        },
+        "language": {
+          "label": "Language",
+          "val": "German"
+        }
+      }
+    },
+    "intro": {
+      "title_pre": "Education,",
+      "title_mid": "Culture,",
+      "title_post": "Experience",
+      "desc": "The Au-Pair program is an international cultural exchange for young people aged 18-26. By living as a member of a host family, you improve your German language skills, gain independence, and learn responsibility. During the program, you are exempt from housing and food costs and receive regular monthly pocket money.",
+      "age": "18-26 Years",
+      "native": "Native Learning"
+    },
+    "programs": {
+      "tag": "Programs for you",
+      "title_pre": "3 Types of",
+      "title_post": "Programs",
+      "list": [
+        {
+          "title": "German A1+",
+          "target": "Beginner",
+          "desc": "For participants with no prior language knowledge. Trains German from beginner to A2 level.",
+          "duration": "Prep: 6 months",
+          "age": "Age: 18+"
+        },
+        {
+          "title": "English B2",
+          "target": "Intermediate",
+          "desc": "With flight ticket bonus. For youth with English knowledge; German A1 required.",
+          "duration": "Prep: 4-6 months",
+          "age": "Age: 20+"
+        },
+        {
+          "title": "Au-Pair Boy",
+          "target": "Male",
+          "desc": "Program for male participants. Requires English B2 / German A2+ and a driver's license.",
+          "duration": "Prep: 3-8 months",
+          "age": "Driver's License"
+        }
+      ]
+    },
+    "duties": {
+      "childcare": {
+        "title": "Childcare",
+        "items": [
+          "Playing & engaging",
+          "Waking & dressing",
+          "School runs",
+          "Homework help"
+        ]
+      },
+      "household": {
+        "title": "Housework",
+        "items": [
+          "Dishwasher",
+          "Vacuuming",
+          "Children's laundry",
+          "Light shopping"
+        ]
+      }
+    },
+    "contract": {
+      "title_pre": "Contract &",
+      "title_post": "Conditions",
+      "desc": "Standards according to German Au-Pair regulations.",
+      "items": {
+        "hours": {
+          "title": "Working Hours",
+          "desc": "Up to 30 hours per week."
+        },
+        "money": {
+          "title": "Pocket Money",
+          "desc": "Fixed 280 Euro monthly."
+        },
+        "course": {
+          "title": "Course Fees",
+          "desc": "Host family pays 70 Euro monthly."
+        },
+        "vacation": {
+          "title": "Vacation",
+          "desc": "4 weeks paid leave per year."
+        }
+      }
+    },
+    "housing": {
+      "title": "Housing & Food",
+      "sub": "100% provided by host family",
+      "items": [
+        "Private room (with window)",
+        "Lockable door",
+        "Warm & furnished",
+        "Free board & lodging"
+      ]
+    }
+  },
+  "AustriaPage": {
+    "metadata": {
+      "title": "Au Pair in Austria | Mongolian Au Pair",
+      "description": "Live amidst the Alps and Viennese waltzes. Improve your German and experience European culture."
+    },
+    "hero": {
+      "tag": "Austria Program",
+      "title": "Au Pair in",
+      "highlight": "Austria",
+      "sub": "Alp mountains, Viennese waltzes, and a history-rich country. Improve your German and discover European culture while living and learning in Austria.",
+      "cta": "Register Now",
+      "about": "About Us"
+    },
+    "info": {
+      "title": "About Austria",
+      "desc": "Located in Central Europe, Austria is known for its stunning landscapes, high quality of life, and rich musical history as the home of Mozart.",
+      "stats": {
+        "capital": {
+          "label": "Capital",
+          "val": "Vienna"
+        },
+        "population": {
+          "label": "Population",
+          "val": "8.9 Million"
+        },
+        "language": {
+          "label": "Language",
+          "val": "German"
+        }
+      }
+    },
+    "requirements": {
+      "title": "Program",
+      "highlight": "Requirements",
+      "list": [
+        "Age: 18-26",
+        "Unmarried",
+        "Good health",
+        "No criminal record",
+        "Basic German knowledge"
+      ]
+    },
+    "duties": {
+      "childcare": {
+        "title": "Childcare",
+        "items": [
+          "Playing & engaging",
+          "Feeding & dressing",
+          "School runs",
+          "Homework help"
+        ]
+      },
+      "household": {
+        "title": "Light Housework",
+        "items": [
+          "Washing dishes",
+          "Vacuuming",
+          "Children's laundry",
+          "Light shopping"
+        ]
+      }
+    },
+    "contract": {
+      "title_pre": "Contract",
+      "title_post": "Conditions",
+      "desc": "Key agreement points according to Austrian law.",
+      "items": {
+        "hours": {
+          "title": "Working Hours",
+          "desc": "Up to 18 hours per week."
+        },
+        "money": {
+          "title": "Pocket Money",
+          "desc": "Fixed 520 Euro monthly."
+        },
+        "course": {
+          "title": "Education",
+          "desc": "Family pays 50% of language course."
+        },
+        "duration": {
+          "title": "Duration",
+          "desc": "Contract lasts 6-12 months."
+        }
+      }
+    },
+    "housing": {
+      "title": "Housing & Food",
+      "sub": "Completely free of charge",
+      "items": [
+        "Separate private room",
+        "Personal space",
+        "Eat with the family",
+        "Free room & board"
+      ]
+    }
+  },
+  "BelgiumPage": {
+    "metadata": {
+      "title": "Au Pair in Belgium | Mongolian Au Pair",
+      "description": "Join a host family in the heart of Europe. Learn French, Dutch, or German while exploring Belgium."
+    },
+    "hero": {
+      "tag": "Live in Europe",
+      "title": "Belgium:",
+      "highlight": "Your Next Home",
+      "sub": "Join a host family in the heart of Europe, amidst delicious chocolate and historical culture. A golden opportunity to learn French, Dutch, and German simultaneously.",
+      "cta": "Start Journey"
+    },
+    "info": {
+      "title": "Discover Belgium",
+      "desc": "Belgium is a multicultural hub in Western Europe. As the capital of the EU, Brussels offers unique political and cultural experiences.",
+      "stats": {
+        "capital": {
+          "label": "Capital",
+          "val": "Brussels"
+        },
+        "hours": {
+          "label": "Working Hours",
+          "val": "20h/week"
+        },
+        "language": {
+          "label": "Languages",
+          "val": "3 Types"
+        }
+      }
+    },
+    "culture": [
+      {
+        "name": "Heart of Europe",
+        "desc": "EU Capital"
+      },
+      {
+        "name": "Sweet Paradise",
+        "desc": "Waffles & Chocolate"
+      },
+      {
+        "name": "Historical Jewels",
+        "desc": "Diamonds & Castles"
+      },
+      {
+        "name": "Art & Comics",
+        "desc": "Cultural Hub"
+      }
+    ],
+    "duties": {
+      "childcare": {
+        "title": "Childcare",
+        "desc": "Playing, school runs, learning together"
+      },
+      "household": {
+        "title": "Housework",
+        "desc": "Light cleaning, small shopping"
+      }
+    },
+    "benefits": [
+      {
+        "title": "20h Work",
+        "sub": "Lowest in Europe"
+      },
+      {
+        "title": "450€ Pocket Money",
+        "sub": "Regular monthly income"
+      },
+      {
+        "title": "1000€ Course Bonus",
+        "sub": "Language fees included"
+      }
+    ]
+  },
+  "SwitzerlandPage": {
+    "metadata": {
+      "title": "Au Pair in Switzerland | Mongolian Au Pair",
+      "description": "High quality of life and stunning nature. Learn languages in one of the world's wealthiest countries."
+    },
+    "hero": {
+      "tag": "Swiss Excellence 2025",
+      "title": "Au Pair in",
+      "highlight": "Switzerland",
+      "sub": "Stunning Alps nature, high living standards, and 4-language culture. Master languages while living in one of the world's safest environments.",
+      "cta": "Register Now",
+      "about": "About Us"
+    },
+    "info": {
+      "title": "About Switzerland",
+      "desc": "Switzerland is a leader in stability and quality education. Home to world-class brands like Rolex and Nestlé, it offers the world's highest standard of living.",
+      "stats": {
+        "capital": {
+          "label": "Capital",
+          "val": "Bern"
+        },
+        "city": {
+          "label": "Large City",
+          "val": "Zurich"
+        },
+        "languages": {
+          "label": "Languages",
+          "val": "4 Types"
+        }
+      },
+      "quality": "Quality of Life"
+    },
+    "highlights": [
+      {
+        "title": "990 CHF",
+        "sub": "Monthly salary"
+      },
+      {
+        "title": "120 Hours",
+        "sub": "Free language course"
+      },
+      {
+        "title": "4 Weeks",
+        "sub": "Paid vacation"
+      }
+    ],
+    "contract": {
+      "title_pre": "Contract",
+      "title_post": "Conditions",
+      "desc": "Agreement standards according to Swiss regulations.",
+      "items": {
+        "hours": {
+          "title": "Working Hours",
+          "desc": "30 hours per week."
+        },
+        "money": {
+          "title": "Pocket Money",
+          "desc": "990 CHF monthly."
+        },
+        "course": {
+          "title": "Language Course",
+          "desc": "Paid by host family."
+        },
+        "vacation": {
+          "title": "Vacation",
+          "desc": "4 weeks paid leave."
+        }
+      }
+    },
+    "housing": {
+      "title": "Housing & Food",
+      "sub": "100% Free of Charge",
+      "items": [
+        "Private room (with window)",
+        "Lockable door",
+        "Warm & furnished",
+        "Free board & lodging"
+      ]
+    }
+  },
+  "ContactPage": {
+    "metadata": {
+      "title": "Contact Us | Mongolian Au Pair",
+      "description": "Get in touch with our experts for any questions about the Au Pair program or your application."
+    },
+    "badge": "Contact Us",
+    "heroTitle": "GET IN",
+    "heroTitleHighlight": "TOUCH",
+    "heroDesc": "Travel abroad and learn languages for free. We are here to help you every step of the way.",
+    "info": {
+      "phone": {
+        "label": "Call Us",
+        "value": "+976 7711 6906"
+      },
+      "email": {
+        "label": "Email Us",
+        "value": "info@mongolianaupair.com"
+      },
+      "address": {
+        "label": "Visit Us",
+        "value": "Sukhbaatar street-Baga Toiruu, Tsetsee Gun office, 300A#"
+      }
+    },
+    "copy": "Copy",
+    "copied": "Copied",
+    "openLink": "Open Link",
+    "followTitle": "Follow Our Journey",
+    "followHandle": "@MongolianAuPair",
+    "formTitle": "Contact Form",
+    "formDesc": "Have a question? We will respond within 24 hours.",
+    "successTitle": "Message Sent!",
+    "successDesc": "We will contact you shortly.",
+    "sendAnother": "Send Another Request",
+    "labels": {
+      "name": "Your Name",
+      "email": "Email Address",
+      "message": "Message"
+    },
+    "placeholders": {
+      "name": "Enter your name",
+      "email": "name@email.com",
+      "message": "What are you interested in?"
+    },
+    "buttons": {
+      "send": "Send"
+    }
+  },
   "AuPair": {
     "cultureExchange": "Culture Exchange",
     "heroTitlePrefix": "International",
@@ -102,6 +685,10 @@
     "stat_intl_hist_sub": "International History",
     "stat_iapa_years": "Years",
     "stat_iapa_member": "IAPA Member",
+    "metadata": {
+      "title": "Au Pair Program | Mongolian Au Pair",
+      "description": "Comprehensive guide to the international Au Pair program. Benefits, requirements, and how to join."
+    },
     "whatIsTitle": "What is",
     "whatIsTitleHighlight": "Au-Pair?",
     "whatIsP1": "The Au-Pair program is an international cultural exchange program for young people aged 18-26. The word Au-Pair comes from French meaning",
@@ -154,6 +741,10 @@
     "ecaps_list3": "Safety"
   },
   "About": {
+    "metadata": {
+      "title": "About Us | Mongolian Au Pair",
+      "description": "Learn about our mission to empower youth through cultural exchange and education in Europe."
+    },
     "tag": "About Us",
     "heroTitle": "Empowering",
     "heroHighlight": "Youth Futures",
@@ -268,6 +859,11 @@
         "title": "Agency Interview",
         "action": "Prepare for your screening. We will contact you via Skype or Phone to schedule your interview.",
         "button": "Preparation Tips"
+      },
+      "DocumentsPhase": {
+        "title": "Documents Phase",
+        "action": "Upload required documents.",
+        "button": "Upload"
       },
       "Matching": {
         "title": "Family Matching",

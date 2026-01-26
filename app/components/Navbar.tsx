@@ -115,7 +115,15 @@ export default function Navbar() {
         `}>
           <Link href="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative w-10 h-10 overflow-hidden rounded-full border-2 border-white/50 shadow-md bg-white">
-              <Image src="/image.png" alt="AuPair Logo" fill unoptimized className="object-cover transition-transform duration-500 group-hover:scale-110" />
+              <Image
+                src="/image.png"
+                alt="AuPair Logo"
+                fill
+                priority
+                sizes="40px"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                quality={75}
+              />
             </div>
             <span className="font-sans font-black text-lg tracking-tight uppercase" style={{ color: BRAND.RED }}>
               {t("logo")}
@@ -183,7 +191,7 @@ export default function Navbar() {
           <div className="flex items-center gap-2 shrink-0">
             <LanguageToggle />
             <div className="h-5 w-[1px] bg-current/10 mx-1" />
-            <AuthActions lang={language}   BRAND={BRAND} CONTENT={content}  isMobile={false} />
+            <AuthActions lang={language} BRAND={BRAND} CONTENT={content} isMobile={false} />
           </div>
         </nav>
       </motion.header>
@@ -192,7 +200,15 @@ export default function Navbar() {
         <Link href="/" className="pointer-events-auto">
           <div style={{ WebkitBackdropFilter: "blur(12px)" }} className={`transform-gpu flex items-center gap-2 p-1.5 pr-4 rounded-full backdrop-blur-md border shadow-2xl transition-all duration-500 ${isDark ? "bg-black/80 border-white/10" : "bg-white/90 border-slate-100"}`}>
             <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/50 bg-white">
-              <Image src="/image.png" alt="Logo" fill unoptimized className="object-cover" />
+              <Image
+                src="/image.png"
+                alt="Logo"
+                fill
+                priority
+                sizes="32px"
+                className="object-cover"
+                quality={75}
+              />
             </div>
             <span className="text-[10px] font-black uppercase tracking-widest" style={{ color: BRAND.RED }}>AuPair</span>
           </div>
@@ -200,7 +216,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-2 pointer-events-auto min-w-[120px] justify-end">
           <LanguageToggle />
-          <AuthActions lang={language}  BRAND={BRAND} CONTENT={content} isMobile={true} />
+          <AuthActions lang={language} BRAND={BRAND} CONTENT={content} isMobile={true} />
         </div>
       </div>
 
