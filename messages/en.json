@@ -1177,5 +1177,108 @@
       "approved": "Approved",
       "rejected": "Rejected"
     }
+  },
+  "ApplyPage": {
+    "badge": "Step {step} of 3",
+    "heroTitle_1": "Start Your ",
+    "heroTitleHighlight_1": "Journey.",
+    "heroTitle_2": "Detailed Profile",
+    "heroDesc": "Select a program below and submit your application. Our team will review your profile and contact you within 24 hours.",
+    "programSelection": {
+      "requirements": "Requirements",
+      "allowanceUnit": "month",
+      "hoursUnit": "week",
+      "selectPrompt": "Please select a program above to continue",
+      "step1": "Step 1",
+      "initialRequest": "Initial Request"
+    },
+    "requirements": {
+      "germany": [
+        "Age 18-26",
+        "Basic German (A1)",
+        "Single"
+      ],
+      "belgium": [
+        "Age 18-25",
+        "English or French",
+        "High School Diploma"
+      ],
+      "austria": [
+        "Age 18-27",
+        "Basic German",
+        "Experience with kids"
+      ],
+      "switzerland": [
+        "Age 18-25",
+        "German/French",
+        "Driving License"
+      ]
+    },
+    "steps": {
+      "choose": "Choose Program",
+      "profile": "Detailed Profile",
+      "documents": "Documents"
+    },
+    "form": {
+      "personalDetails": "Personal Details",
+      "synced": "Automatically synced with your account: {email}",
+      "fillDetails": "Please fill in your details to continue.",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email Address",
+      "phone": "Phone Number",
+      "age": "Age",
+      "level": "Language Level",
+      "verified": "Verified from Profile",
+      "linked": "Linked to your profile",
+      "saveContinue": "Save & Continue"
+    },
+    "levels": {
+      "a1": "A1 (Beginner)",
+      "a2": "A2 (Elementary)",
+      "b1": "B1 (Intermediate)",
+      "b2": "B2 (Upper Intermediate)",
+      "c1": "C1 (Advanced)"
+    }
+  },
+  "StudentInformation": {
+    "success": "Profile Saved!",
+    "successDesc": "Your information has been securely saved. You are now ready for the final step.",
+    "nextDocs": "Next: Documents",
+    "sidebarTitle": "Student Information",
+    "sidebarDesc": "Please provide accurate details. This information will be used for matching you with potential hosts.",
+    "step1Title": "Personal & Contact",
+    "step1Sub": "Your basic information.",
+    "step2Title": "Education & Family",
+    "step2Sub": "Background details.",
+    "formTitle1": "General & Contact",
+    "formTitle2": "Family & Education",
+    "formTitle3": "Experience & Skills",
+    "labels": {
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "sex": "Sex",
+      "dob": "Date of Birth",
+      "email": "Email",
+      "address": "Full Address",
+      "street": "Street",
+      "number": "No.",
+      "city": "City",
+      "country": "Country",
+      "education": "Education Level",
+      "languages": "Languages Spoken",
+      "languagesPlaceholder": "e.g. English, German",
+      "childcare": "Experience with Children (Age Groups)"
+    },
+    "options": {
+      "select": "Select...",
+      "female": "Female",
+      "male": "Male",
+      "other": "Other",
+      "highschool": "High School",
+      "university": "University",
+      "vocational": "Vocational Training"
+    },
+    "saveContinue": "Save & Continue"
   }
 }

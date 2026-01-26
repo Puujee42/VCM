@@ -615,6 +615,13 @@ export default function AdminDashboard() {
       }
    };
 
+   const [searchTerm, setSearchTerm] = useState("");
+
+   const filteredUsers = users.filter(u =>
+      u.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.email?.toLowerCase().includes(searchTerm.toLowerCase())
+   );
+
    return (
       <div className="min-h-[100dvh] bg-[#FAFAFA] flex font-sans text-slate-900 selection:bg-[#E31B23] selection:text-white overflow-hidden">
 
@@ -782,7 +789,7 @@ export default function AdminDashboard() {
                                     </div>
                                  </td>
                                  <td className="px-8 py-5 text-sm">{app.programId}</td>
-                                 <td className="px-8 py-5"><span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${app.status === 'approved' ? 'bg-green-50 text-[#00C896]' : app.status === 'rejected' ? 'bg-red-50 text-[#E31B23]' : 'bg-amber-50 text-amber-500'}`}>{t("status." + app.status.lower())}</span></td>
+                                 <td className="px-8 py-5"><span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${app.status === 'approved' ? 'bg-green-50 text-[#00C896]' : app.status === 'rejected' ? 'bg-red-50 text-[#E31B23]' : 'bg-amber-50 text-amber-500'}`}>{t("status." + app.status.toLowerCase())}</span></td>
                                  <td className="px-8 py-5 text-right">
                                     <div className="flex justify-end gap-2">
                                        <button onClick={() => setSelectedApp(app)} className="p-2 bg-slate-100 text-slate-600 hover:bg-slate-900 hover:text-white rounded-xl transition-all"><Eye size={16} /></button>
@@ -808,7 +815,13 @@ export default function AdminDashboard() {
                   <div className="p-6 border-b border-slate-50 flex justify-between items-center">
                      <div className="relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-                        <input type="text" placeholder={t("users.search")} className="pl-12 pr-4 py-3 bg-[#FAFAFA] rounded-xl text-sm font-bold w-64 focus:outline-none focus:ring-2 focus:ring-[#E31B23]/20 transition-all" />
+                        <input
+                           type="text"
+                           placeholder={t("users.search")}
+                           value={searchTerm}
+                           onChange={(e) => setSearchTerm(e.target.value)}
+                           className="pl-12 pr-4 py-3 bg-[#FAFAFA] rounded-xl text-sm font-bold w-64 focus:outline-none focus:ring-2 focus:ring-[#E31B23]/20 transition-all"
+                        />
                      </div>
                   </div>
                   <div className="overflow-x-auto">
@@ -823,7 +836,7 @@ export default function AdminDashboard() {
                            </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-50">
-                           {users.map((u: any) => (
+                           {filteredUsers.map((u: any) => (
                               <React.Fragment key={u.id}>
                                  <tr
                                     className={`hover:bg-slate-50 transition-colors cursor-pointer ${expandedUser === u.id ? 'bg-slate-50' : ''}`}

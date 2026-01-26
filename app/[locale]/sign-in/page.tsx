@@ -17,10 +17,13 @@ export default function SignInPage() {
   // Form State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [code, setCode] = useState("");
 
   // UI State
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [verifying, setVerifying] = useState(false);
+  const [factorType, setFactorType] = useState<"first" | "second">("first");
 
   // Handlers
   const handleSubmit = async (e: React.FormEvent) => {
@@ -31,11 +34,48 @@ export default function SignInPage() {
 
     try {
       const result = await signIn.create({ identifier: email, password });
+      console.log("Clerk SignIn Result:", result);
+
       if (result.status === "complete") {
         await setActive({ session: result.createdSessionId });
         router.push("/dashboard");
+      } else if (result.status === "needs_first_factor") {
+        // Find the email code strategy
+        const emailCodeFactor = result.supportedFirstFactors?.find(
+          (f: any) => f.strategy === "email_code"
+        ) as any;
+
+        if (emailCodeFactor) {
+          await signIn.prepareFirstFactor({
+            strategy: "email_code",
+            emailAddressId: emailCodeFactor.emailAddressId,
+          });
+          setFactorType("first");
+          setVerifying(true);
+          setError("Verification code sent to your email.");
+        } else {
+          setError("Email verification not available for this account.");
+        }
+      } else if (result.status === "needs_second_factor") {
+        const emailCodeFactor = result.supportedSecondFactors?.find(
+          (f: any) => f.strategy === "email_code"
+        ) as any;
+
+        if (emailCodeFactor) {
+          await signIn.prepareSecondFactor({ strategy: "email_code" });
+          setFactorType("second");
+          setVerifying(true);
+          setError("MFA code sent to your email.");
+        } else {
+          setError("MFA required, but no email factor found.");
+        }
       } else {
-        setError("Login verification required.");
+        // Provide more detailed error based on status
+        if (result.status === "needs_new_password") {
+          setError("Password reset required. Please check Clerk dashboard.");
+        } else {
+          setError(`Login verification required (Status: ${result.status}). Please check your Clerk verification settings.`);
+        }
       }
     } catch (err: any) {
       if (err.errors?.[0]?.code === "form_password_incorrect") {
@@ -43,8 +83,34 @@ export default function SignInPage() {
       } else if (err.errors?.[0]?.code === "form_identifier_not_found") {
         setError("Account not found.");
       } else {
-        setError("Invalid credentials. Please try again.");
+        setError(err.errors?.[0]?.longMessage || "Invalid credentials. Please try again.");
       }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isLoaded || isLoading) return;
+    setIsLoading(true);
+    setError("");
+
+    try {
+      // Attempt to complete the sign-in with the code
+      const result = factorType === "first"
+        ? await signIn.attemptFirstFactor({ strategy: "email_code", code })
+        : await signIn.attemptSecondFactor({ strategy: "email_code", code });
+
+      if (result.status === "complete") {
+        await setActive({ session: result.createdSessionId });
+        router.push("/dashboard");
+      } else {
+        console.log("Incomplete status after code:", result.status);
+        setError(`Status: ${result.status}. More steps required.`);
+      }
+    } catch (err: any) {
+      setError(err.errors?.[0]?.longMessage || "Invalid code. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -83,85 +149,130 @@ export default function SignInPage() {
               className="absolute -top-10 -left-10 w-24 h-24 bg-emerald-100 rounded-full blur-3xl opacity-50"
             />
             <h1 className="text-5xl md:text-6xl font-black text-slate-900 mb-3 tracking-tight leading-[0.95] relative z-10">
-              {t('welcome')} <br />
+              {verifying ? "Verify" : t('welcome')} <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-teal-500">
-                {t('back')}
+                {verifying ? "Code" : t('back')}
               </span>
             </h1>
             <p className="text-slate-500 font-bold text-sm leading-relaxed max-w-sm relative z-10">
-              {t('signinSubtitle')}
+              {verifying ? "Enter the 6-digit code sent to your email address." : t('signinSubtitle')}
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-
-            {/* EMAIL */}
-            <div className="relative group">
-              <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors">
-                <Mail size={20} />
-              </div>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder={t('emailPlaceholder')}
-                className="w-full bg-white border-2 border-slate-100 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 rounded-[1.5rem] py-5 pl-14 pr-6 text-sm font-bold text-slate-900 placeholder:text-slate-300 transition-all shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] outline-none"
-                required
-              />
-            </div>
-
-            {/* PASSWORD */}
-            <div className="space-y-2">
+          {!verifying ? (
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* EMAIL */}
               <div className="relative group">
                 <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors">
-                  <Lock size={20} />
+                  <Mail size={20} />
                 </div>
                 <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Нууц үг"
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder={t('emailPlaceholder')}
                   className="w-full bg-white border-2 border-slate-100 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 rounded-[1.5rem] py-5 pl-14 pr-6 text-sm font-bold text-slate-900 placeholder:text-slate-300 transition-all shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] outline-none"
                   required
                 />
               </div>
-              <div className="text-right pr-2">
-                <Link href="#" className="text-[10px] font-black uppercase tracking-wider text-slate-400 hover:text-emerald-600 transition-colors">
-                  {t('forgotPassword')}
-                </Link>
+
+              {/* PASSWORD */}
+              <div className="space-y-2">
+                <div className="relative group">
+                  <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors">
+                    <Lock size={20} />
+                  </div>
+                  <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Нууц үг"
+                    className="w-full bg-white border-2 border-slate-100 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 rounded-[1.5rem] py-5 pl-14 pr-6 text-sm font-bold text-slate-900 placeholder:text-slate-300 transition-all shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] outline-none"
+                    required
+                  />
+                </div>
+                <div className="text-right pr-2">
+                  <Link href="#" className="text-[10px] font-black uppercase tracking-wider text-slate-400 hover:text-emerald-600 transition-colors">
+                    {t('forgotPassword')}
+                  </Link>
+                </div>
               </div>
-            </div>
 
-            {/* ERROR MSG */}
-            {error && (
-              <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="text-red-500 text-[11px] font-black uppercase tracking-wider bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
-                {error}
-              </motion.p>
-            )}
-
-            {/* SUBMIT BUTTON */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-slate-900 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.25em] py-6 rounded-[1.5rem] shadow-xl hover:shadow-2xl hover:shadow-emerald-600/30 transition-all active:scale-[0.98] flex items-center justify-center gap-3 mt-6 group"
-            >
-              {isLoading ? <Loader2 className="animate-spin" size={18} /> : (
-                <>{t('signInButton')} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" /></>
+              {/* ERROR MSG */}
+              {error && (
+                <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="text-red-500 text-[11px] font-black uppercase tracking-wider bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                  {error}
+                </motion.p>
               )}
-            </button>
 
-            {/* Clerk CAPTCHA Placeholder */}
-            <div id="clerk-captcha" />
+              {/* SUBMIT BUTTON */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-slate-900 hover:bg-emerald-600 text-white font-black text-xs uppercase tracking-[0.25em] py-6 rounded-[1.5rem] shadow-xl hover:shadow-2xl hover:shadow-emerald-600/30 transition-all active:scale-[0.98] flex items-center justify-center gap-3 mt-6 group"
+              >
+                {isLoading ? <Loader2 className="animate-spin" size={18} /> : (
+                  <>{t('signInButton')} <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" /></>
+                )}
+              </button>
 
-          </form>
+              {/* Clerk CAPTCHA Placeholder */}
+              <div id="clerk-captcha" />
+            </form>
+          ) : (
+            <form onSubmit={handleVerify} className="space-y-5">
+              {/* VERIFICATION CODE */}
+              <div className="relative group">
+                <div className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-emerald-500 transition-colors">
+                  <ShieldCheck size={20} />
+                </div>
+                <input
+                  type="text"
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  placeholder="6-digit code"
+                  className="w-full bg-white border-2 border-slate-100 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 rounded-[1.5rem] py-5 pl-14 pr-6 text-sm font-bold text-slate-900 placeholder:text-slate-300 transition-all shadow-[0_4px_20px_-10px_rgba(0,0,0,0.05)] outline-none tracking-[0.5em] text-center"
+                  required
+                />
+              </div>
+
+              {/* ERROR MSG */}
+              {error && (
+                <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} className="text-red-500 text-[11px] font-black uppercase tracking-wider bg-red-50 p-4 rounded-2xl border border-red-100 text-center">
+                  {error}
+                </motion.p>
+              )}
+
+              {/* VERIFY BUTTON */}
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs uppercase tracking-[0.25em] py-6 rounded-[1.5rem] shadow-xl hover:shadow-2xl hover:shadow-emerald-600/30 transition-all active:scale-[0.98] flex items-center justify-center gap-3 mt-6 group"
+              >
+                {isLoading ? <Loader2 className="animate-spin" size={18} /> : (
+                  <>Verify Code <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" /></>
+                )}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setVerifying(false)}
+                className="w-full text-[10px] font-black uppercase tracking-wider text-slate-400 hover:text-slate-600 transition-colors text-center"
+              >
+                Back to Login
+              </button>
+            </form>
+          )}
 
           {/* Sign Up Link */}
-          <div className="mt-8 text-center">
-            <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
-              {t('newMember')}
-              <Link href="/sign-up" className="text-emerald-600 ml-2 hover:text-slate-900 transition-colors underline decoration-2 underline-offset-4">{t('signUpButton')}</Link>
-            </p>
-          </div>
+          {!verifying && (
+            <div className="mt-8 text-center">
+              <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                {t('newMember')}
+                <Link href="/sign-up" className="text-emerald-600 ml-2 hover:text-slate-900 transition-colors underline decoration-2 underline-offset-4">{t('signUpButton')}</Link>
+              </p>
+            </div>
+          )}
 
         </motion.div>
       </div>

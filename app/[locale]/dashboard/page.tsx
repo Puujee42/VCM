@@ -184,6 +184,12 @@ export default function MemberDashboard() {
    const [loading, setLoading] = useState(true);
 
    useEffect(() => {
+      // Fast check for admins to redirect immediately
+      if (isLoaded && user?.publicMetadata?.role === 'admin') {
+         router.replace('/admin');
+         return;
+      }
+
       const init = async () => {
          if (!isLoaded || !user) return;
          try {

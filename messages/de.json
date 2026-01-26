@@ -1164,5 +1164,108 @@
       "approved": "Genehmigt",
       "rejected": "Abgelehnt"
     }
+  },
+  "ApplyPage": {
+    "badge": "Schritt {step} von 3",
+    "heroTitle_1": "Starten Sie Ihre ",
+    "heroTitleHighlight_1": "Reise.",
+    "heroTitle_2": "Detailliertes Profil",
+    "heroDesc": "Wählen Sie unten ein Programm aus und senden Sie Ihre Bewerbung ab. Unser Team wird Ihr Profil prüfen und Sie innerhalb von 24 Stunden kontaktieren.",
+    "programSelection": {
+      "requirements": "Anforderungen",
+      "allowanceUnit": "Monat",
+      "hoursUnit": "Woche",
+      "selectPrompt": "Bitte wählen Sie oben ein Programm aus, um fortzufahren",
+      "step1": "Schritt 1",
+      "initialRequest": "Erstanfrage"
+    },
+    "requirements": {
+      "germany": [
+        "Alter 18-26",
+        "Deutsch A1",
+        "Ledig"
+      ],
+      "belgium": [
+        "Alter 18-25",
+        "Englisch oder Französisch",
+        "Abitur"
+      ],
+      "austria": [
+        "Alter 18-27",
+        "Deutschkenntnisse",
+        "Erfahrung mit Kindern"
+      ],
+      "switzerland": [
+        "Alter 18-25",
+        "Deutsch/Französisch",
+        "Führerschein"
+      ]
+    },
+    "steps": {
+      "choose": "Programm wählen",
+      "profile": "Detailliertes Profil",
+      "documents": "Dokumente"
+    },
+    "form": {
+      "personalDetails": "Persönliche Daten",
+      "synced": "Automatisch mit Ihrem Konto synchronisiert: {email}",
+      "fillDetails": "Bitte füllen Sie Ihre Daten aus, um fortzufahren.",
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "email": "E-Mail-Adresse",
+      "phone": "Telefonnummer",
+      "age": "Alter",
+      "level": "Sprachniveau",
+      "verified": "Vom Profil verifiziert",
+      "linked": "Mit Ihrem Profil verknüpft",
+      "saveContinue": "Speichern & Weiter"
+    },
+    "levels": {
+      "a1": "A1 (Anfänger)",
+      "a2": "A2 (Grundlagen)",
+      "b1": "B1 (Mittelstufe)",
+      "b2": "B2 (Gute Mittelstufe)",
+      "c1": "C1 (Fortgeschritten)"
+    }
+  },
+  "StudentInformation": {
+    "success": "Profil gespeichert!",
+    "successDesc": "Ihre Informationen wurden sicher gespeichert. Sie sind nun bereit für den letzten Schritt.",
+    "nextDocs": "Weiter: Dokumente",
+    "sidebarTitle": "Studenteninformationen",
+    "sidebarDesc": "Bitte machen Sie genaue Angaben. Diese Informationen werden verwendet, um Sie mit potenziellen Gastgebern zusammenzubringen.",
+    "step1Title": "Persönliche Daten & Kontakt",
+    "step1Sub": "Ihre Basisinformationen.",
+    "step2Title": "Bildung & Familie",
+    "step2Sub": "Hintergrunddetails.",
+    "formTitle1": "Allgemein & Kontakt",
+    "formTitle2": "Familie & Bildung",
+    "formTitle3": "Erfahrung & Fähigkeiten",
+    "labels": {
+      "firstName": "Vorname",
+      "lastName": "Nachname",
+      "sex": "Geschlecht",
+      "dob": "Geburtsdatum",
+      "email": "E-Mail",
+      "address": "Vollständige Adresse",
+      "street": "Straße",
+      "number": "Nr.",
+      "city": "Stadt",
+      "country": "Land",
+      "education": "Bildungsstand",
+      "languages": "Gesprochene Sprachen",
+      "languagesPlaceholder": "z.B. Englisch, Deutsch",
+      "childcare": "Erfahrung mit Kindern (Altersgruppen)"
+    },
+    "options": {
+      "select": "Auswählen...",
+      "female": "Weiblich",
+      "male": "Männlich",
+      "other": "Andere",
+      "highschool": "Gymnasium / Fachoberschule",
+      "university": "Universität / Hochschule",
+      "vocational": "Berufsausbildung"
+    },
+    "saveContinue": "Speichern & Weiter"
   }
 }

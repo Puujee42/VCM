@@ -2,7 +2,7 @@
 
 import React from "react";
 import { Link } from "@/navigation";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, UserButton, useUser } from "@clerk/nextjs";
 import { Motion as motion } from "./MotionProxy";
 import { useTranslations } from "next-intl";
 
@@ -13,6 +13,10 @@ interface AuthActionsProps {
 
 const AuthActions = ({ BRAND, isMobile }: AuthActionsProps) => {
   const t = useTranslations("Auth");
+  const { user } = useUser();
+  const isAdmin = user?.publicMetadata?.role === 'admin';
+  const dashboardHref = isAdmin ? "/admin" : "/dashboard";
+
   if (isMobile) {
     return (
       <>
@@ -42,7 +46,7 @@ const AuthActions = ({ BRAND, isMobile }: AuthActionsProps) => {
       <SignedIn>
         <div className="flex items-center gap-3">
           <Link
-            href="/dashboard"
+            href={dashboardHref}
             className="text-[9px] font-black uppercase tracking-widest opacity-70 hover:opacity-100 border-b-2 hidden xl:block"
             style={{ borderColor: BRAND.RED }}
           >

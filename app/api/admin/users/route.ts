@@ -30,10 +30,45 @@ export async function GET(req: Request) {
   }
 
   // Fetch all users sorted by role (Students first) then by update date
-  // We sort role descending so 'student' (s) comes before 'guest' (g)
-  const users = await User.find({}).sort({ role: -1, updatedAt: -1 });
+  const mongoUsers = await User.find({}).lean();
 
-  return NextResponse.json(users);
+  // Fetch all users from Clerk
+  const client = await clerkClient();
+  const clerkUsersResponse = await client.users.getUserList({
+    limit: 500, // Adjust as needed
+  });
+  const clerkUsers = clerkUsersResponse.data;
+
+  // Merge them
+  const mergedUsers = clerkUsers.map((cu: any) => {
+    const mu = mongoUsers.find((u: any) => u.clerkId === cu.id);
+
+    return {
+      _id: mu?._id || cu.id,
+      clerkId: cu.id,
+      fullName: mu?.fullName || `${cu.firstName || ""} ${cu.lastName || ""}`.trim() || cu.username || "Unknown User",
+      email: mu?.email || cu.emailAddresses[0]?.emailAddress,
+      role: mu?.role || cu.publicMetadata?.role || "guest",
+      status: mu?.status || "Active",
+      country: mu?.country || "-",
+      step: mu?.step || "-",
+      photo: cu.imageUrl || mu?.photo,
+      profile: mu?.profile || {},
+      updatedAt: mu?.updatedAt || new Date(cu.updatedAt),
+      createdAt: mu?.createdAt || new Date(cu.createdAt),
+    };
+  });
+
+  // Sort: Admins first, then Students, then Guests
+  const roleOrder: Record<string, number> = { admin: 3, student: 2, guest: 1 };
+  mergedUsers.sort((a, b) => {
+    const orderA = roleOrder[a.role.toLowerCase()] || 0;
+    const orderB = roleOrder[b.role.toLowerCase()] || 0;
+    if (orderA !== orderB) return orderB - orderA;
+    return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+  });
+
+  return NextResponse.json(mergedUsers);
 }
 
 // 2. PUT: The critical part that SAVES changes
@@ -51,16 +86,24 @@ export async function PUT(req: Request) {
     if (action === 'update_user') {
       if (!userId) return NextResponse.json({ error: "Missing User ID" }, { status: 400 });
 
-      const updatedUser = await User.findByIdAndUpdate(
-        userId,
+      // Use clerkId if userId doesn't look like a MongoDB ObjectId
+      const isMongoId = /^[0-9a-fA-F]{24}$/.test(userId);
+      const query = isMongoId ? { _id: userId } : { clerkId: userId };
+
+      const updatedUser = await User.findOneAndUpdate(
+        query,
         {
-          role: data.role,
-          country: data.country,
-          step: data.step,
-          status: data.status,
-          fullName: data.fullName
+          $set: {
+            role: data.role,
+            country: data.country,
+            step: data.step,
+            status: data.status,
+            fullName: data.fullName,
+            // Ensure clerkId is stored if we are upserting
+            ...(isMongoId ? {} : { clerkId: userId })
+          }
         },
-        { new: true }
+        { new: true, upsert: true }
       );
 
       if (updatedUser && updatedUser.clerkId) {
@@ -79,13 +122,16 @@ export async function PUT(req: Request) {
     if (action === 'master_update') {
       if (!userId) return NextResponse.json({ error: "Missing User ID" }, { status: 400 });
 
+      const isMongoId = /^[0-9a-fA-F]{24}$/.test(userId);
+      const query = isMongoId ? { _id: userId } : { clerkId: userId };
+
       // Clean the data to avoid updating immutable fields if any, though MongoDB handles _id
       const { _id, clerkId, createdAt, ...updateData } = data;
 
-      const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { $set: updateData },
-        { new: true }
+      const updatedUser = await User.findOneAndUpdate(
+        query,
+        { $set: { ...updateData, ...(isMongoId ? {} : { clerkId: userId }) } },
+        { new: true, upsert: true }
       );
 
       // Sync metadata if role changed
@@ -105,14 +151,19 @@ export async function PUT(req: Request) {
     if (action === 'approve_documents') {
       if (!userId) return NextResponse.json({ error: "Missing User ID" }, { status: 400 });
 
+      const isMongoId = /^[0-9a-fA-F]{24}$/.test(userId);
+      const query = isMongoId ? { _id: userId } : { clerkId: userId };
+
       const adminUser = await currentUser();
-      const updatedUser = await User.findByIdAndUpdate(
-        userId,
+      const updatedUser = await User.findOneAndUpdate(
+        query,
         {
-          documentsReviewedBy: adminUser?.firstName || "Admin",
-          documentsApprovedAt: new Date(),
+          $set: {
+            documentsReviewedBy: adminUser?.firstName || "Admin",
+            documentsApprovedAt: new Date(),
+          }
         },
-        { new: true }
+        { new: true, upsert: true }
       );
 
       return NextResponse.json({ success: true, user: updatedUser });
@@ -138,7 +189,21 @@ export async function DELETE(req: Request) {
     if (!id) return NextResponse.json({ error: "ID missing" }, { status: 400 });
 
     // Find user to get Clerk ID
-    const userToDelete = await User.findById(id);
+    const isMongoId = /^[0-9a-fA-F]{24}$/.test(id);
+    const query = isMongoId ? { _id: id } : { clerkId: id };
+
+    const userToDelete = await User.findOne(query);
+    if (!userToDelete && !isMongoId) {
+      // If we only have a Clerk ID and no DB record, we still need the Clerk ID to delete from Clerk
+      try {
+        const client = await clerkClient();
+        await client.users.deleteUser(id);
+        return NextResponse.json({ success: true, message: "Deleted from Clerk only" });
+      } catch (err) {
+        return NextResponse.json({ error: "Clerk user not found" }, { status: 404 });
+      }
+    }
+
     if (!userToDelete) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
     // Delete from Clerk
