@@ -3,6 +3,8 @@ import { connectToDB } from "@/lib/db";
 import Event from "@/lib/models/Events";
 import { auth } from "@clerk/nextjs/server";
 
+export const revalidate = 60;
+
 // GET: Fetch all events (with optional filtering)
 export async function GET(req: Request) {
   try {
@@ -19,7 +21,12 @@ export async function GET(req: Request) {
     // Sort by date (newest first)
     const events = await Event.find(query).sort({ date: 1 });
 
-    return NextResponse.json(events, { status: 200 });
+    return NextResponse.json(events, { 
+      status: 200,
+      headers: {
+        'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=30'
+      }
+    });
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch events" }, { status: 500 });
   }

@@ -1,35 +1,39 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useAnimationFrame } from "framer-motion";
 
 export default function SmoothScroll() {
+  const lenisRef = useRef<any>(null);
+
   useEffect(() => {
     // Disable on mobile/tablet (simplest check)
     if (window.innerWidth < 1024) return;
 
-    let lenis: any;
-
     const initLenis = async () => {
       const Lenis = (await import("lenis")).default;
-      lenis = new Lenis({
+      lenisRef.current = new Lenis({
         duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       });
-
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-
-      requestAnimationFrame(raf);
     };
 
     initLenis();
 
     return () => {
-      if (lenis) lenis.destroy();
+      if (lenisRef.current) {
+        lenisRef.current.destroy();
+        lenisRef.current = null;
+      }
     };
   }, []);
+
+  // Sync Lenis with Framer Motion's update loop to avoid double RAF
+  useAnimationFrame(() => {
+    if (lenisRef.current) {
+      lenisRef.current.raf(performance.now());
+    }
+  });
 
   return null;
 }

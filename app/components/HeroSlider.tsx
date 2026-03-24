@@ -106,6 +106,7 @@ const HeroSlider = () => {
             <CloudinaryPlayer
               publicId="A_cinematic_highquality_202601201908_j5s2n_kkoosh"
               cloudName="dxoxdiuwr"
+              poster="https://res.cloudinary.com/dxoxdiuwr/video/upload/f_auto,q_30,so_0/v1/A_cinematic_highquality_202601201908_j5s2n_kkoosh.jpg"
               className="w-full h-full object-cover opacity-50 scale-105 pointer-events-none"
             />
           )}
