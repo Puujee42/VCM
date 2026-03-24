@@ -3,6 +3,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { connectToDB } from "@/lib/db";
 import Application from "@/lib/models/Application";
 import User from "@/lib/models/User";
+import { withAdminAuth } from "@/lib/adminAuth";
 
 const PROGRAM_MAP: Record<string, string> = {
   "DE": "Germany",
@@ -11,25 +12,7 @@ const PROGRAM_MAP: Record<string, string> = {
   "CH": "Switzerland"
 };
 
-async function isAdmin() {
-  const clerkUser = await currentUser();
-  
-  if (!clerkUser) return false;
-
-  if (clerkUser.publicMetadata?.role === 'admin') {
-    return true;
-  }
-
-  await connectToDB();
-  const dbUser = await User.findOne({ clerkId: clerkUser.id });
-  return dbUser?.role === 'admin';
-}
-
-export async function GET() {
-  if (!await isAdmin()) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
+export const GET = withAdminAuth(async () => {
   try {
     await connectToDB();
     
@@ -49,13 +32,9 @@ export async function GET() {
     console.error("Fetch applications error:", error);
     return NextResponse.json({ error: "Failed to fetch applications" }, { status: 500 });
   }
-}
+});
 
-export async function PUT(req: Request) {
-  if (!await isAdmin()) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
+export const PUT = withAdminAuth(async (req: Request) => {
   try {
     await connectToDB();
     const body = await req.json();
@@ -96,4 +75,4 @@ export async function PUT(req: Request) {
     console.error("Update application error:", error);
     return NextResponse.json({ error: "Failed to update application" }, { status: 500 });
   }
-}
+});

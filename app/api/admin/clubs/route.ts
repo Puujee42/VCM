@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { connectToDB } from "@/lib/db";
 import Club from "@/lib/models/Club";
 import { v2 as cloudinary } from 'cloudinary';
+import { withAdminAuth } from "@/lib/adminAuth";
 
 // Configure Cloudinary
 cloudinary.config({
@@ -10,7 +11,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export async function GET() {
+export const GET = withAdminAuth(async () => {
   try {
     await connectToDB();
     const clubs = await Club.find({}).sort({ createdAt: -1 });
@@ -19,9 +20,9 @@ export async function GET() {
     console.error("Failed to fetch clubs", error);
     return NextResponse.json({ error: "Failed to fetch clubs" }, { status: 500 });
   }
-}
+});
 
-export async function POST(request: Request) {
+export const POST = withAdminAuth(async (request: Request) => {
   try {
     await connectToDB();
     const formData = await request.formData();
@@ -66,9 +67,9 @@ export async function POST(request: Request) {
     console.error("Failed to create club", error);
     return NextResponse.json({ error: "Failed to create club" }, { status: 500 });
   }
-}
+});
 
-export async function PUT(request: Request) {
+export const PUT = withAdminAuth(async (request: Request) => {
     try {
         await connectToDB();
         const formData = await request.formData();
@@ -116,9 +117,9 @@ export async function PUT(request: Request) {
         console.error("Failed to update club", error);
         return NextResponse.json({ error: "Failed to update club" }, { status: 500 });
     }
-}
+});
 
-export async function DELETE(request: Request) {
+export const DELETE = withAdminAuth(async (request: Request) => {
     try {
         await connectToDB();
         const { searchParams } = new URL(request.url);
@@ -130,4 +131,4 @@ export async function DELETE(request: Request) {
     } catch (error) {
         return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
     }
-}
+});

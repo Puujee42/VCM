@@ -3,19 +3,10 @@ import { NextResponse } from "next/server";
 import { currentUser, clerkClient } from "@clerk/nextjs/server";
 import { connectToDB } from "@/lib/db";
 import User from "@/lib/models/User";
-
-// --- AUTH CHECK ---
-async function isAdmin() {
-  const user = await currentUser();
-  if (!user) return false;
-  // Check Clerk metadata or DB role
-  return user.publicMetadata?.role === 'admin';
-}
+import { withAdminAuth } from "@/lib/adminAuth";
 
 // 1. GET: Fetch all users for the table (or specific user with documents)
-export async function GET(req: Request) {
-  if (!await isAdmin()) return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-
+export const GET = withAdminAuth(async (req: Request) => {
   await connectToDB();
 
   const { searchParams } = new URL(req.url);
@@ -69,12 +60,10 @@ export async function GET(req: Request) {
   });
 
   return NextResponse.json(mergedUsers);
-}
+});
 
 // 2. PUT: The critical part that SAVES changes
-export async function PUT(req: Request) {
-  if (!await isAdmin()) return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-
+export const PUT = withAdminAuth(async (req: Request) => {
   try {
     await connectToDB();
     const body = await req.json();
@@ -175,12 +164,10 @@ export async function PUT(req: Request) {
     console.error("Database Update Failed:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
-}
+});
 
 // 3. DELETE: Remove user
-export async function DELETE(req: Request) {
-  if (!await isAdmin()) return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
-
+export const DELETE = withAdminAuth(async (req: Request) => {
   try {
     await connectToDB();
     const { searchParams } = new URL(req.url);
@@ -223,4 +210,4 @@ export async function DELETE(req: Request) {
   } catch (error) {
     return NextResponse.json({ error: "Delete failed" }, { status: 500 });
   }
-}
+});

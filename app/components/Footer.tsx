@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "@/navigation";
 import {
   ArrowUp,
@@ -10,7 +10,6 @@ import {
   Phone,
   LucideIcon
 } from "lucide-react";
-import { useTheme } from "next-themes";
 import { useTranslations, useLocale } from "next-intl";
 
 // --- TYPES ---
@@ -48,19 +47,9 @@ export default function AestheticFooter() {
   const t = useTranslations("Footer");
   const common = useTranslations("common");
   const locale = useLocale();
-  const { theme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isDark = mounted && theme === "dark";
 
   return (
-    <footer className={`relative w-full pt-16 pb-8 font-sans transition-all duration-700 overflow-hidden
-      ${mounted ? "opacity-100" : "opacity-0"} 
-      ${isDark ? "bg-[#050508]" : "bg-white"}`}>
+    <footer className="relative w-full pt-16 pb-8 font-sans transition-all duration-700 overflow-hidden bg-white dark:bg-[#050508]">
 
       {/* ─── VIBRANT COLOR BLOBS (Restored) ─── */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -77,8 +66,7 @@ export default function AestheticFooter() {
 
         {/* ─── 1. NEWSLETTER CARD ─── */}
         <div className="relative mb-24">
-          <div className={`relative overflow-hidden rounded-[2.5rem] shadow-2xl shadow-rose-200/50
-             ${isDark ? "bg-slate-900 border border-slate-800" : "bg-white border border-slate-50"}`}>
+          <div className="relative overflow-hidden rounded-[2.5rem] shadow-2xl shadow-rose-200/50 bg-white border border-slate-50 dark:bg-slate-900 dark:border-slate-800">
 
             {/* Colorful Gradient Border Effect */}
             <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-400 via-rose-400 to-purple-400" />
@@ -93,7 +81,7 @@ export default function AestheticFooter() {
                 <span className="inline-block px-4 py-1.5 rounded-full bg-rose-50 text-[#E31B23] text-xs font-bold uppercase tracking-widest ring-1 ring-rose-100">
                   {t("weeklyUpdates")}
                 </span>
-                <h2 className={`text-4xl md:text-5xl font-black leading-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                <h2 className="text-4xl md:text-5xl font-black leading-tight text-slate-900 dark:text-white">
                   {t("dontMiss")} <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#E31B23] to-rose-400">
                     {t("yourChance")}
@@ -103,12 +91,12 @@ export default function AestheticFooter() {
 
               {/* Right Input */}
               <div className="relative w-full">
-                <div className={`flex items-center p-2 rounded-2xl shadow-sm border focus-within:ring-4 focus-within:ring-rose-100 transition-all ${isDark ? "bg-black border-slate-800" : "bg-white border-slate-100"}`}>
+                <div className="flex items-center p-2 rounded-2xl shadow-sm border focus-within:ring-4 focus-within:ring-rose-100 transition-all bg-white border-slate-100 dark:bg-black dark:border-slate-800">
                   <Mail className="ml-4 text-slate-400 shrink-0" size={20} />
                   <input
                     type="email"
                     placeholder={t("enterEmail")}
-                    className={`w-full bg-transparent px-4 py-3 text-sm font-semibold outline-none ${isDark ? "text-white placeholder:text-slate-600" : "text-slate-800 placeholder:text-slate-400"}`}
+                    className="w-full bg-transparent px-4 py-3 text-sm font-semibold outline-none text-slate-800 placeholder:text-slate-400 dark:text-white dark:placeholder:text-slate-600"
                   />
                   <button className="flex items-center gap-2 px-6 py-3 rounded-xl bg-[#E31B23] text-white font-bold text-xs uppercase tracking-widest hover:bg-rose-600 hover:scale-105 transition-all shadow-lg shadow-rose-500/30">
                     {common("send")} <Send size={14} className="-rotate-12 group-hover:rotate-0 transition-transform" />
@@ -132,7 +120,7 @@ export default function AestheticFooter() {
                 <span className="font-bold text-xl relative z-10">M</span>
               </div>
               <div className="flex flex-col">
-                <span className={`text-2xl font-black uppercase leading-none tracking-tight ${isDark ? "text-white" : "text-slate-900"}`}>
+                <span className="text-2xl font-black uppercase leading-none tracking-tight text-slate-900 dark:text-white">
                   Mongolian
                 </span>
                 {/* Colorful Agency Text */}
@@ -149,7 +137,7 @@ export default function AestheticFooter() {
               <SectionHeader color={BRAND.GREEN} label={t("explore")} />
               <ul className="space-y-3">
                 {LINKS.about.map((l, i) => (
-                  <SimpleLink key={i} href={l.href} text={t(`links.${l.labelKey}`)} isDark={isDark} color={BRAND.GREEN} />
+                  <SimpleLink key={i} href={l.href} text={t(`links.${l.labelKey}`)} color={BRAND.GREEN} />
                 ))}
               </ul>
             </div>
@@ -157,7 +145,7 @@ export default function AestheticFooter() {
               <SectionHeader color={BRAND.RED} label={t("action")} />
               <ul className="space-y-3">
                 {LINKS.action.map((l, i) => (
-                  <SimpleLink key={i} href={l.href} text={t(`links.${l.labelKey}`)} isDark={isDark} color={BRAND.RED} />
+                  <SimpleLink key={i} href={l.href} text={t(`links.${l.labelKey}`)} color={BRAND.RED} />
                 ))}
               </ul>
             </div>
@@ -171,8 +159,6 @@ export default function AestheticFooter() {
                 icon={Phone}
                 title={common("phone")}
                 value="+976 7711 6906"
-                isDark={isDark}
-                // Keeping background subtle but text colored
                 bgColor="bg-blue-50"
                 textColor="text-blue-600"
               />
@@ -180,7 +166,6 @@ export default function AestheticFooter() {
                 icon={Mail}
                 title={common("email")}
                 value="info@mongolianaupair.com"
-                isDark={isDark}
                 bgColor="bg-rose-50"
                 textColor="text-[#E31B23]"
               />
@@ -188,7 +173,6 @@ export default function AestheticFooter() {
                 icon={MapPin}
                 title={common("address")}
                 value="Ulaanbaatar, Mongolia"
-                isDark={isDark}
                 bgColor="bg-emerald-50"
                 textColor="text-[#00C896]"
               />
@@ -198,15 +182,14 @@ export default function AestheticFooter() {
 
         {/* ─── 3. BOTTOM BAR ─── */}
         <div className="pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className={`text-xs font-bold uppercase tracking-widest opacity-60 ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+          <p className="text-xs font-bold uppercase tracking-widest opacity-60 text-slate-500 dark:text-slate-400">
             {t("rights")}
           </p>
 
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Scroll to top"
-            className={`p-3 rounded-full transition-colors hover:shadow-lg group
-                ${isDark ? "bg-slate-800 text-white hover:bg-slate-700" : "bg-white text-slate-800 hover:bg-slate-50 border border-slate-100"}`}>
+            className="p-3 rounded-full transition-colors hover:shadow-lg group bg-white text-slate-800 hover:bg-slate-50 border border-slate-100 dark:bg-slate-800 dark:text-white dark:hover:bg-slate-700 dark:border-transparent">
             <ArrowUp size={16} className="group-hover:text-[#E31B23] transition-colors" />
           </button>
         </div>
@@ -237,8 +220,7 @@ const SectionHeader = ({ color, label }: { color: string, label: string }) => (
   </div>
 );
 
-// Added hover color prop (re-included for context)
-const SimpleLink = ({ href, text, isDark, color }: { href: string, text: string, isDark: boolean, color: string }) => {
+const SimpleLink = ({ href, text, color }: { href: string, text: string, color: string }) => {
   const [hovered, setHovered] = useState(false);
   return (
     <li>
@@ -246,8 +228,7 @@ const SimpleLink = ({ href, text, isDark, color }: { href: string, text: string,
         href={href}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
-        className={`text-sm font-bold transition-all duration-300 hover:translate-x-1 inline-block
-          ${isDark ? "text-slate-400" : "text-slate-500"}`}
+        className="text-sm font-bold transition-all duration-300 hover:translate-x-1 inline-block text-slate-500 dark:text-slate-400"
         // Valid standard CSS property 'color' works fine here
         style={{ color: hovered ? color : undefined }}
       >
@@ -257,15 +238,14 @@ const SimpleLink = ({ href, text, isDark, color }: { href: string, text: string,
   );
 }
 
-const ContactItem = ({ icon: Icon, title, value, isDark, bgColor, textColor }: { icon: LucideIcon, title: string, value: string, isDark: boolean, bgColor: string, textColor: string }) => (
-  <div className={`group flex items-center gap-4 p-3 rounded-xl transition-all duration-300 hover:shadow-md cursor-pointer
-    ${isDark ? "bg-slate-900 hover:bg-slate-800" : "bg-white border border-slate-100 hover:border-slate-200"}`}>
+const ContactItem = ({ icon: Icon, title, value, bgColor, textColor }: { icon: LucideIcon, title: string, value: string, bgColor: string, textColor: string }) => (
+  <div className="group flex items-center gap-4 p-3 rounded-xl transition-all duration-300 hover:shadow-md cursor-pointer bg-white border border-slate-100 hover:border-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-transparent">
     <div className={`w-10 h-10 rounded-lg flex items-center justify-center shrink-0 ${bgColor} ${textColor}`}>
       <Icon size={18} />
     </div>
     <div className="min-w-0">
       <p className="text-[10px] font-bold uppercase opacity-70 mb-0.5">{title}</p>
-      <p className={`text-sm font-bold truncate transition-colors duration-300 group-hover:${textColor} ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+      <p className={`text-sm font-bold truncate transition-colors duration-300 group-hover:${textColor} text-slate-800 dark:text-slate-200`}>
         {value}
       </p>
     </div>

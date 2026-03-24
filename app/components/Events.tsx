@@ -227,25 +227,28 @@ export default function LatestUpdatesSection() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const [eventsRes, blogsRes] = await Promise.all([
-          fetch('/api/events'),
-          fetch('/api/news')
+        const results = await Promise.allSettled([
+          fetch('/api/events').then(r => r.ok ? r.json() : Promise.reject('Failed to fetch events')),
+          fetch('/api/news').then(r => r.ok ? r.json() : Promise.reject('Failed to fetch news'))
         ]);
 
-        if (eventsRes.ok) {
-          const data = await eventsRes.json();
-          setEvents(data);
+        if (results[0].status === 'fulfilled') {
+          setEvents(results[0].value);
+        } else {
+          console.error("Events error:", results[0].reason);
         }
-        if (blogsRes.ok) {
-          const data = await blogsRes.json();
-          // Map blog data to match component expectation
+
+        if (results[1].status === 'fulfilled') {
+          const data = results[1].value;
           const mappedBlogs = data.map((blog: any) => ({
             ...blog,
             date: blog.publishedDate,
             category: blog.tags?.[0] || 'General',
-            readTime: "3 min read" // Placeholder as we don't have this in DB yet
+            readTime: "3 min read"
           }));
           setBlogs(mappedBlogs);
+        } else {
+          console.error("News error:", results[1].reason);
         }
       } catch (error) {
         console.error("Failed to fetch data", error);

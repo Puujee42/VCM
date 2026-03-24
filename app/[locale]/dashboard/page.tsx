@@ -202,24 +202,21 @@ export default function MemberDashboard() {
       const init = async () => {
          if (!isLoaded || !user) return;
          try {
-            const [profileRes, appsRes] = await Promise.all([
-               fetch(`/api/user/profile?clerkId=${user.id}`),
-               fetch(`/api/user/applications`)
-            ]);
+            const dashRes = await fetch('/api/user/dashboard');
 
-            if (profileRes.ok) {
-               const data = await profileRes.json();
-               if (data.user.role === 'admin') {
+            if (dashRes.ok) {
+               const data = await dashRes.json();
+               if (data.user?.role === 'admin') {
                   router.replace('/admin');
                   return;
                }
                setUserData(data.user);
                setActivities(data.activity || []);
                setBookings(data.bookings || []);
+               setUserApps(data.applications || []);
             } else {
                setUserData({ _id: "new", fullName: user.fullName || "Guest User", email: user.primaryEmailAddress?.emailAddress || "", role: "guest" });
             }
-            if (appsRes.ok) setUserApps(await appsRes.json());
          } catch (e) {
             console.error("Dashboard Error:", e);
          } finally {

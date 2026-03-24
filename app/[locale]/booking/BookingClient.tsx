@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import { Motion as motion } from "@/app/components/MotionProxy";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { Link } from "@/navigation";
@@ -50,10 +51,7 @@ interface BookingFormData {
    note: string;
 }
 
-// --- DATA ---
-const ALL_TIMES = [
-    "10:00", "10:10","11:00", "13:00", "14:00", "15:30", "16:30", "18:00"
-];
+// --- DATA REMOVED: Times are now fetched dynamically via API ---
 
 // --- ANIMATION VARIANTS ---
 const stepVar = {
@@ -109,6 +107,8 @@ export default function BookingClient() {
    const [myBookings, setMyBookings] = useState<any[]>([]);
    const [isSubmitting, setIsSubmitting] = useState(false);
    const [dates, setDates] = useState<DateOption[]>([]);
+   const [fetchedTimes, setFetchedTimes] = useState<string[]>([]);
+   const [loadingTimes, setLoadingTimes] = useState(false);
 
    // Generate Dates (Next 5 Days)
    useEffect(() => {
@@ -136,16 +136,45 @@ export default function BookingClient() {
       setDates(generateDates());
    }, [locale]);
 
-   // Filter Times based on selected date
+   // Fetch available times when date is selected
+   useEffect(() => {
+      if (!formData.date) {
+         setFetchedTimes([]);
+         return;
+      }
+      
+      let active = true;
+      const dateString = formData.date.full;
+      
+      const fetchTimes = async () => {
+         setLoadingTimes(true);
+         try {
+            const res = await fetch(`/api/bookings/available-times?date=${dateString}`);
+            if (res.ok && active) {
+               const data = await res.json();
+               setFetchedTimes(data.availableTimes || []);
+            }
+         } catch (error) {
+            console.error("Failed to fetch available times", error);
+         } finally {
+            if (active) setLoadingTimes(false);
+         }
+      };
+      
+      fetchTimes();
+      return () => { active = false; };
+   }, [formData.date?.full]);
+
+   // Filter Times based on selected date and current time if today
    const availableTimes = useMemo(() => {
-      if (!formData.date) return ALL_TIMES;
+      if (!formData.date) return fetchedTimes;
 
       if (formData.date.isToday) {
          const now = new Date();
          const currentHour = now.getHours();
          const currentMinute = now.getMinutes();
 
-         return ALL_TIMES.filter(t => {
+         return fetchedTimes.filter(t => {
             const [h, m] = t.split(":").map(Number);
             if (h > currentHour) return true;
             if (h === currentHour && m > currentMinute) return true;
@@ -153,8 +182,8 @@ export default function BookingClient() {
          });
       }
 
-      return ALL_TIMES;
-   }, [formData.date]);
+      return fetchedTimes;
+   }, [formData.date, fetchedTimes]);
 
 
    // Autofill form when user loads
@@ -326,24 +355,30 @@ export default function BookingClient() {
 
                            <div>
                               <h2 className="text-2xl font-black text-slate-900 mb-6 font-sans">{t("timeTitle")}</h2>
-                              <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
-                                 {availableTimes.length > 0 ? availableTimes.map((t) => (
-                                    <button
-                                       key={t}
-                                       onClick={() => handleSelect("time", t)}
-                                       className={`py-3 rounded-2xl font-bold text-sm border-2 transition-all ${formData.time === t
-                                          ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                                          : "border-slate-100 text-slate-600 hover:border-red-200"
-                                          }`}
-                                    >
-                                       {t}
-                                    </button>
-                                 )) : (
-                                    <div className="col-span-4 text-center text-slate-400 py-4 font-medium italic bg-slate-50 rounded-2xl">
-                                       {t("noSlots")}
-                                    </div>
-                                 )}
-                              </div>
+                              {loadingTimes ? (
+                                 <div className="flex justify-center py-8">
+                                    <Loader2 className="animate-spin text-emerald-500" size={32} />
+                                 </div>
+                              ) : (
+                                 <div className="grid grid-cols-3 sm:grid-cols-4 gap-3">
+                                    {availableTimes.length > 0 ? availableTimes.map((t) => (
+                                       <button
+                                          key={t}
+                                          onClick={() => handleSelect("time", t)}
+                                          className={`py-3 rounded-2xl font-bold text-sm border-2 transition-all ${formData.time === t
+                                             ? "border-emerald-500 bg-emerald-50 text-emerald-700"
+                                             : "border-slate-100 text-slate-600 hover:border-red-200"
+                                             }`}
+                                       >
+                                          {t}
+                                       </button>
+                                    )) : (
+                                       <div className="col-span-4 text-center text-slate-400 py-4 font-medium italic bg-slate-50 rounded-2xl">
+                                          {t("noSlots")}
+                                       </div>
+                                    )}
+                                 </div>
+                              )}
                            </div>
                         </motion.div>
                      )}

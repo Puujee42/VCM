@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { connectToDB } from "@/lib/db";
 import Lesson from "@/lib/models/Lesson";
 import User from "@/lib/models/User"; // Ensure User model is registered
+import { withAdminAuth } from "@/lib/adminAuth";
 
-export async function GET() {
+export const GET = withAdminAuth(async () => {
     try {
         await connectToDB();
         const lessons = await Lesson.find({}).sort({ createdAt: -1 }).populate('attendees');
@@ -12,9 +13,9 @@ export async function GET() {
         console.error("GET /api/admin/lessons error:", error);
         return NextResponse.json({ error: "Failed to fetch lessons" }, { status: 500 });
     }
-}
+});
 
-export async function POST(req: Request) {
+export const POST = withAdminAuth(async (req: Request) => {
     try {
         await connectToDB();
         const body = await req.json();
@@ -23,9 +24,9 @@ export async function POST(req: Request) {
     } catch (error) {
         return NextResponse.json({ error: "Failed to create lesson" }, { status: 500 });
     }
-}
+});
 
-export async function PUT(req: Request) {
+export const PUT = withAdminAuth(async (req: Request) => {
     try {
         await connectToDB();
         const body = await req.json();
@@ -45,9 +46,9 @@ export async function PUT(req: Request) {
     } catch (error) {
         return NextResponse.json({ error: "Failed to update lesson" }, { status: 500 });
     }
-}
+});
 
-export async function DELETE(req: Request) {
+export const DELETE = withAdminAuth(async (req: Request) => {
     try {
         await connectToDB();
         const { searchParams } = new URL(req.url);
@@ -62,4 +63,4 @@ export async function DELETE(req: Request) {
     } catch (error) {
         return NextResponse.json({ error: "Failed to delete lesson" }, { status: 500 });
     }
-}
+});

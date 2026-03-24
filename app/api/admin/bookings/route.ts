@@ -4,21 +4,9 @@ import { connectToDB } from "@/lib/db";
 import Booking from "@/lib/models/Booking";
 import User from "@/lib/models/User";
 import { sendBookingApprovedEmail, sendBookingRejectedEmail } from "@/lib/email";
+import { withAdminAuth } from "@/lib/adminAuth";
 
-async function isAdmin() {
-  const clerkUser = await currentUser();
-  if (!clerkUser) return false;
-  if (clerkUser.publicMetadata?.role === 'admin') return true;
-  await connectToDB();
-  const dbUser = await User.findOne({ clerkId: clerkUser.id });
-  return dbUser?.role === 'admin';
-}
-
-export async function GET() {
-  if (!await isAdmin()) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
+export const GET = withAdminAuth(async () => {
   try {
     await connectToDB();
     const bookings = await Booking.find({}).sort({ createdAt: -1 });
@@ -26,13 +14,9 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch bookings" }, { status: 500 });
   }
-}
+});
 
-export async function PUT(req: Request) {
-  if (!await isAdmin()) {
-    return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-  }
-
+export const PUT = withAdminAuth(async (req: Request) => {
   try {
     const { bookingId, status } = await req.json();
 
@@ -83,4 +67,4 @@ export async function PUT(req: Request) {
     console.error("Update booking error:", error);
     return NextResponse.json({ error: "Failed to update booking" }, { status: 500 });
   }
-}
+});

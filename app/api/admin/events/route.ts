@@ -4,6 +4,7 @@ import { connectToDB } from "@/lib/db";
 import Event from "@/lib/models/Events";
 import User from "@/lib/models/User";
 import { v2 as cloudinary } from 'cloudinary';
+import { withAdminAuth } from "@/lib/adminAuth";
 
 // --- CONFIG CLOUDINARY ---
 cloudinary.config({
@@ -12,17 +13,7 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// --- HELPER: CHECK ADMIN ---
-async function isAdmin() {
-  const clerkUser = await currentUser();
-  if (!clerkUser) return false;
-  if (clerkUser.publicMetadata?.role === 'admin') return true;
-  await connectToDB();
-  const dbUser = await User.findOne({ clerkId: clerkUser.id });
-  return dbUser?.role === 'admin';
-}
-
-export async function GET() {
+export const GET = withAdminAuth(async () => {
   try {
     await connectToDB();
     const events = await Event.find({}).sort({ date: 1 }).populate('attendees', 'fullName email');
@@ -30,12 +21,10 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch" }, { status: 500 });
   }
-}
+});
 
-export async function POST(req: Request) {
+export const POST = withAdminAuth(async (req: Request) => {
   try {
-    if (!await isAdmin()) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-
     await connectToDB();
     let data: any;
     const contentType = req.headers.get("content-type") || "";
@@ -74,12 +63,10 @@ export async function POST(req: Request) {
     console.error("Event Create Error:", error);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-}
+});
 
-export async function PUT(req: Request) {
+export const PUT = withAdminAuth(async (req: Request) => {
   try {
-    if (!await isAdmin()) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-
     await connectToDB();
     let data: any;
     let id: string;
@@ -119,14 +106,13 @@ export async function PUT(req: Request) {
   } catch (error: any) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
-}
+});
 
-export async function DELETE(req: Request) {
-  if (!await isAdmin()) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+export const DELETE = withAdminAuth(async (req: Request) => {
   await connectToDB();
   const { searchParams } = new URL(req.url);
   const id = searchParams.get('id');
   if (!id) return NextResponse.json({ error: "ID required" }, { status: 400 });
   await Event.findByIdAndDelete(id);
   return NextResponse.json({ success: true });
-}
+});
