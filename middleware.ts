@@ -20,11 +20,13 @@ const isPublicRoute = createRouteMatcher([
     '/:locale/news(.*)',
     '/:locale/contact',
     '/:locale/booking',
+    '/:locale/shop(.*)',
     '/sign-in(.*)',
     '/sign-up(.*)',
     '/api/events(.*)',
     '/api/news(.*)',
-    '/api/livekit(.*)'
+    '/api/livekit(.*)',
+    '/api/shopping(.*)'
 ]);
 
 // 1. Mark the function as 'async'

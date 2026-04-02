@@ -62,7 +62,7 @@ export default function Navbar() {
     { name: t("program"), href: "/aupair", hasDropdown: true },
     { name: t("events"), href: "/events" },
     { name: t("lessons"), href: "/lessons" },
-    { name: t("shop"), href: "/booking" },
+    { name: t("shop"), href: "/shop" },
     { name: t("news"), href: "/news" },
   ];
 
