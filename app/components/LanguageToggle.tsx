@@ -9,7 +9,6 @@ import { AnimatePresence, motion } from "framer-motion";
 const LANGUAGES = [
   { code: "mn", name: "Монгол", flag: "🇲🇳" },
   { code: "en", name: "English", flag: "🇺🇸" },
-  { code: "de", name: "Deutsch", flag: "🇩🇪" },
 ];
 
 export default function LanguageToggle() {

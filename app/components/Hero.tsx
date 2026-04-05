@@ -8,7 +8,7 @@ import Image from "next/image";
 import {
   FaArrowRight,
   FaPlayCircle,
-  FaGlobeEurope,
+  FaUsers,
   FaChevronRight,
   FaChevronLeft,
   FaCheckCircle
@@ -187,7 +187,7 @@ const HeroSection = () => {
                   className="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-white shadow-sm border border-slate-100 flex items-center gap-2"
                   style={{ color: active.colors.accent }}
                 >
-                  <FaGlobeEurope /> {active.stat}
+                  <FaUsers /> {active.stat}
                 </span>
               </motion.div>
 

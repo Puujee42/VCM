@@ -20,7 +20,7 @@ import { useTranslations } from "next-intl";
 
 // --- BRAND CONFIG ---
 const BRAND = {
-   RED: "#E31B23",
+   SKY: "#0EA5E9",
    GREEN: "#00C896",
    DARK: "#0F172A",
 };
@@ -28,44 +28,34 @@ const BRAND = {
 // --- PROGRAMS DATA ---
 const PROGRAMS = [
    {
-      id: "DE",
-      countryKey: "germany",
-      titleKey: "germany",
-      image: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=800&q=80",
-      allowance: "280",
-      currency: "€",
-      hours: "30",
-      color: "from-red-500 to-yellow-500"
+      id: "EDU",
+      countryKey: "prog_edu",
+      titleKey: "prog_edu",
+      image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=80",
+      allowance: "Flexible",
+      currency: "",
+      hours: "Flexible",
+      color: "from-sky-500 to-blue-600"
    },
    {
-      id: "BE",
-      countryKey: "belgium",
-      titleKey: "belgium",
-      image: "https://images.unsplash.com/photo-1549144511-f099e773c147?auto=format&fit=crop&w=800&q=80",
-      allowance: "450",
-      currency: "€",
-      hours: "20",
-      color: "from-yellow-400 to-red-500"
+      id: "AND",
+      countryKey: "prog_and",
+      titleKey: "prog_and",
+      image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
+      allowance: "Community",
+      currency: "",
+      hours: "Flexible",
+      color: "from-emerald-500 to-teal-600"
    },
    {
-      id: "AT",
-      countryKey: "austria",
-      titleKey: "austria",
-      image: "https://images.unsplash.com/photo-1516550893923-42d28e5677af?auto=format&fit=crop&w=800&q=80",
-      allowance: "500",
-      currency: "€",
-      hours: "18",
-      color: "from-red-600 to-red-400"
-   },
-   {
-      id: "CH",
-      countryKey: "switzerland",
-      titleKey: "switzerland",
-      image: "https://images.unsplash.com/photo-1527668752968-14dc70a27c95?auto=format&fit=crop&w=800&q=80",
-      allowance: "990",
-      currency: "CHF",
-      hours: "30",
-      color: "from-red-600 to-white"
+      id: "VCLUB",
+      countryKey: "prog_vclub",
+      titleKey: "prog_vclub",
+      image: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?auto=format&fit=crop&w=800&q=80",
+      allowance: "Members",
+      currency: "",
+      hours: "Events",
+      color: "from-amber-500 to-orange-600"
    },
 ];
 
@@ -184,7 +174,7 @@ export default function ApplyPage() {
    };
 
    return (
-      <div className="min-h-dvh bg-[#FDFBF7] text-slate-900 font-sans selection:bg-[#E31B23] selection:text-white pt-28 pb-20 px-6">
+      <div className="min-h-dvh bg-[#FDFBF7] text-slate-900 font-sans selection:bg-[#0EA5E9] selection:text-white pt-28 pb-20 px-6">
 
          {/* ─── 1. HERO SECTION ─── */}
          <div className="max-w-7xl mx-auto mb-20 text-center relative z-10">
@@ -193,12 +183,12 @@ export default function ApplyPage() {
                animate={{ opacity: 1, y: 0 }}
                className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white border border-slate-200 text-slate-500 shadow-sm mb-6"
             >
-               <Plane size={16} className="text-[#E31B23]" />
+               <Plane size={16} className="text-[#0EA5E9]" />
                <span className="text-xs font-black uppercase tracking-widest">{t("badge", { step })}</span>
             </motion.div>
 
             <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-tight">
-               {step === 1 ? <>{t("heroTitle_1")} <span className="text-transparent bg-clip-text bg-linear-to-r from-[#E31B23] to-rose-500">{t("heroTitleHighlight_1")}</span></> : t("heroTitle_2")}
+               {step === 1 ? <>{t("heroTitle_1")} <span className="text-transparent bg-clip-text bg-linear-to-r from-[#0EA5E9] to-rose-500">{t("heroTitleHighlight_1")}</span></> : t("heroTitle_2")}
             </h1>
             {step === 1 && (
                <p className="text-lg text-slate-500 max-w-2xl mx-auto font-medium transition-all">
@@ -225,7 +215,7 @@ export default function ApplyPage() {
                            onClick={() => handleSelectProgram(prog.id)}
                            className={`group relative rounded-[2.5rem] overflow-hidden cursor-pointer border-4 transition-all duration-300 h-112.5
                         ${selectedProgram === prog.id
-                                 ? "border-[#E31B23] shadow-2xl scale-105 z-20"
+                                 ? "border-[#0EA5E9] shadow-2xl scale-105 z-20"
                                  : "border-transparent hover:border-slate-200 hover:shadow-xl hover:scale-[1.02]"}`
                            }
                         >
@@ -242,7 +232,7 @@ export default function ApplyPage() {
 
                            {/* Selected Checkmark */}
                            {selectedProgram === prog.id && (
-                              <div className="absolute top-4 right-4 bg-[#E31B23] text-white p-2 rounded-full shadow-lg z-30">
+                              <div className="absolute top-4 right-4 bg-[#0EA5E9] text-white p-2 rounded-full shadow-lg z-30">
                                  <CheckCircle2 size={24} />
                               </div>
                            )}
@@ -293,9 +283,9 @@ export default function ApplyPage() {
                         >
                            {/* Left Side: Summary */}
                            <div className="w-full md:w-1/3 bg-slate-900 text-white p-10 flex flex-col justify-between relative overflow-hidden">
-                              <div className="absolute top-0 right-0 w-64 h-64 bg-[#E31B23] rounded-full blur-[100px] opacity-20" />
+                              <div className="absolute top-0 right-0 w-64 h-64 bg-[#0EA5E9] rounded-full blur-[100px] opacity-20" />
                               <div className="relative z-10">
-                                 <span className="inline-block bg-[#E31B23] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md mb-6">
+                                 <span className="inline-block bg-[#0EA5E9] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-md mb-6">
                                     {t("programSelection.step1")}
                                  </span>
                                  <h2 className="text-4xl font-black mb-2">{nt(PROGRAMS.find(p => p.id === selectedProgram)?.countryKey || "")}</h2>
@@ -339,7 +329,7 @@ export default function ApplyPage() {
                                           required
                                           value={formData.firstName}
                                           onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23]"
+                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
                                        />
                                     </div>
                                     <div className="space-y-2">
@@ -351,7 +341,7 @@ export default function ApplyPage() {
                                           required
                                           value={formData.lastName}
                                           onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23]"
+                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
                                        />
                                     </div>
                                  </div>
@@ -360,7 +350,7 @@ export default function ApplyPage() {
                                     <div className="space-y-2">
                                        <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1 flex justify-between">
                                           {t("form.email")}
-                                          {isPreFilled && <span className="text-[8px] text-[#E31B23] font-black tracking-widest bg-red-50 px-1.5 rounded uppercase flex items-center gap-1"><Info size={8} /> {t("form.linked")}</span>}
+                                          {isPreFilled && <span className="text-[8px] text-[#0EA5E9] font-black tracking-widest bg-sky-50 px-1.5 rounded uppercase flex items-center gap-1"><Info size={8} /> {t("form.linked")}</span>}
                                        </label>
                                        <input
                                           type="email"
@@ -368,7 +358,7 @@ export default function ApplyPage() {
                                           readOnly={isPreFilled}
                                           value={formData.email}
                                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                          className={`w-full border border-slate-200 rounded-xl px-4 py-3 font-bold transition-all focus:outline-none focus:ring-2 focus:ring-[#E31B23] 
+                                          className={`w-full border border-slate-200 rounded-xl px-4 py-3 font-bold transition-all focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] 
                                      ${isPreFilled ? "bg-slate-100 text-slate-500 cursor-not-allowed border-dashed" : "bg-slate-50 text-slate-900"}`}
                                        />
                                     </div>
@@ -381,7 +371,7 @@ export default function ApplyPage() {
                                           required
                                           value={formData.phone}
                                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23]"
+                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
                                        />
                                     </div>
                                  </div>
@@ -394,7 +384,7 @@ export default function ApplyPage() {
                                           type="number"
                                           value={formData.age}
                                           onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23]"
+                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
                                        />
                                     </div>
                                     <div className="space-y-2">
@@ -403,7 +393,7 @@ export default function ApplyPage() {
                                           required
                                           value={formData.level}
                                           onChange={(e) => setFormData({ ...formData, level: e.target.value })}
-                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23]"
+                                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
                                        >
                                           <option value="A1">{t("levels.a1")}</option>
                                           <option value="A2">{t("levels.a2")}</option>
@@ -420,7 +410,7 @@ export default function ApplyPage() {
                                        required
                                        value={formData.generalId}
                                        onChange={(e) => setFormData({ ...formData, generalId: e.target.value })}
-                                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23]"
+                                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
                                     >
                                        <option value="" disabled>Choose a coordinator...</option>
                                        {generals.map(g => (
@@ -437,14 +427,14 @@ export default function ApplyPage() {
                                        placeholder="Please explain why you want to join this program and answer the General's prerequisite questions here..."
                                        value={formData.message}
                                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23]"
+                                       className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]"
                                     />
                                  </div>
 
                                  <button
                                     type="submit"
                                     disabled={loading}
-                                    className="w-full bg-[#E31B23] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.25em] shadow-xl shadow-red-200 hover:shadow-2xl hover:bg-red-700 transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
+                                    className="w-full bg-[#0EA5E9] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.25em] shadow-xl shadow-sky-200 hover:shadow-2xl hover:bg-sky-700 transition-all flex items-center justify-center gap-3 active:scale-[0.98]"
                                  >
                                     {loading ? <Loader2 className="animate-spin" /> : <>{t("form.saveContinue")} <ArrowRight size={16} /></>}
                                  </button>

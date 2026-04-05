@@ -5,16 +5,19 @@ const EventSchema = new Schema(
     title: {
       en: { type: String, required: true },
       mn: { type: String, required: true },
+      de: { type: String, required: true },
     },
     description: {
       en: { type: String, required: true },
       mn: { type: String, required: true },
+      de: { type: String, required: true },
     },
     date: { type: Date, required: true },
     timeString: { type: String, required: true }, // e.g., "14:00 - 16:00"
     location: {
       en: { type: String, required: true },
       mn: { type: String, required: true },
+      de: { type: String, required: true },
     },
     image: { type: String, required: true },
     category: {

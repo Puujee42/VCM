@@ -1,17 +1,13 @@
-import { getTranslations } from "next-intl/server";
-import AuPairClient from "./ProgramsClient";
+import ProgramsClient from "./ProgramsClient";
 import { Metadata } from "next";
 
-export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-    const { locale } = await params;
-    const t = await getTranslations({ locale, namespace: "Programs.metadata" });
-
+export async function generateMetadata(): Promise<Metadata> {
     return {
-        title: t("title"),
-        description: t("description"),
+        title: "Our Programs | Volunteer Center Mongolia",
+        description: "Explore our diverse volunteering programs: EDU-Volunteer, AND, and V-Club.",
     };
 }
 
 export default function ProgramsPage() {
-    return <AuPairClient />;
+    return <ProgramsClient />;
 }

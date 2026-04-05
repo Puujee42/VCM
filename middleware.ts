@@ -35,7 +35,7 @@ function isPublicRoute(pathname: string): boolean {
     if (publicApis.some(api => pathname.startsWith(api))) return true;
 
     // Remove locale prefix for path matching
-    const pathWithoutLocale = pathname.replace(/^\/(en|mn|de)/, '') || '/';
+    const pathWithoutLocale = pathname.replace(/^\/(en|mn)/, '') || '/';
 
     // Check public paths
     return publicPaths.some(p => {
@@ -69,7 +69,7 @@ export default async function middleware(req: NextRequest) {
     }
 
     // Non-API routes — check auth for protected pages, then run intl
-    const localeMatch = pathname.match(/^\/(en|mn|de)/);
+    const localeMatch = pathname.match(/^\/(en|mn)/);
     const locale = localeMatch ? localeMatch[1] : 'en';
 
     if (!isPublicRoute(pathname)) {

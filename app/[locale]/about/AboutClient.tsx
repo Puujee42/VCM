@@ -52,8 +52,8 @@ const introductionData = {
     title: "Үүсгэн байгуулагчийн танилцуулга",
     founderName: "Б. Цэвэлмаа",
     founderTitle: "Үүсгэн байгуулагч, Нийгмийн зөвлөх",
-    image: "/tsev.png",
-    signatureImage: "/tsev.png",
+    image: "https://res.cloudinary.com/dc127wztz/image/upload/q_auto/f_auto/v1775390121/tsevlee_mnzwhq.jpg",
+    signatureImage: "https://res.cloudinary.com/dc127wztz/image/upload/q_auto/f_auto/v1775390121/tsevlee_mnzwhq.jpg",
     text: [
       "Сайн дурын үйлсээр дамжуулан эерэг өөрчлөлтийг бүтээх хүсэл тэмүүлэл минь Монголын сайн дурынхны төвийг үүсгэн байгуулахад хүргэсэн юм. Бид хамтдаа, эх орныхоо өнцөг булан бүрт хүрч, хүмүүнлэг, иргэний нийгмийг цогцлоохын төлөө тууштай ажиллаж байна.",
       "Бидний үйл ажиллагааны гол цөм нь хүн бүрийн дотор орших тусч сэтгэл бөгөөд тэрхүү сэтгэлийг зөв гольдролд нь оруулж, бодит үйлдэл болгох нь бидний эрхэм зорилго юм. Таныг энэхүү үнэ цэнтэй аялалд нэгдэхийг урьж байна.",
@@ -69,8 +69,8 @@ const introductionData = {
     title: "Meet Our Founder",
     founderName: "B. Tsevelmaa",
     founderTitle: "Founder & Community Engagement Consultant",
-    image: "/tsev.png",
-    signatureImage: "/tsev.png",
+    image: "https://res.cloudinary.com/dc127wztz/image/upload/q_auto/f_auto/v1775390121/tsevlee_mnzwhq.jpg",
+    signatureImage: "https://res.cloudinary.com/dc127wztz/image/upload/q_auto/f_auto/v1775390121/tsevlee_mnzwhq.jpg",
     text: [
       "My passion for creating positive change through volunteerism led me to establish the Mongolian Volunteer Center. Together, we have reached every corner of our nation, working tirelessly to build a more humane and civil society.",
       "At the core of our work is the belief in the helping spirit that resides in everyone. Our mission is to channel that spirit into meaningful, tangible action. I invite you to join us on this invaluable journey of contribution and growth.",
@@ -200,7 +200,7 @@ export default function AboutPageSky() {
               <div className="relative w-full h-full group">
                 {/* Fallback image representing volunteering/mission */}
                 <Image
-                  src="https://res.cloudinary.com/dc127wztz/image/upload/v1768996172/zu47lypqyoup0ylylou2.webp"
+                  src="https://res.cloudinary.com/dc127wztz/image/upload/q_auto/f_auto/v1775390121/tsevlee_mnzwhq.jpg"
                   alt="VCM Mission"
                   fill
                   className="object-cover transition-transform duration-[2s] group-hover:scale-110"

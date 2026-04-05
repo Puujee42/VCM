@@ -47,12 +47,12 @@ import ShoppingManager from "@/app/components/admin/ShoppingManager";
 import { Link } from "@/navigation";
 
 // --- CONSTANTS ---
-const ROLES = ["Admin", "Student", "Guest"];
+const ROLES = ["Admin", "Volunteer", "Student", "Guest", "general_edu", "general_and", "general_vclub"];
 const STATUSES = ["Active", "Pending", "Suspended"];
-const COUNTRIES = ["Germany", "Belgium", "Austria", "Switzerland"];
+const COUNTRIES = ["EDU", "AND", "VCLUB"];
 const STEPS = ["Registration", "Documents", "Interview", "Matching", "Visa Process", "Departure"];
 const BRAND = {
-   RED: "#E31B23",
+   SKY: "#0EA5E9",
    GREEN: "#00C896",
    DARK: "#0F172A",
 };
@@ -66,7 +66,7 @@ const Input = ({ label, value, onChange, type = "text", placeholder }: any) => (
          value={value}
          placeholder={placeholder}
          onChange={(e) => onChange(e.target.value)}
-         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23] transition-all"
+         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all"
       />
    </div>
 );
@@ -79,7 +79,7 @@ const TextArea = ({ label, value, onChange, placeholder }: any) => (
          placeholder={placeholder}
          onChange={(e) => onChange(e.target.value)}
          rows={4}
-         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#E31B23] transition-all resize-none"
+         className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9] transition-all resize-none"
       />
    </div>
 );
@@ -104,7 +104,7 @@ const SidebarItem = ({ icon: Icon, label, active, onClick }: any) => (
          : "text-slate-500 hover:bg-slate-200/50 hover:text-slate-700"
          }`}
    >
-      <Icon size={18} className={active ? "text-[#E31B23]" : "text-slate-400"} />
+      <Icon size={18} className={active ? "text-[#0EA5E9]" : "text-slate-400"} />
       {label}
    </button>
 );
@@ -165,7 +165,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
                {activeTab === "basic" && (
                   <div className="grid grid-cols-2 gap-8">
                      <div className="space-y-6">
-                        <h4 className="text-xs font-black uppercase text-[#E31B23] tracking-widest">{t("modals.master.core")}</h4>
+                        <h4 className="text-xs font-black uppercase text-[#0EA5E9] tracking-widest">{t("modals.master.core")}</h4>
                         <Input label={t("modals.master.fullName")} value={formData.fullName} onChange={(v: string) => setFormData({ ...formData, fullName: v })} />
                         <Input label={t("modals.master.email")} value={formData.email} onChange={(v: string) => setFormData({ ...formData, email: v })} />
                         <div className="grid grid-cols-2 gap-4">
@@ -184,7 +184,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
                         </div>
                      </div>
                      <div className="space-y-6">
-                        <h4 className="text-xs font-black uppercase text-[#E31B23] tracking-widest">{t("modals.master.journey")}</h4>
+                        <h4 className="text-xs font-black uppercase text-[#0EA5E9] tracking-widest">{t("modals.master.journey")}</h4>
                         <div className="grid grid-cols-2 gap-4">
                            <div>
                               <label className="block text-xs font-bold text-slate-500 mb-1">Country</label>
@@ -208,7 +208,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
                   <div className="grid grid-cols-2 gap-12">
                      <div className="space-y-8">
                         <section className="space-y-4">
-                           <h4 className="text-xs font-black uppercase text-[#E31B23] tracking-widest flex items-center gap-2"><User size={14} /> Personal Details</h4>
+                           <h4 className="text-xs font-black uppercase text-[#0EA5E9] tracking-widest flex items-center gap-2"><User size={14} /> Personal Details</h4>
                            <div className="grid grid-cols-2 gap-4">
                               <Input label="Sex" value={formData.profile?.sex || ""} onChange={(v: string) => handleNestedChange('profile.sex', v)} />
                               <Input label="Nationality" value={formData.profile?.nationality || ""} onChange={(v: string) => handleNestedChange('profile.nationality', v)} />
@@ -217,7 +217,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
                            </div>
                         </section>
                         <section className="space-y-4">
-                           <h4 className="text-xs font-black uppercase text-[#E31B23] tracking-widest flex items-center gap-2"><MapPin size={14} /> Contact & Location</h4>
+                           <h4 className="text-xs font-black uppercase text-[#0EA5E9] tracking-widest flex items-center gap-2"><MapPin size={14} /> Contact & Location</h4>
                            <div className="grid grid-cols-2 gap-4">
                               <Input label="Phone" value={formData.profile?.phone || ""} onChange={(v: string) => handleNestedChange('profile.phone', v)} />
                               <Input label="Mobile" value={formData.profile?.mobile || ""} onChange={(v: string) => handleNestedChange('profile.mobile', v)} />
@@ -237,7 +237,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
                      </div>
                      <div className="space-y-8">
                         <section className="space-y-4">
-                           <h4 className="text-xs font-black uppercase text-[#E31B23] tracking-widest flex items-center gap-2"><GraduationCap size={14} /> Background</h4>
+                           <h4 className="text-xs font-black uppercase text-[#0EA5E9] tracking-widest flex items-center gap-2"><GraduationCap size={14} /> Background</h4>
                            <div className="grid grid-cols-2 gap-4">
                               <Input label="Education Level" value={formData.profile?.educationLevel || ""} onChange={(v: string) => handleNestedChange('profile.educationLevel', v)} />
                               <Input label="Languages" value={formData.profile?.languages || ""} onChange={(v: string) => handleNestedChange('profile.languages', v)} />
@@ -246,7 +246,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
                            </div>
                         </section>
                         <section className="space-y-4">
-                           <h4 className="text-xs font-black uppercase text-[#E31B23] tracking-widest flex items-center gap-2"><Baby size={14} /> Experience</h4>
+                           <h4 className="text-xs font-black uppercase text-[#0EA5E9] tracking-widest flex items-center gap-2"><Baby size={14} /> Experience</h4>
                            <TextArea label="Motivation Letter" value={formData.profile?.motivation || ""} onChange={(v: string) => handleNestedChange('profile.motivation', v)} />
                            <Input label="Hobbies" value={formData.profile?.hobbies || ""} onChange={(v: string) => handleNestedChange('profile.hobbies', v)} />
                         </section>
@@ -264,7 +264,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
                                  {url ? (
                                     <div className="flex flex-col gap-2">
                                        <span className="text-[10px] bg-emerald-100 text-emerald-700 px-2 py-1 rounded inline-block w-fit font-bold">Uploaded</span>
-                                       <a href={url} target="_blank" className="text-xs font-bold text-[#E31B23] hover:underline truncate">{url}</a>
+                                       <a href={url} target="_blank" className="text-xs font-bold text-[#0EA5E9] hover:underline truncate">{url}</a>
                                     </div>
                                  ) : (
                                     <span className="text-[10px] bg-slate-200 text-slate-500 px-2 py-1 rounded font-bold">Not Provided</span>
@@ -277,7 +277,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
                         ))}
                      </div>
                      <div className="bg-[#FAFAFA] p-6 rounded-2xl border border-slate-100">
-                        <h4 className="text-xs font-black uppercase text-[#E31B23] tracking-widest mb-4">Internal Review</h4>
+                        <h4 className="text-xs font-black uppercase text-[#0EA5E9] tracking-widest mb-4">Internal Review</h4>
                         <div className="grid grid-cols-2 gap-6">
                            <div>
                               <p className="text-[10px] font-bold text-slate-400 uppercase mb-1">Reviewed By</p>
@@ -295,7 +295,7 @@ const UserMasterManagementModal = ({ user, onClose, onSave }: { user: any; onClo
 
             <div className="p-8 border-t border-slate-100 bg-[#FAFAFA] flex justify-end gap-4">
                <button onClick={onClose} className="px-8 py-4 font-black uppercase text-xs tracking-widest text-slate-500 hover:text-slate-900 transition-colors">Discard Changes</button>
-               <button onClick={() => onSave(formData)} className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-xl hover:bg-[#E31B23] transition-all hover:-translate-y-1 active:scale-95">Save Master Record</button>
+               <button onClick={() => onSave(formData)} className="bg-slate-900 text-white px-10 py-4 rounded-2xl font-black uppercase text-xs tracking-[0.2em] shadow-xl hover:bg-[#0EA5E9] transition-all hover:-translate-y-1 active:scale-95">Save Master Record</button>
             </div>
          </motion.div>
       </div>
@@ -315,7 +315,7 @@ const ApplicationDetailsModal = ({ app, onClose, onMasterEdit }: { app: any; onC
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{app.firstName} {app.lastName} • {app.programId}</p>
                </div>
                <div className="flex items-center gap-3">
-                  <button onClick={() => onMasterEdit(app)} className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#E31B23] transition-all shadow-md">
+                  <button onClick={() => onMasterEdit(app)} className="flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-[#0EA5E9] transition-all shadow-md">
                      <Settings size={14} /> Full Control
                   </button>
                   <button onClick={onClose} className="p-2 hover:bg-slate-200 rounded-full transition-colors"><X size={24} /></button>
@@ -350,7 +350,7 @@ const ApplicationDetailsModal = ({ app, onClose, onMasterEdit }: { app: any; onC
                   <div className="grid md:grid-cols-2 gap-10">
                      <div className="space-y-8">
                         <section>
-                           <h4 className="flex items-center gap-2 text-[#E31B23] font-black text-[10px] uppercase tracking-widest mb-4">
+                           <h4 className="flex items-center gap-2 text-[#0EA5E9] font-black text-[10px] uppercase tracking-widest mb-4">
                               <User size={14} /> Personal Details
                            </h4>
                            <div className="grid grid-cols-2 gap-4">
@@ -361,7 +361,7 @@ const ApplicationDetailsModal = ({ app, onClose, onMasterEdit }: { app: any; onC
                            </div>
                         </section>
                         <section>
-                           <h4 className="flex items-center gap-2 text-[#E31B23] font-black text-[10px] uppercase tracking-widest mb-4">
+                           <h4 className="flex items-center gap-2 text-[#0EA5E9] font-black text-[10px] uppercase tracking-widest mb-4">
                               <MapPin size={14} /> Address & Contact
                            </h4>
                            <div className="space-y-2">
@@ -372,7 +372,7 @@ const ApplicationDetailsModal = ({ app, onClose, onMasterEdit }: { app: any; onC
                      </div>
                      <div className="space-y-8">
                         <section>
-                           <h4 className="flex items-center gap-2 text-[#E31B23] font-black text-[10px] uppercase tracking-widest mb-4">
+                           <h4 className="flex items-center gap-2 text-[#0EA5E9] font-black text-[10px] uppercase tracking-widest mb-4">
                               <Baby size={14} /> Experience
                            </h4>
                            <div className="space-y-4">
@@ -385,7 +385,7 @@ const ApplicationDetailsModal = ({ app, onClose, onMasterEdit }: { app: any; onC
                            </div>
                         </section>
                         <section>
-                           <h4 className="flex items-center gap-2 text-[#E31B23] font-black text-[10px] uppercase tracking-widest mb-4">
+                           <h4 className="flex items-center gap-2 text-[#0EA5E9] font-black text-[10px] uppercase tracking-widest mb-4">
                               <Heart size={14} /> Motivation Letter
                            </h4>
                            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 italic text-slate-600 text-sm leading-relaxed">
@@ -459,6 +459,7 @@ export default function AdminDashboard() {
                email: u.email || "No Email",
                status: u.status ? (u.status.charAt(0).toUpperCase() + u.status.slice(1)) : "Active",
                country: u.country || "-",
+               program: u.program || "-",
                step: u.step || "-"
             })));
          }
@@ -532,6 +533,7 @@ export default function AdminDashboard() {
          ...user,
          role: user.role,
          country: user.country === "-" ? COUNTRIES[0] : user.country,
+         program: user.program === "-" ? "" : user.program,
          step: user.step === "-" ? STEPS[0] : user.step,
          status: user.status || "Active"
       });
@@ -548,8 +550,9 @@ export default function AdminDashboard() {
                data: {
                   fullName: userForm.name,
                   role: userForm.role.toLowerCase(),
-                  country: userForm.role === "Student" ? userForm.country : null,
-                  step: userForm.role === "Student" ? userForm.step : "Registration",
+                  country: (userForm.role === "Student" || userForm.role === "Volunteer") ? userForm.country : null,
+                  program: (userForm.role === "Student" || userForm.role === "Volunteer") ? userForm.program : null,
+                  step: (userForm.role === "Student" || userForm.role === "Volunteer") ? userForm.step : "Registration",
                   status: userForm.status.toLowerCase()
                }
             })
@@ -627,14 +630,14 @@ export default function AdminDashboard() {
    );
 
    return (
-      <div className="min-h-[100dvh] bg-[#FAFAFA] flex font-sans text-slate-900 selection:bg-[#E31B23] selection:text-white overflow-hidden">
+      <div className="min-h-[100dvh] bg-[#FAFAFA] flex font-sans text-slate-900 selection:bg-[#0EA5E9] selection:text-white overflow-hidden">
 
          {/* ─── SIDEBAR ─── */}
          <aside className="w-72 bg-[#F5F5F5] h-[100dvh] sticky top-0 p-6 flex flex-col justify-between hidden lg:flex border-r border-slate-200">
             <div>
                <div className="flex items-center gap-3 mb-10 px-2">
-                  <div className="w-8 h-8 bg-[#E31B23] rounded-lg shadow-sm" />
-                  <span className="font-black text-xl tracking-tight">AuPair<span className="text-[#E31B23]">Admin</span></span>
+                  <div className="w-8 h-8 bg-[#0EA5E9] rounded-lg shadow-sm" />
+                  <span className="font-black text-xl tracking-tight">VCM<span className="text-[#0EA5E9]">Admin</span></span>
                </div>
                <nav className="space-y-1">
                   <SidebarItem icon={LayoutDashboard} label={t("sidebar.dashboard")} active={activeTab === "dashboard"} onClick={() => setActiveTab("dashboard")} />
@@ -679,8 +682,7 @@ export default function AdminDashboard() {
                <div className="space-y-8">
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
                      <StatCard label={t("dashboard.stats.totalUsers")} val={stats.totalUsers} icon={Users} colorClass="bg-slate-900" />
-                     <StatCard label={t("dashboard.stats.students")} val={stats.studentsCount} icon={GraduationCap} colorClass="bg-[#E31B23]" />
-                     <StatCard label={t("dashboard.stats.admins")} val={stats.adminsCount} icon={UserCheck} colorClass="bg-[#00C896]" />
+                     <StatCard label={t("dashboard.stats.students")} val={stats.studentsCount} icon={GraduationCap} colorClass="bg-[#0EA5E9]" />                     <StatCard label={t("dashboard.stats.admins")} val={stats.adminsCount} icon={UserCheck} colorClass="bg-[#00C896]" />
                      <StatCard label={t("dashboard.stats.guests")} val={stats.guestsCount} icon={User} colorClass="bg-slate-500" />
                      <StatCard label={t("dashboard.stats.pendingApps")} val={stats.pendingApps} icon={ClipboardList} colorClass="bg-amber-500" />
                      <StatCard label={t("dashboard.stats.articles")} val={stats.articles} icon={FileText} colorClass="bg-blue-500" />
@@ -801,14 +803,14 @@ export default function AdminDashboard() {
                                     </div>
                                  </td>
                                  <td className="px-8 py-5 text-sm">{app.programId}</td>
-                                 <td className="px-8 py-5"><span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${app.status === 'approved_volunteer' ? 'bg-green-50 text-[#00C896]' : app.status === 'rejected' ? 'bg-red-50 text-[#E31B23]' : 'bg-amber-50 text-amber-500'}`}>{app.status.replace('_', ' ').toLowerCase()}</span></td>
+                                 <td className="px-8 py-5"><span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${app.status === 'approved_volunteer' ? 'bg-green-50 text-[#00C896]' : app.status === 'rejected' ? 'bg-rose-50 text-rose-500' : 'bg-amber-50 text-amber-500'}`}>{app.status.replace('_', ' ').toLowerCase()}</span></td>
                                  <td className="px-8 py-5 text-right">
                                     <div className="flex justify-end gap-2">
                                        <button onClick={() => setSelectedApp(app)} className="p-2 bg-slate-100 text-slate-600 hover:bg-slate-900 hover:text-white rounded-xl transition-all"><Eye size={16} /></button>
                                        {app.status === 'pending' && (
                                           <>
                                              <button onClick={() => handleUpdateApplication(app._id, 'approved_volunteer')} className="p-2 bg-green-50 text-[#00C896] hover:bg-[#00C896] hover:text-white rounded-xl transition-colors"><Check size={16} /></button>
-                                             <button onClick={() => handleUpdateApplication(app._id, 'rejected')} className="p-2 bg-red-50 text-[#E31B23] hover:bg-[#E31B23] hover:text-white rounded-xl transition-colors"><X size={16} /></button>
+                                             <button onClick={() => handleUpdateApplication(app._id, 'rejected')} className="p-2 bg-rose-50 text-rose-500 hover:bg-rose-500 hover:text-white rounded-xl transition-colors"><X size={16} /></button>
                                           </>
                                        )}
                                     </div>
@@ -832,7 +834,7 @@ export default function AdminDashboard() {
                            placeholder={t("users.search")}
                            value={searchTerm}
                            onChange={(e) => setSearchTerm(e.target.value)}
-                           className="pl-12 pr-4 py-3 bg-[#FAFAFA] rounded-xl text-sm font-bold w-64 focus:outline-none focus:ring-2 focus:ring-[#E31B23]/20 transition-all"
+                           className="pl-12 pr-4 py-3 bg-[#FAFAFA] rounded-xl text-sm font-bold w-64 focus:outline-none focus:ring-2 focus:ring-[#0EA5E9]/20 transition-all"
                         />
                      </div>
                   </div>
@@ -862,22 +864,22 @@ export default function AdminDashboard() {
                                           <div>
                                              <div className="flex items-center gap-2">
                                                 <p className="font-bold text-sm text-slate-900">{u.name}</p>
-                                                {u.role === 'Student' && (
-                                                   <span className="text-[8px] bg-emerald-100 text-emerald-600 px-1.5 py-0.5 rounded-md font-black uppercase">{t("users.activeStudent")}</span>
+                                                {(u.role === 'Student' || u.role === 'Volunteer') && (
+                                                   <span className="text-[8px] bg-sky-100 text-sky-600 px-1.5 py-0.5 rounded-md font-black uppercase">{u.role}</span>
                                                 )}
                                              </div>
                                              <p className="text-xs text-slate-400 font-medium">{u.email}</p>
                                           </div>
                                        </div>
                                     </td>
-                                    <td className="px-8 py-5"><span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${u.role === 'Admin' ? 'bg-slate-800 text-white' : u.role === 'Student' ? 'bg-blue-50 text-blue-600' : 'bg-orange-50 text-orange-600'}`}>{u.role}</span></td>
-                                    <td className="px-8 py-5"><span className={`text-[10px] font-bold uppercase tracking-widest ${u.status === 'Active' ? 'text-[#00C896]' : u.status === 'Suspended' ? 'text-red-500' : 'text-amber-500'}`}>{t("status." + u.status.toLowerCase())}</span></td>
+                                    <td className="px-8 py-5"><span className={`px-3 py-1 rounded-lg text-[10px] font-black uppercase ${u.role === 'Admin' ? 'bg-slate-800 text-white' : u.role === 'Volunteer' ? 'bg-emerald-50 text-emerald-600' : 'bg-sky-50 text-sky-600'}`}>{u.role}</span></td>
+                                    <td className="px-8 py-5"><span className={`text-[10px] font-bold uppercase tracking-widest ${u.status === 'Active' ? 'text-[#00C896]' : u.status === 'Suspended' ? 'text-rose-500' : 'text-amber-500'}`}>{t("status." + u.status.toLowerCase())}</span></td>
                                     <td className="px-8 py-5">
-                                       {u.role === 'Student' ? (
+                                       {(u.role === 'Student' || u.role === 'Volunteer') ? (
                                           <div className="flex items-center gap-4 text-xs font-medium text-slate-500 bg-white px-3 py-2 rounded-xl border border-slate-100 shadow-sm">
-                                             <div className="flex items-center gap-1.5 font-bold"><Globe size={14} className="text-[#00C896]" /> {u.country}</div>
+                                             <div className="flex items-center gap-1.5 font-bold"><Globe size={14} className="text-[#00C896]" /> {u.country} {u.program ? `(${u.program})` : ""}</div>
                                              <div className="w-px h-3 bg-slate-200" />
-                                             <div className="flex items-center gap-1.5 font-bold"><Clock size={14} className="text-[#E31B23]" /> {u.step}</div>
+                                             <div className="flex items-center gap-1.5 font-bold"><Clock size={14} className="text-[#0EA5E9]" /> {u.step}</div>
                                           </div>
                                        ) : <span className="text-slate-300 text-xs italic">N/A</span>}
                                     </td>
@@ -885,7 +887,7 @@ export default function AdminDashboard() {
                                        <div className="flex justify-end gap-2" onClick={(e) => e.stopPropagation()}>
                                           <button onClick={() => setIsMasterEditingUser(u)} className="p-2 bg-slate-900 text-white rounded-lg transition-all shadow-md hover:shadow-lg"><Settings size={16} /></button>
                                           <button onClick={() => handleEditUser(u)} className="p-2 bg-slate-100 hover:bg-slate-900 hover:text-white rounded-lg transition-all"><Edit3 size={16} /></button>
-                                          <button onClick={() => handleDeleteUser(u.id)} className="p-2 text-slate-300 hover:text-[#E31B23] transition-colors"><Trash2 size={16} /></button>
+                                          <button onClick={() => handleDeleteUser(u.id)} className="p-2 text-slate-300 hover:text-rose-500 transition-colors"><Trash2 size={16} /></button>
                                        </div>
                                     </td>
                                  </tr>
@@ -1005,14 +1007,27 @@ export default function AdminDashboard() {
                               </div>
                            </div>
 
-                           {userForm.role === "Student" && (
+                           {(userForm.role === "Student" || userForm.role === "Volunteer") && (
                               <div className="space-y-4 bg-[#FAFAFA] p-5 rounded-2xl border border-slate-100">
                                  <div>
                                     <label className="text-[10px] font-black uppercase text-slate-400 mb-2 block tracking-widest">{t("modals.targetCountry")}</label>
                                     <div className="relative">
                                        <select value={userForm.country} onChange={e => setUserForm({ ...userForm, country: e.target.value })}
-                                          className="w-full bg-white border-2 border-slate-200 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#00C896] appearance-none">
+                                          className="w-full bg-white border-2 border-slate-200 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#0EA5E9] appearance-none">
                                           {COUNTRIES.map((c: any) => <option key={c} value={c}>{c}</option>)}
+                                       </select>
+                                       <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
+                                    </div>
+                                 </div>
+                                 <div>
+                                    <label className="text-[10px] font-black uppercase text-slate-400 mb-2 block tracking-widest">Active Program</label>
+                                    <div className="relative">
+                                       <select value={userForm.program} onChange={e => setUserForm({ ...userForm, program: e.target.value })}
+                                          className="w-full bg-white border-2 border-slate-200 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#0EA5E9] appearance-none">
+                                          <option value="">None</option>
+                                          <option value="EDU">EDU-Volunteer</option>
+                                          <option value="AND">AND Program</option>
+                                          <option value="VCLUB">V-Club</option>
                                        </select>
                                        <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={16} />
                                     </div>
@@ -1021,7 +1036,7 @@ export default function AdminDashboard() {
                                     <label className="text-[10px] font-black uppercase text-slate-400 mb-2 block tracking-widest">{t("modals.progressStep")}</label>
                                     <div className="relative">
                                        <select value={userForm.step} onChange={e => setUserForm({ ...userForm, step: e.target.value })}
-                                          className="w-full bg-white border-2 border-slate-200 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#E31B23] appearance-none">
+                                          className="w-full bg-white border-2 border-slate-200 rounded-xl p-3 text-sm font-bold outline-none focus:border-[#0EA5E9] appearance-none">
                                           {STEPS.map((s: any) => <option key={s} value={s}>{s}</option>)}
 
                                        </select>
@@ -1032,7 +1047,7 @@ export default function AdminDashboard() {
                            )}
                         </div>
 
-                        <button onClick={handleSaveUser} className="w-full bg-[#E31B23] text-white font-black py-4 rounded-xl mt-8 shadow-xl shadow-red-100 hover:bg-red-700 transition-all uppercase text-xs tracking-[0.2em] hover:-translate-y-1">
+                        <button onClick={handleSaveUser} className="w-full bg-[#0EA5E9] text-white font-black py-4 rounded-xl mt-8 shadow-xl shadow-sky-100 hover:bg-sky-700 transition-all uppercase text-xs tracking-[0.2em] hover:-translate-y-1">
                            {t("modals.saveUpdate")}
                         </button>
                      </motion.div>
@@ -1094,10 +1109,10 @@ function EventsManager({ events, opportunities, onRefresh }: any) {
    // Form State
    const [formData, setFormData] = useState({
       id: "",
-      titleMn: "", titleEn: "",
-      descMn: "", descEn: "",
-      locationMn: "", locationEn: "",
-      providerMn: "", providerEn: "",
+      titleMn: "", titleEn: "", titleDe: "",
+      descMn: "", descEn: "", descDe: "",
+      locationMn: "", locationEn: "", locationDe: "",
+      providerMn: "", providerEn: "", providerDe: "",
       date: "",
       category: "workshop",
       type: "volunteer",
@@ -1128,15 +1143,18 @@ function EventsManager({ events, opportunities, onRefresh }: any) {
             id: item._id,
             titleMn: item.title?.mn || "",
             titleEn: item.title?.en || "",
+            titleDe: item.title?.de || "",
             descMn: item.description?.mn || "",
             descEn: item.description?.en || "",
+            descDe: item.description?.de || "",
             locationMn: item.location?.mn || "",
             locationEn: item.location?.en || "",
-            providerMn: "", providerEn: "",
+            locationDe: item.location?.de || "",
+            providerMn: "", providerEn: "", providerDe: "",
             date: item.date ? new Date(item.date).toISOString().split('T')[0] : "",
             category: item.category || "workshop",
             type: "volunteer",
-            link: "#",
+            link: item.link || "#",
             imageUrl: item.image || ""
          });
       } else {
@@ -1144,12 +1162,16 @@ function EventsManager({ events, opportunities, onRefresh }: any) {
             id: item._id,
             titleMn: item.title?.mn || "",
             titleEn: item.title?.en || "",
+            titleDe: item.title?.de || "",
             descMn: item.description?.mn || "",
             descEn: item.description?.en || "",
+            descDe: item.description?.de || "",
             locationMn: item.location?.mn || "",
             locationEn: item.location?.en || "",
+            locationDe: item.location?.de || "",
             providerMn: item.provider?.mn || "",
             providerEn: item.provider?.en || "",
+            providerDe: item.provider?.de || "",
             date: item.deadline || "",
             category: "workshop",
             type: item.type || "volunteer",
@@ -1177,6 +1199,11 @@ function EventsManager({ events, opportunities, onRefresh }: any) {
          alert("Please upload a cover image first.");
          return;
       }
+
+      if (!formData.titleEn || !formData.titleMn || !formData.titleDe || !formData.descEn || !formData.descMn || !formData.descDe) {
+         alert("Please fill in English, Mongolian and German titles and descriptions.");
+         return;
+      }
       setLoading(true);
       try {
          const url = activeTab === "event" ? "/api/admin/events" : "/api/admin/opportunities";
@@ -1186,10 +1213,10 @@ function EventsManager({ events, opportunities, onRefresh }: any) {
          if (activeTab === "event") {
             body = {
                id: formData.id,
-               title: { en: formData.titleEn, mn: formData.titleMn },
-               description: { en: formData.descEn, mn: formData.descMn },
+               title: { en: formData.titleEn, mn: formData.titleMn, de: formData.titleDe },
+               description: { en: formData.descEn, mn: formData.descMn, de: formData.descDe },
                date: formData.date,
-               location: { en: formData.locationEn, mn: formData.locationMn },
+               location: { en: formData.locationEn, mn: formData.locationMn, de: formData.locationDe },
                image: formData.imageUrl,
                category: formData.category,
                timeString: "All Day",
@@ -1199,10 +1226,10 @@ function EventsManager({ events, opportunities, onRefresh }: any) {
             body = {
                id: formData.id,
                type: formData.type,
-               title: { en: formData.titleEn, mn: formData.titleMn },
-               provider: { en: formData.providerEn, mn: formData.providerMn },
-               location: { en: formData.locationEn, mn: formData.locationMn },
-               description: { en: formData.descEn, mn: formData.descMn },
+               title: { en: formData.titleEn, mn: formData.titleMn, de: formData.titleDe },
+               provider: { en: formData.providerEn, mn: formData.providerMn, de: formData.providerDe },
+               location: { en: formData.locationEn, mn: formData.locationMn, de: formData.locationDe },
+               description: { en: formData.descEn, mn: formData.descMn, de: formData.descDe },
                deadline: formData.date,
                link: formData.link,
                image: formData.imageUrl
@@ -1230,7 +1257,7 @@ function EventsManager({ events, opportunities, onRefresh }: any) {
                <TabButton active={activeTab === "event"} onClick={() => setActiveTab("event")} icon={FaCalendarAlt} label={t("events.tabs.event")} />
                <TabButton active={activeTab === "opportunity"} onClick={() => setActiveTab("opportunity")} icon={FaHandsHelping} label={t("events.tabs.opportunity")} />
             </div>
-            <button onClick={() => { setFormData({ id: "", titleMn: "", titleEn: "", descMn: "", descEn: "", locationMn: "", locationEn: "", providerMn: "", providerEn: "", date: "", category: "workshop", type: "volunteer", link: "#", imageUrl: "" }); setIsModalOpen(true); }} className="flex items-center gap-2 bg-[#E31B23] text-white px-6 py-2.5 rounded-lg font-bold shadow-lg">
+            <button onClick={() => { setFormData({ id: "", titleMn: "", titleEn: "", titleDe: "", descMn: "", descEn: "", descDe: "", locationMn: "", locationEn: "", locationDe: "", providerMn: "", providerEn: "", providerDe: "", date: "", category: "workshop", type: "volunteer", link: "#", imageUrl: "" }); setIsModalOpen(true); }} className="flex items-center gap-2 bg-[#E31B23] text-white px-6 py-2.5 rounded-lg font-bold shadow-lg">
                <FaPlus /> {t("events.postNew", { type: activeTab === "event" ? t("events.tabs.event") : t("events.tabs.opportunity") })}
             </button>
          </div>
@@ -1238,43 +1265,92 @@ function EventsManager({ events, opportunities, onRefresh }: any) {
          <AnimatePresence>
             {isModalOpen && (
                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-                  <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                  <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh]">
                      <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
                         <h3 className="text-xl font-bold">{formData.id ? t("events.manage.edit") : t("events.manage.create")}</h3>
                         <button onClick={() => setIsModalOpen(false)}><FaTimes /></button>
                      </div>
-                     <div className="overflow-y-auto p-6 space-y-6">
-                        <div className="col-span-2">
-                           <h4 className="text-sm font-bold text-red-600 uppercase mb-2">{t("events.manage.cover")}</h4>
-                           <div className="border-2 border-dashed border-slate-300 rounded-xl p-6 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-slate-50 transition-colors relative" onClick={() => fileInputRef.current?.click()}>
-                              {uploadingImage ? <FaSpinner className="animate-spin text-3xl text-red-500" /> : formData.imageUrl ? <div className="relative h-48 w-full"><Image src={formData.imageUrl} alt="Preview" fill className="object-cover rounded-lg" /></div> : <div className="py-4"><FaCloudUploadAlt className="text-4xl text-slate-400 mx-auto" /><p>{t("events.manage.upload")}</p></div>}
-                              <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
-                           </div>
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                           <Input label={t("events.manage.titleMn")} value={formData.titleMn} onChange={(v: any) => setFormData({ ...formData, titleMn: v })} />
-                           <Input label={t("events.manage.titleEn")} value={formData.titleEn} onChange={(v: any) => setFormData({ ...formData, titleEn: v })} />
-                           {activeTab === "opportunity" && (
-                              <>
-                                 <Input label={t("events.manage.providerMn")} value={formData.providerMn} onChange={(v: any) => setFormData({ ...formData, providerMn: v })} />
-                                 <Input label={t("events.manage.providerEn")} value={formData.providerEn} onChange={(v: any) => setFormData({ ...formData, providerEn: v })} />
-                                 <Input label={t("events.manage.type")} value={formData.type} onChange={(v: any) => setFormData({ ...formData, type: v })} />
-                                 <Input label={t("events.manage.externalLink")} value={formData.link} onChange={(v: any) => setFormData({ ...formData, link: v })} />
-                              </>
-                           )}
-                           <Input label={t("events.manage.locationMn")} value={formData.locationMn} onChange={(v: any) => setFormData({ ...formData, locationMn: v })} />
-                           <Input label={t("events.manage.locationEn")} value={formData.locationEn} onChange={(v: any) => setFormData({ ...formData, locationEn: v })} />
-                           <Input type="date" label={activeTab === "event" ? t("events.manage.eventDate") : t("events.manage.deadline")} value={formData.date} onChange={(v: any) => setFormData({ ...formData, date: v })} />
-                           {activeTab === "event" && (
-                              <>
-                                 <Input label={t("events.manage.category")} value={formData.category} onChange={(v: any) => setFormData({ ...formData, category: v })} />
-                                 <Input label={t("events.manage.regLink")} value={formData.link} onChange={(v: any) => setFormData({ ...formData, link: v })} />
-                              </>
-                           )}
-                        </div>
-                        <TextArea label={t("events.manage.descMn")} value={formData.descMn} onChange={(v: any) => setFormData({ ...formData, descMn: v })} />
-                        <TextArea label={t("events.manage.descEn")} value={formData.descEn} onChange={(v: any) => setFormData({ ...formData, descEn: v })} />
-                     </div>
+                      <div className="overflow-y-auto p-8 space-y-8">
+                         <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h4 className="text-xs font-black text-[#0EA5E9] uppercase tracking-widest mb-4 flex items-center gap-2">
+                               <FaImage /> {t("events.manage.cover")} <span className="text-red-500">*</span>
+                            </h4>
+                            <div className="border-2 border-dashed border-slate-300 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white hover:border-[#0EA5E9] transition-all relative group" onClick={() => fileInputRef.current?.click()}>
+                               {uploadingImage ? <FaSpinner className="animate-spin text-3xl text-[#0EA5E9]" /> : formData.imageUrl ? <div className="relative h-64 w-full"><Image src={formData.imageUrl} alt="Preview" fill className="object-cover rounded-lg shadow-md" /></div> : <div className="py-8"><FaCloudUploadAlt className="text-5xl text-slate-300 mx-auto mb-4 group-hover:text-[#0EA5E9] transition-colors" /><p className="text-slate-500 font-bold">{t("events.manage.upload")}</p></div>}
+                               <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
+                            </div>
+                         </div>
+
+                         <div className="space-y-6">
+                            <h4 className="text-xs font-black text-[#0EA5E9] uppercase tracking-widest flex items-center gap-2">
+                               <Globe size={14} /> Basic Information <span className="text-red-500">*</span>
+                            </h4>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest border-b pb-2">Mongolian (MN)</p>
+                                  <Input label={t("events.manage.titleMn")} value={formData.titleMn} onChange={(v: any) => setFormData({ ...formData, titleMn: v })} placeholder="Гарчиг (Монгол)..." />
+                                  <Input label={t("events.manage.locationMn")} value={formData.locationMn} onChange={(v: any) => setFormData({ ...formData, locationMn: v })} placeholder="Байршил (Монгол)..." />
+                                  {activeTab === "opportunity" && (
+                                     <Input label={t("events.manage.providerMn")} value={formData.providerMn} onChange={(v: any) => setFormData({ ...formData, providerMn: v })} placeholder="Нийлүүлэгч (Монгол)..." />
+                                  )}
+                               </div>
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-[#0EA5E9] tracking-widest border-b border-[#0EA5E9]/20 pb-2">English (EN)</p>
+                                  <Input label={t("events.manage.titleEn")} value={formData.titleEn} onChange={(v: any) => setFormData({ ...formData, titleEn: v })} placeholder="Title (English)..." />
+                                  <Input label={t("events.manage.locationEn")} value={formData.locationEn} onChange={(v: any) => setFormData({ ...formData, locationEn: v })} placeholder="Location (English)..." />
+                                  {activeTab === "opportunity" && (
+                                     <>
+                                        <Input label={t("events.manage.providerEn")} value={formData.providerEn} onChange={(v: any) => setFormData({ ...formData, providerEn: v })} placeholder="Provider (English)..." />
+                                        <Input label={t("events.manage.type")} value={formData.type} onChange={(v: any) => setFormData({ ...formData, type: v })} placeholder="volunteer / internship..." />
+                                     </>
+                                  )}
+                               </div>
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-[#0EA5E9] tracking-widest border-b border-[#0EA5E9]/20 pb-2">German (DE)</p>
+                                  <Input label="Title (DE)" value={formData.titleDe} onChange={(v: any) => setFormData({ ...formData, titleDe: v })} placeholder="Titel (Deutsch)..." />
+                                  <Input label="Location (DE)" value={formData.locationDe} onChange={(v: any) => setFormData({ ...formData, locationDe: v })} placeholder="Standort (Deutsch)..." />
+                                  {activeTab === "opportunity" && (
+                                     <Input label="Provider (DE)" value={formData.providerDe} onChange={(v: any) => setFormData({ ...formData, providerDe: v })} placeholder="Anbieter (Deutsch)..." />
+                                  )}
+                               </div>
+                            </div>
+                         </div>
+
+                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                               <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Calendar size={14} /> Schedule <span className="text-red-500">*</span></h4>
+                               <Input type="date" label={activeTab === "event" ? t("events.manage.eventDate") : t("events.manage.deadline")} value={formData.date} onChange={(v: any) => setFormData({ ...formData, date: v })} />
+                            </div>
+                            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                               <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Settings size={14} /> Category</h4>
+                               <Input label={t("events.manage.category")} value={formData.category} onChange={(v: any) => setFormData({ ...formData, category: v })} />
+                            </div>
+                            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
+                               <h4 className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2"><Globe size={14} /> Links</h4>
+                               <Input label={activeTab === "event" ? t("events.manage.regLink") : t("events.manage.externalLink")} value={formData.link} onChange={(v: any) => setFormData({ ...formData, link: v })} placeholder="https://..." />
+                            </div>
+                         </div>
+
+                         <div className="space-y-6">
+                            <h4 className="text-xs font-black text-[#0EA5E9] uppercase tracking-widest flex items-center gap-2">
+                               <FileText size={14} /> Detailed Description <span className="text-red-500">*</span>
+                            </h4>
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest border-b pb-2">Mongolian Description</p>
+                                  <TextArea label={t("events.manage.descMn")} value={formData.descMn} onChange={(v: any) => setFormData({ ...formData, descMn: v })} placeholder="Дэлгэрэнгүй тайлбар (Монгол)..." />
+                               </div>
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-[#0EA5E9] tracking-widest border-b border-[#0EA5E9]/20 pb-2">English Description</p>
+                                  <TextArea label={t("events.manage.descEn")} value={formData.descEn} onChange={(v: any) => setFormData({ ...formData, descEn: v })} placeholder="Detailed Description (English)..." />
+                               </div>
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-[#0EA5E9] tracking-widest border-b border-[#0EA5E9]/20 pb-2">German Description</p>
+                                  <TextArea label="Description (DE)" value={formData.descDe} onChange={(v: any) => setFormData({ ...formData, descDe: v })} placeholder="Detaillierte Beschreibung (Deutsch)..." />
+                               </div>
+                            </div>
+                         </div>
+                      </div>
                      <div className="p-6 border-t flex justify-end gap-3">
                         <button onClick={() => setIsModalOpen(false)} className="px-6 py-2">Cancel</button>
                         <button onClick={handleSubmit} disabled={loading || uploadingImage} className="px-6 py-2 bg-[#E31B23] text-white rounded-lg">{loading ? t("events.manage.saving") : t("events.manage.save")}</button>
@@ -1368,6 +1444,10 @@ function ContentManager({ blogs, onRefresh }: any) {
 
    const handleSubmit = async (e: React.FormEvent) => {
       e.preventDefault();
+      if (!formData.titleEn || !formData.titleMn || !formData.descEn || !formData.descMn || !formData.imageUrl) {
+         alert("All fields including cover image are required.");
+         return;
+      }
       setLoading(true);
       try {
          const method = formData.id ? "PUT" : "POST";
@@ -1406,25 +1486,56 @@ function ContentManager({ blogs, onRefresh }: any) {
          <AnimatePresence>
             {isCreating && (
                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-                  <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                  <motion.div initial={{ scale: 0.95, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.95, opacity: 0 }} className="bg-white rounded-2xl shadow-2xl w-full max-w-4xl overflow-hidden flex flex-col max-h-[90vh]">
                      <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
                         <h3 className="text-xl font-bold">{t("blog.manage")}</h3>
                         <button onClick={() => setIsCreating(false)}><FaTimes /></button>
                      </div>
-                     <div className="overflow-y-auto p-6 space-y-6">
-                        <div onClick={() => fileInputRef.current?.click()} className="border-2 border-dashed rounded-xl p-4 flex items-center justify-center cursor-pointer hover:bg-slate-50">
-                           {uploadingImage ? <FaSpinner className="animate-spin" /> : formData.imageUrl ? <div className="relative h-32 w-full"><Image src={formData.imageUrl} alt="Preview" fill className="object-cover rounded" /></div> : <div className="text-center"><FaImage className="text-2xl mx-auto" /><p>{t("blog.upload")}</p></div>}
-                           <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                           <Input label={t("events.manage.titleMn")} value={formData.titleMn} onChange={(v: any) => setFormData({ ...formData, titleMn: v })} />
-                           <Input label={t("events.manage.titleEn")} value={formData.titleEn} onChange={(v: any) => setFormData({ ...formData, titleEn: v })} />
-                           <Input label={t("blog.summaryMn")} value={formData.summaryMn} onChange={(v: any) => setFormData({ ...formData, summaryMn: v })} />
-                           <Input label={t("blog.summaryEn")} value={formData.summaryEn} onChange={(v: any) => setFormData({ ...formData, summaryEn: v })} />
-                        </div>
-                        <TextArea label={t("blog.contentMn")} value={formData.descMn} onChange={(v: any) => setFormData({ ...formData, descMn: v })} />
-                        <TextArea label={t("blog.contentEn")} value={formData.descEn} onChange={(v: any) => setFormData({ ...formData, descEn: v })} />
-                     </div>
+                      <div className="overflow-y-auto p-8 space-y-8">
+                         <div className="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+                            <h4 className="text-xs font-black text-[#E31B23] uppercase tracking-widest mb-4 flex items-center gap-2">
+                               <FaImage /> {t("blog.upload")} <span className="text-red-500">*</span>
+                            </h4>
+                            <div onClick={() => fileInputRef.current?.click()} className="border-2 border-dashed border-slate-300 rounded-xl p-8 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-white hover:border-[#E31B23] transition-all relative group">
+                               {uploadingImage ? <FaSpinner className="animate-spin text-3xl text-[#E31B23]" /> : formData.imageUrl ? <div className="relative h-64 w-full"><Image src={formData.imageUrl} alt="Preview" fill className="object-cover rounded-lg shadow-md" /></div> : <div className="py-8"><FaImage className="text-5xl text-slate-300 mx-auto mb-4 group-hover:text-[#E31B23] transition-colors" /><p className="text-slate-500 font-bold">{t("blog.upload")}</p></div>}
+                               <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleImageUpload} />
+                            </div>
+                         </div>
+
+                         <div className="space-y-6">
+                            <h4 className="text-xs font-black text-[#E31B23] uppercase tracking-widest flex items-center gap-2">
+                               <Globe size={14} /> Title & Summary <span className="text-red-500">*</span>
+                            </h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest border-b pb-2">Mongolian (MN)</p>
+                                  <Input label={t("events.manage.titleMn")} value={formData.titleMn} onChange={(v: any) => setFormData({ ...formData, titleMn: v })} />
+                                  <Input label={t("blog.summaryMn")} value={formData.summaryMn} onChange={(v: any) => setFormData({ ...formData, summaryMn: v })} />
+                               </div>
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-[#E31B23] tracking-widest border-b border-[#E31B23]/20 pb-2">English (EN)</p>
+                                  <Input label={t("events.manage.titleEn")} value={formData.titleEn} onChange={(v: any) => setFormData({ ...formData, titleEn: v })} />
+                                  <Input label={t("blog.summaryEn")} value={formData.summaryEn} onChange={(v: any) => setFormData({ ...formData, summaryEn: v })} />
+                               </div>
+                            </div>
+                         </div>
+
+                         <div className="space-y-6">
+                            <h4 className="text-xs font-black text-[#E31B23] uppercase tracking-widest flex items-center gap-2">
+                               <FileText size={14} /> Full Content <span className="text-red-500">*</span>
+                            </h4>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-slate-400 tracking-widest border-b pb-2">Mongolian Content</p>
+                                  <TextArea label={t("blog.contentMn")} value={formData.descMn} onChange={(v: any) => setFormData({ ...formData, descMn: v })} />
+                               </div>
+                               <div className="space-y-4">
+                                  <p className="text-[10px] font-black uppercase text-[#E31B23] tracking-widest border-b border-[#E31B23]/20 pb-2">English Content</p>
+                                  <TextArea label={t("blog.contentEn")} value={formData.descEn} onChange={(v: any) => setFormData({ ...formData, descEn: v })} />
+                               </div>
+                            </div>
+                         </div>
+                      </div>
                      <div className="p-6 border-t flex justify-end gap-3">
                         <button onClick={() => setIsCreating(false)} className="px-6 py-2">Cancel</button>
                         <button onClick={handleSubmit} disabled={loading || uploadingImage} className="px-6 py-2 bg-[#E31B23] text-white rounded-lg">{t("blog.save")}</button>

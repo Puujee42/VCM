@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import connectToDB from "@/lib/db";
 import User from "@/lib/models/User";
 import { getAuthUserId } from "@/lib/authHelpers";
+import bcrypt from "bcryptjs";
 
 export async function POST(req: Request) {
   try {
@@ -14,21 +15,23 @@ export async function POST(req: Request) {
     const data = await req.json();
 
     const {
-      firstName,
-      lastName,
+      email,
+      password,
+      city,
+      fullName,
+      phone,
+      // Existing profile fields
       sex,
       dob,
       placeOfBirth,
       nationality,
       religion,
-      phone,
       mobile,
       skype,
       bestTime,
       street,
       number,
       postalCode,
-      city,
       country,
       fatherProfession,
       motherProfession,
@@ -41,9 +44,9 @@ export async function POST(req: Request) {
       motivation,
     } = data;
 
-    const profileUpdate = {
-      firstName,
-      lastName,
+    const profileUpdate: any = {
+      fullName,
+      phone,
       "profile.sex": sex,
       "profile.dob": dob ? new Date(dob) : null,
       "profile.placeOfBirth": placeOfBirth,
@@ -67,8 +70,22 @@ export async function POST(req: Request) {
       "profile.childcareExperience": childcareExperience,
       "profile.householdTasks": householdTasks,
       "profile.motivation": motivation,
-      documentsSubmitted: true,
     };
+
+    if (email) {
+      const existingUser = await User.findOne({ email, _id: { $ne: userId } });
+      if (existingUser) {
+        return NextResponse.json({ error: "Email already in use" }, { status: 400 });
+      }
+      profileUpdate.email = email;
+    }
+
+    if (password) {
+      if (password.length < 6) {
+        return NextResponse.json({ error: "Password must be at least 6 characters" }, { status: 400 });
+      }
+      profileUpdate.password = await bcrypt.hash(password, 12);
+    }
 
     const user = await User.findByIdAndUpdate(
       userId,

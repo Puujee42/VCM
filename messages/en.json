@@ -1,8 +1,8 @@
 {
   "HomePage": {
     "metadata": {
-      "title": "Volunteer Center of Mongolia ",
-      "description": "Volunteer Center of Mongolia is a non-profit organization that provides volunteering opportunities to Mongolian youth."
+      "title": "Volunteer Center of Mongolia",
+      "description": "Empowering Mongolian youth through creative volunteerism, education, and community impact."
     }
   },
   "common": {
@@ -11,7 +11,7 @@
     "verified": "Verified",
     "openNow": "Open Now",
     "explore": "Explore",
-    "trusted": "Trusted by families & students worldwide.",
+    "trusted": "Trusted by communities & volunteers nationwide.",
     "loading": "Loading Profile...",
     "action": "Action",
     "contact": "Contact",
@@ -31,10 +31,9 @@
     "rights": "© 2024 Volunteer Center Mongolia.",
     "links": {
       "aboutUs": "About Us",
-      "auPairProgram": "Au Pair Program",
+      "programs": "Volunteer Programs",
       "successStories": "Success Stories",
       "applyNow": "Apply Now",
-      "findFamily": "Find Family",
       "faq": "FAQ"
     }
   },
@@ -69,8 +68,8 @@
   },
   "BookingPage": {
     "metadata": {
-      "title": "Book an Appointment | Volunteer Center Mongolia",
-      "description": "Schedule a consultation or interview with our experts."
+      "title": "Book a Consultation | Volunteer Center Mongolia",
+      "description": "Schedule a meeting with our program coordinators."
     },
     "badge": "Online Booking",
     "heroTitle": "Book",
@@ -233,418 +232,48 @@
   },
   "Marketplace": {
     "badge": "Marketplace",
-    "title": "Explore Opportunities",
-    "subtitle": "Browse available programs, events, and exclusive access passes for our VCM community.",
-    "item1_title": "Summer Language Camp",
-    "item1_desc": "Intensive 4-week German language immersion in Berlin.",
-    "item1_price": "Fully Funded",
+    "title": "Explore Academy",
+    "subtitle": "Browse available courses, workshops, and exclusive access passes for our VCM community.",
+    "item1_title": "Volunteer Training",
+    "item1_desc": "Intensive skill-building workshop for new volunteers.",
+    "item1_price": "Free",
     "item2_title": "V-Club VIP Pass",
     "item2_desc": "Annual membership to exclusive volunteer networking events.",
     "item2_price": "Free for Members",
-    "item3_title": "Host Family Matching",
-    "item3_desc": "Premium application review and guaranteed family match.",
+    "item3_title": "Premium Mentorship",
+    "item3_desc": "One-on-one career guidance from community leaders.",
     "item3_price": "Priority",
-    "item4_title": "Cultural Exchange Kit",
-    "item4_desc": "Essentials for your first week in Europe.",
+    "item4_title": "Impact Kit",
+    "item4_desc": "Essentials for your first volunteer project.",
     "item4_price": "Included",
     "start": "View All"
   },
   "WhyChooseUs": {
     "badge": "Why Choose Us",
     "title_pre": "Your journey,",
-    "title_highlight": "Beautifully Secured.",
-    "desc": "We combine heartfelt care with rigorous safety standards to give you the most trusted Au Pair experience.",
-    "card1_title": "Volunteering & Programs",
+    "title_highlight": "Meaningfully Guided.",
+    "desc": "We combine heartfelt care with high standards to give you the most rewarding volunteering experience.",
+    "card1_title": "Impactful Programs",
     "card1_desc": "Discover diverse opportunities including local volunteer events and flagship programs like EDU-Volunteer, AND, and V-Club.",
-    "card2_title": "Human Support",
-    "card2_desc": "No bots here. Just real people ready to help you 24/7.",
-    "card2_btn": "Chat Now",
-    "card3_title": "Helping People",
-    "card3_desc": "Empowering communities through impactful volunteer work and shared multicultural experiences.",
-    "card4_title": "Safety First",
-    "card4_desc": "Strict vetting process for every family. Your safety is our obsession.",
-    "card5_title": "Start Your Application",
-    "card5_desc": "It's free to create a profile."
-  },
-  "GermanyPage": {
-    "metadata": {
-      "title": "Au Pair in Germany | Mongolian Au Pair",
-      "description": "Experience life in the heart of Europe. Master German, explore culture, and kickstart your future career."
-    },
-    "hero": {
-      "tag": "Germany Program",
-      "title": "Au Pair in",
-      "highlight": "Germany",
-      "sub": "A golden opportunity to live in the heart of Europe, experience a world-leading education system, and discover new cultures. Master your German language skills in a native environment and kickstart your future career.",
-      "cta": "Register Now",
-      "about": "About Us"
-    },
-    "info": {
-      "title": "About Germany",
-      "desc": "Germany is a world-leading nation in technology and engineering with a population of 83 million. Known for its tuition-free education system, beautiful nature, historical landmarks, and rich cultural heritage.",
-      "stats": {
-        "capital": {
-          "label": "Capital",
-          "val": "Berlin"
-        },
-        "population": {
-          "label": "Population",
-          "val": "83 Million"
-        },
-        "language": {
-          "label": "Language",
-          "val": "German"
-        }
-      }
-    },
-    "intro": {
-      "title_pre": "Education,",
-      "title_mid": "Culture,",
-      "title_post": "Experience",
-      "desc": "The Au-Pair program is an international cultural exchange for young people aged 18-26. By living as a member of a host family, you improve your German language skills, gain independence, and learn responsibility. During the program, you are exempt from housing and food costs and receive regular monthly pocket money.",
-      "age": "18-26 Years",
-      "native": "Native Learning"
-    },
-    "programs": {
-      "tag": "Programs for you",
-      "title_pre": "3 Types of",
-      "title_post": "Programs",
-      "list": [
-        {
-          "title": "German A1+",
-          "target": "Beginner",
-          "desc": "For participants with no prior language knowledge. Trains German from beginner to A2 level.",
-          "duration": "Prep: 6 months",
-          "age": "Age: 18+"
-        },
-        {
-          "title": "English B2",
-          "target": "Intermediate",
-          "desc": "With flight ticket bonus. For youth with English knowledge; German A1 required.",
-          "duration": "Prep: 4-6 months",
-          "age": "Age: 20+"
-        },
-        {
-          "title": "Au-Pair Boy",
-          "target": "Male",
-          "desc": "Program for male participants. Requires English B2 / German A2+ and a driver's license.",
-          "duration": "Prep: 3-8 months",
-          "age": "Driver's License"
-        }
-      ]
-    },
-    "duties": {
-      "childcare": {
-        "title": "Childcare",
-        "items": [
-          "Playing & engaging",
-          "Waking & dressing",
-          "School runs",
-          "Homework help"
-        ]
-      },
-      "household": {
-        "title": "Housework",
-        "items": [
-          "Dishwasher",
-          "Vacuuming",
-          "Children's laundry",
-          "Light shopping"
-        ]
-      }
-    },
-    "contract": {
-      "title_pre": "Contract &",
-      "title_post": "Conditions",
-      "desc": "Standards according to German Au-Pair regulations.",
-      "items": {
-        "hours": {
-          "title": "Working Hours",
-          "desc": "Up to 30 hours per week."
-        },
-        "money": {
-          "title": "Pocket Money",
-          "desc": "Fixed 280 Euro monthly."
-        },
-        "course": {
-          "title": "Course Fees",
-          "desc": "Host family pays 70 Euro monthly."
-        },
-        "vacation": {
-          "title": "Vacation",
-          "desc": "4 weeks paid leave per year."
-        }
-      }
-    },
-    "housing": {
-      "title": "Housing & Food",
-      "sub": "100% provided by host family",
-      "items": [
-        "Private room (with window)",
-        "Lockable door",
-        "Warm & furnished",
-        "Free board & lodging"
-      ]
-    }
-  },
-  "AustriaPage": {
-    "metadata": {
-      "title": "Au Pair in Austria | Mongolian Au Pair",
-      "description": "Live amidst the Alps and Viennese waltzes. Improve your German and experience European culture."
-    },
-    "hero": {
-      "tag": "Austria Program",
-      "title": "Au Pair in",
-      "highlight": "Austria",
-      "sub": "Alp mountains, Viennese waltzes, and a history-rich country. Improve your German and discover European culture while living and learning in Austria.",
-      "cta": "Register Now",
-      "about": "About Us"
-    },
-    "info": {
-      "title": "About Austria",
-      "desc": "Located in Central Europe, Austria is known for its stunning landscapes, high quality of life, and rich musical history as the home of Mozart.",
-      "stats": {
-        "capital": {
-          "label": "Capital",
-          "val": "Vienna"
-        },
-        "population": {
-          "label": "Population",
-          "val": "8.9 Million"
-        },
-        "language": {
-          "label": "Language",
-          "val": "German"
-        }
-      }
-    },
-    "requirements": {
-      "title": "Program",
-      "highlight": "Requirements",
-      "list": [
-        "Age: 18-27",
-        "Unmarried",
-        "Good health",
-        "No criminal record",
-        "Basic German knowledge"
-      ]
-    },
-    "duties": {
-      "childcare": {
-        "title": "Childcare",
-        "items": [
-          "Playing & engaging",
-          "Feeding & dressing",
-          "School runs",
-          "Homework help"
-        ]
-      },
-      "household": {
-        "title": "Light Housework",
-        "items": [
-          "Washing dishes",
-          "Vacuuming",
-          "Children's laundry",
-          "Light shopping"
-        ]
-      }
-    },
-    "contract": {
-      "title_pre": "Contract",
-      "title_post": "Conditions",
-      "desc": "Key agreement points according to Austrian law.",
-      "items": {
-        "hours": {
-          "title": "Working Hours",
-          "desc": "Up to 18 hours per week."
-        },
-        "money": {
-          "title": "Pocket Money",
-          "desc": "Fixed 520 Euro monthly."
-        },
-        "course": {
-          "title": "Education",
-          "desc": "Family pays 50% of language course."
-        },
-        "duration": {
-          "title": "Duration",
-          "desc": "Contract lasts 6-12 months."
-        }
-      }
-    },
-    "housing": {
-      "title": "Housing & Food",
-      "sub": "Completely free of charge",
-      "items": [
-        "Separate private room",
-        "Personal space",
-        "Eat with the family",
-        "Free room & board"
-      ]
-    }
-  },
-  "BelgiumPage": {
-    "metadata": {
-      "title": "Au Pair in Belgium | Mongolian Au Pair",
-      "description": "Join a host family in the heart of Europe. Learn French, Dutch, or German while exploring Belgium."
-    },
-    "hero": {
-      "tag": "Live in Europe",
-      "title": "Belgium:",
-      "highlight": "Your Next Home",
-      "sub": "Join a host family in the heart of Europe, amidst delicious chocolate and historical culture. A golden opportunity to learn French, Dutch, and German simultaneously.",
-      "cta": "Start Journey"
-    },
-    "info": {
-      "title": "Discover Belgium",
-      "desc": "Belgium is a multicultural hub in Western Europe. As the capital of the EU, Brussels offers unique political and cultural experiences.",
-      "stats": {
-        "capital": {
-          "label": "Capital",
-          "val": "Brussels"
-        },
-        "hours": {
-          "label": "Working Hours",
-          "val": "20h/week"
-        },
-        "language": {
-          "label": "Languages",
-          "val": "3 Types"
-        }
-      }
-    },
-    "culture": [
-      {
-        "name": "Heart of Europe",
-        "desc": "EU Capital"
-      },
-      {
-        "name": "Sweet Paradise",
-        "desc": "Waffles & Chocolate"
-      },
-      {
-        "name": "Historical Jewels",
-        "desc": "Diamonds & Castles"
-      },
-      {
-        "name": "Art & Comics",
-        "desc": "Cultural Hub"
-      }
-    ],
-    "duties": {
-      "childcare": {
-        "title": "Childcare",
-        "desc": "Playing, school runs, learning together"
-      },
-      "household": {
-        "title": "Housework",
-        "desc": "Light cleaning, small shopping"
-      }
-    },
-    "benefits": [
-      {
-        "title": "20h Work",
-        "sub": "Lowest in Europe"
-      },
-      {
-        "title": "450€ Pocket Money",
-        "sub": "Regular monthly income"
-      },
-      {
-        "title": "1000€ Course Bonus",
-        "sub": "Language fees included"
-      }
-    ]
-  },
-  "SwitzerlandPage": {
-    "metadata": {
-      "title": "Au Pair in Switzerland | Mongolian Au Pair",
-      "description": "High quality of life and stunning nature. Learn languages in one of the world's wealthiest countries."
-    },
-    "hero": {
-      "tag": "Swiss Excellence 2025",
-      "title": "Au Pair in",
-      "highlight": "Switzerland",
-      "sub": "Stunning Alps nature, high living standards, and 4-language culture. Master languages while living in one of the world's safest environments.",
-      "cta": "Register Now",
-      "about": "About Us"
-    },
-    "info": {
-      "title": "About Switzerland",
-      "desc": "Switzerland is a leader in stability and quality education. Home to world-class brands like Rolex and Nestlé, it offers the world's highest standard of living.",
-      "stats": {
-        "capital": {
-          "label": "Capital",
-          "val": "Bern"
-        },
-        "city": {
-          "label": "Large City",
-          "val": "Zurich"
-        },
-        "languages": {
-          "label": "Languages",
-          "val": "4 Types"
-        }
-      },
-      "quality": "Quality of Life"
-    },
-    "highlights": [
-      {
-        "title": "990 CHF",
-        "sub": "Monthly salary"
-      },
-      {
-        "title": "120 Hours",
-        "sub": "Free language course"
-      },
-      {
-        "title": "4 Weeks",
-        "sub": "Paid vacation"
-      }
-    ],
-    "contract": {
-      "title_pre": "Contract",
-      "title_post": "Conditions",
-      "desc": "Agreement standards according to Swiss regulations.",
-      "items": {
-        "hours": {
-          "title": "Working Hours",
-          "desc": "30 hours per week."
-        },
-        "money": {
-          "title": "Pocket Money",
-          "desc": "990 CHF monthly."
-        },
-        "course": {
-          "title": "Language Course",
-          "desc": "Paid by host family."
-        },
-        "vacation": {
-          "title": "Vacation",
-          "desc": "4 weeks paid leave."
-        }
-      }
-    },
-    "housing": {
-      "title": "Housing & Food",
-      "sub": "100% Free of Charge",
-      "items": [
-        "Private room (with window)",
-        "Lockable door",
-        "Warm & furnished",
-        "Free board & lodging"
-      ]
-    }
+    "card2_title": "Direct Support",
+    "card2_desc": "Our team is always ready to guide you through your volunteer journey.",
+    "card2_btn": "Contact Us",
+    "card3_title": "Empowering People",
+    "card3_desc": "Empowering communities through impactful volunteer work and shared local experiences.",
+    "card4_title": "Safety & Trust",
+    "card4_desc": "Strict vetting process for every partner. Your safety and trust are our priorities.",
+    "card5_title": "Start Your Impact",
+    "card5_desc": "It's free to join our community."
   },
   "ContactPage": {
     "metadata": {
-      "title": "Contact Us | Mongolian Au Pair",
-      "description": "Get in touch with our experts for any questions about the Au Pair program or your application."
+      "title": "Contact Us | Volunteer Center Mongolia",
+      "description": "Get in touch with our experts for any questions about our volunteering programs."
     },
     "badge": "Contact Us",
     "heroTitle": "GET IN",
     "heroTitleHighlight": "TOUCH",
-    "heroDesc": "Travel abroad and learn languages for free. We are here to help you every step of the way.",
+    "heroDesc": "Make a difference today. We are here to help you every step of the way.",
     "info": {
       "phone": {
         "label": "Call Us",
@@ -652,7 +281,7 @@
       },
       "email": {
         "label": "Email Us",
-        "value": "info@mongolianaupair.com"
+        "value": "info@vcm.mn"
       },
       "address": {
         "label": "Visit Us",
@@ -663,7 +292,7 @@
     "copied": "Copied",
     "openLink": "Open Link",
     "followTitle": "Follow Our Journey",
-    "followHandle": "@MongolianAuPair",
+    "followHandle": "@VCMongolia",
     "formTitle": "Contact Form",
     "formDesc": "Have a question? We will respond within 24 hours.",
     "successTitle": "Message Sent!",
@@ -776,117 +405,43 @@
       }
     }
   },
-  "Programs": {
-    "cultureExchange": "Culture Exchange",
-    "heroTitlePrefix": "International",
-    "heroTitleHighlight": "Au-Pair Program",
-    "heroSub": "Live abroad, learn a new culture and language, and gain experience. Improve your language skills in a native environment in Europe.",
-    "cta": "Fill Form",
-    "more": "Learn More",
-    "stat_years": "Years",
-    "stat_exp": "Experience",
-    "stat_participants": "Participants",
-    "stat_success": "Success",
-    "stat_intl_hist": "Years",
-    "stat_intl_hist_sub": "International History",
-    "stat_iapa_years": "Years",
-    "stat_iapa_member": "IAPA Member",
-    "metadata": {
-      "title": "Au Pair Program | Mongolian Au Pair",
-      "description": "Comprehensive guide to the international Au Pair program. Benefits, requirements, and how to join."
-    },
-    "whatIsTitle": "What is",
-    "whatIsTitleHighlight": "Au-Pair?",
-    "whatIsP1": "The Au-Pair program is an international cultural exchange program for young people aged 18-26. The word Au-Pair comes from French meaning",
-    "whatIsEqual": "Equal",
-    "whatIsOr": "or",
-    "whatIsEqualRights": "on equal terms",
-    "whatIsMeaning": ".",
-    "whatIsBox": "This expresses the idea that you become a member of the host family and live on equal terms with them during your stay.",
-    "historyTitle": "Origin & Development",
-    "historyYear": "1969.",
-    "historyP1": "Strasbourg, France. The program was officially approved by the Council of Europe meeting.",
-    "historyP2": "While only Europeans participated at that time, today it is successfully implemented in many countries around the world, including Mongolia, opening global doors for youth.",
-    "register": "Register",
-    "benefitsTitle": "Program",
-    "benefitsHighlight": "Benefits",
-    "benefitsSub": "A real investment in your future.",
-    "benefit1_title": "Gain experience abroad",
-    "benefit1_desc": "Real experience of living abroad and learning a new culture.",
-    "benefit2_title": "Master language in environment",
-    "benefit2_desc": "Master a foreign language perfectly in its environment and attend language courses.",
-    "benefit3_title": "Travel as you wish",
-    "benefit3_desc": "Opportunity to travel freely in Europe and around the world.",
-    "benefit4_title": "Start earning money",
-    "benefit4_desc": "Receive regular pocket money every month and become financially independent.",
-    "benefit5_title": "Enrich your CV",
-    "benefit5_desc": "International work experience will be a huge advantage for your future career.",
-    "benefit6_title": "Make international friends",
-    "benefit6_desc": "Make new friends from all over the world and expand your network.",
-    "stepsTitle": "Join Program",
-    "stepsHighlight": "5 Steps",
-    "step1_title": "Attend language training",
-    "step1_desc": "If you choose Germany, attend A1 level training and take the Goethe exam.",
-    "step2_title": "Training & Documents",
-    "step2_desc": "Compile documents according to ECAPS standards and attend orientation training.",
-    "step3_title": "Choose Host Family",
-    "step3_desc": "Connect with a host family, interview, and confirm the contract.",
-    "step4_title": "Visa Application Guide",
-    "step4_desc": "Get professional advice and instructions on applying for a visa at the Embassy.",
-    "step5_title": "Travel Preparation",
-    "step5_desc": "Post-visa travel preparation, flight tickets, and pick-up service.",
-    "iapa_title": "IAPA Association",
-    "iapa_p1": "The International Au-Pair Association (IAPA) ensures your safety 100%. Founded in 1994, the association cooperates with over 150 member organizations in more than 45 countries.",
-    "member_title": "Naturschutz Mongolia & Mongolian Au-Pair",
-    "member_since": "Top since 2011 The only one in Mongolia",
-    "member_badge": "Longstanding Member",
-    "ecaps_title": "ECAPS Standard",
-    "ecaps_p1": "The committee defining Au-Pair standards in Europe. Establishes unified rules for host families, agencies, and Au-Pairs to follow, developing a quality program.",
-    "ecaps_list1": "Unified Standard",
-    "ecaps_list2": "Official Contract",
-    "ecaps_list3": "Safety"
-  },
   "About": {
     "metadata": {
-      "title": "About Us | Mongolian Au Pair",
-      "description": "Learn about our mission to empower youth through cultural exchange and education in Europe."
+      "title": "About Us | Volunteer Center Mongolia",
+      "description": "Learn about our mission to empower youth through volunteering and community action."
     },
     "tag": "About Us",
     "heroTitle": "Empowering",
     "heroHighlight": "Youth Futures",
     "heroSubtitle": "Since 2005",
-    "intro": "We bridge cultures and create opportunities for Mongolian youth through the Au Pair program, fostering global citizenship and language mastery.",
+    "intro": "We create opportunities for Mongolian youth through volunteering, fostering global citizenship and personal growth.",
     "stat_years": "Years",
     "stat_exp": "Experience",
     "stat_participants": "Participants",
     "stat_success": "Success Stories",
     "yearsLabel": "Established",
     "storyTitle": "Our Story",
-    "stat_iapa": "IAPA",
-    "stat_iapa_sub": "Certified Member",
-    "stat_intl": "Countries",
+    "stat_intl": "Partners",
     "stat_intl_sub": "Partner Network",
-    "storyP1": "Founded with a vision to connect Mongolian youth with global opportunities, we have grown into the nation's premier cultural exchange agency.",
-    "storyP2": "Our journey is defined by the thousands of lives transformed through cultural immersion, language learning, and international friendships.",
-    "iapa_member": "IAPA Member",
-    "iapa_full": "International Au Pair Association",
+    "storyP1": "Founded with a vision to connect Mongolian youth with local and global opportunities, we have grown into the nation's premier volunteering agency.",
+    "storyP2": "Our journey is defined by the thousands of lives transformed through community service, skill-building, and lasting friendships.",
     "valuesTitle": "Our Core Values",
     "card1_title": "Integrity",
-    "card1_text": "We operate with full transparency and ethical standards in every placement.",
+    "card1_text": "We operate with full transparency and ethical standards in every program.",
     "card2_title": "Excellence",
-    "card2_text": "Commited to providing the highest quality support for both families and au pairs.",
+    "card2_text": "Commited to providing the highest quality support for our volunteers.",
     "card3_title": "Community",
-    "card3_text": "Building a supportive network that lasts far beyond the program duration.",
+    "card3_text": "Building a supportive network that lasts far beyond the project duration.",
     "card4_title": "Growth",
-    "card4_text": "Fostering personal and professional development through cultural exchange."
+    "card4_text": "Fostering personal and professional development through volunteerism."
   },
   "navbar": {
     "logo": "VCM",
     "home": "Home",
     "about": "About Us",
     "program": "Our Programs",
-    "events": "Events",
-    "lessons": "Lessons",
+    "events": "Volunteering",
+    "lessons": "Academy",
     "shop": "Shop",
     "news": "News",
     "dashboard": "Dashboard",
@@ -902,11 +457,11 @@
   "dashboard": {
     "loading": "Loading Profile...",
     "hello": "Hello",
-    "activeStudent": "Active Student",
+    "activeVolunteer": "Active Volunteer",
     "guestAccount": "Guest Account",
     "findEvents": "Find Events",
-    "applicationSnapshot": "Application Snapshot",
-    "fullRecord": "Full synchronized record",
+    "applicationSnapshot": "Volunteer Snapshot",
+    "fullRecord": "Full volunteer record",
     "missing": "Missing",
     "identity": "Identity & Contact",
     "sex": "Sex",
@@ -914,38 +469,40 @@
     "birth": "Birth",
     "phoneMobile": "Phone / Mobile",
     "address": "Current Address",
-    "family": "Family & Background",
-    "fatherJob": "Father's Job",
-    "motherJob": "Mother's Job",
+    "background": "Background & Skills",
     "languages": "Languages",
     "education": "Education",
-    "driverLicense": "Driver License",
+    "hobbies": "Hobbies",
+    "experience": "Experience",
+    "interests": "Interests",
+    "availability": "Availability",
+    "driverLicense": "Special License",
     "yes": "Yes",
     "no": "No",
-    "childcare": "Childcare & Tasks",
-    "ageExperience": "Age Experience",
+    "impact": "Impact & Goals",
+    "ageExperience": "Experience Years",
     "noneListed": "None listed",
-    "household": "Household Capabilities",
+    "household": "Skills & Capabilities",
     "timeline": "Timeline",
-    "motivation": "Your Personal Motivation Letter",
-    "motivationMissing": "You haven't provided a motivation letter yet. Completing this helps your application immensely.",
+    "motivation": "Your Personal Statement",
+    "motivationMissing": "You haven't provided a statement yet. Completing this helps your application.",
     "currentStep": "Current Step",
     "ready": "Ready",
-    "pending": "Application Pending",
+    "pending": "Pending Review",
     "underReview": "Under Review",
-    "completeApplication": "Complete Application",
-    "destination": "Destination",
+    "completeApplication": "Complete Profile",
+    "activeProgram": "Active Program",
     "appliedFor": "You applied for",
     "on": "on",
     "startYourJourney": "Start Your Journey",
-    "startJourneyDesc": "You are currently a Guest. Apply now to become a Student.",
+    "startJourneyDesc": "You are currently a Guest. Apply now to become a Volunteer.",
     "applyNow": "Apply Now",
     "actionRequired": "Action Required",
     "history": "History",
     "noActivity": "No Recent Activity",
-    "studyMaterial": "Study Material",
-    "languageTips": "Language Tips",
-    "cultureGuide": "Culture Guide",
+    "studyMaterial": "Learning Material",
+    "languageTips": "Volunteer Tips",
+    "cultureGuide": "Program Guide",
     "steps": {
       "Applied": "Applied",
       "Documents": "Documents",
@@ -957,38 +514,18 @@
     "instructions": {
       "Applied": {
         "title": "Initial Review",
-        "action": "Our team is currently verifying your request. Please wait for approval to start the document phase.",
+        "action": "Our team is currently verifying your request. Please wait for program manager approval.",
         "button": "View Program Details"
       },
       "Documents": {
         "title": "Documents Needed",
-        "action": "You are approved! Please upload your passport, certificates, and medical records to proceed.",
+        "action": "You are approved! Please upload your certificates and required records to proceed.",
         "button": "Go to Uploads"
       },
       "Interview": {
-        "title": "Agency Interview",
-        "action": "Prepare for your screening. We will contact you via Skype or Phone to schedule your interview.",
+        "title": "Program Interview",
+        "action": "Prepare for your screening. We will contact you to schedule your interview.",
         "button": "Preparation Tips"
-      },
-      "DocumentsPhase": {
-        "title": "Documents Phase",
-        "action": "Upload required documents.",
-        "button": "Upload"
-      },
-      "Matching": {
-        "title": "Family Matching",
-        "action": "Your profile is live! We are sharing it with host families. Keep your phone reachable for matching calls.",
-        "button": "My Application"
-      },
-      "Visa": {
-        "title": "Visa Process",
-        "action": "Match found! Prepare your embassy documents and schedule your visa appointment immediately.",
-        "button": "Visa Checklist"
-      },
-      "Departure": {
-        "title": "Final Departure",
-        "action": "Visa granted! Pack your bags and check your pre-departure guide for your trip to Europe.",
-        "button": "Travel Guide"
       }
     }
   },
@@ -1012,8 +549,8 @@
   "Auth": {
     "dashboard": "Dashboard",
     "home": "Home",
-    "future": "Future",
-    "signupSubtitle": "The first step to traveling the world, learning a language, and experiencing a new culture.",
+    "future": "Impact",
+    "signupSubtitle": "The first step to making a difference and building your future.",
     "fullNamePlaceholder": "Full Name",
     "emailPlaceholder": "Email Address",
     "passwordPlaceholder": "Password",
@@ -1022,7 +559,7 @@
     "signIn": "Sign In",
     "welcome": "Welcome",
     "back": "Back.",
-    "signinSubtitle": "Sign in to check your personal information and application progress.",
+    "signinSubtitle": "Sign in to check your volunteer progress and profile.",
     "forgotPassword": "Forgot password?",
     "signInButton": "Sign In",
     "newMember": "New member?",
@@ -1091,13 +628,14 @@
   "admin": {
     "sidebar": {
       "dashboard": "Dashboard",
-      "users": "Users Management",
+      "users": "Members Management",
       "applications": "Applications",
       "events": "Events",
-      "lessons": "Lessons",
+      "lessons": "Academy",
       "blog": "Blog & News",
       "shopping": "Shopping",
-      "role": "Super Admin"
+      "role": "Super Admin",
+      "online": "Online"
     },
     "header": {
       "blog": "Blog & Content Library",
@@ -1105,12 +643,12 @@
     },
     "dashboard": {
       "stats": {
-        "activeStudents": "Active Students",
+        "activeVolunteers": "Active Volunteers",
         "pendingApps": "Pending Applications",
         "articles": "Articles",
         "todaysBookings": "Today's Bookings",
         "totalUsers": "Total Users",
-        "students": "Students",
+        "volunteers": "Volunteers",
         "admins": "Admins",
         "guests": "Guests"
       },
@@ -1153,15 +691,15 @@
         "journey": "Journey",
         "actions": "Actions"
       },
-      "activeStudent": "Active Student",
+      "activeVolunteer": "Active Volunteer",
       "missing": "Missing",
       "incomplete": "Address incomplete",
       "expanded": {
         "personal": "Personal Details",
         "contact": "Contact & Address",
-        "education": "Education & Language",
-        "motivation": "Latest Motivation Letter",
-        "noMotivation": "No motivation letter sync'd yet.",
+        "background": "Background & Skills",
+        "motivation": "Latest Personal Statement",
+        "noMotivation": "No statement sync'd yet.",
         "sex": "Sex",
         "nationality": "Nationality",
         "birth": "Birth",
@@ -1176,7 +714,7 @@
       "editMember": "Edit Member",
       "userRole": "User Role",
       "accountStatus": "Account Status",
-      "targetCountry": "Target Country",
+      "activeProgram": "Active Program",
       "progressStep": "Progress Step",
       "saveUpdate": "Save & Update DB",
       "master": {
@@ -1209,13 +747,13 @@
         "phone": "Phone",
         "age": "Age",
         "level": "Level",
-        "notCompleted": "Detailed student profile not yet completed.",
+        "notCompleted": "Detailed volunteer profile not yet completed.",
         "personal": "Personal Details",
         "address": "Address & Contact",
         "experience": "Experience",
         "ages": "Ages",
-        "motivation": "Motivation Letter",
-        "noMotivation": "No motivation provided."
+        "motivation": "Personal Statement",
+        "noMotivation": "No statement provided."
       }
     },
     "events": {
@@ -1285,32 +823,27 @@
     "heroDesc": "Select a program below and submit your application. Our team will review your profile and contact you within 24 hours.",
     "programSelection": {
       "requirements": "Requirements",
-      "allowanceUnit": "month",
-      "hoursUnit": "week",
+      "allowanceUnit": "type",
+      "hoursUnit": "commitment",
       "selectPrompt": "Please select a program above to continue",
       "step1": "Step 1",
       "initialRequest": "Initial Request"
     },
     "requirements": {
-      "germany": [
-        "Age 18-26",
-        "Basic German (A1)",
-        "Single"
+      "edu": [
+        "Age 16+",
+        "Passion for teaching",
+        "Communication skills"
       ],
-      "belgium": [
-        "Age 18-25",
-        "English or French",
-        "High School Diploma"
+      "and": [
+        "Age 18+",
+        "Empathy & Care",
+        "Reliability"
       ],
-      "austria": [
-        "Age 18-27",
-        "Basic German",
-        "Experience with kids"
-      ],
-      "switzerland": [
-        "Age 18-25",
-        "German/French",
-        "Driving License"
+      "vclub": [
+        "Community spirit",
+        "Team player",
+        "Creative mindset"
       ]
     },
     "steps": {
@@ -1344,15 +877,15 @@
     "success": "Profile Saved!",
     "successDesc": "Your information has been securely saved. You are now ready for the final step.",
     "nextDocs": "Next: Documents",
-    "sidebarTitle": "Student Information",
-    "sidebarDesc": "Please provide accurate details. This information will be used for matching you with potential hosts.",
+    "sidebarTitle": "Volunteer Information",
+    "sidebarDesc": "Please provide accurate details. This information will be used for evaluating your program suitability.",
     "step1Title": "Personal & Contact",
     "step1Sub": "Your basic information.",
-    "step2Title": "Education & Family",
-    "step2Sub": "Background details.",
+    "step2Title": "Background & Skills",
+    "step2Sub": "Experience details.",
     "formTitle1": "General & Contact",
-    "formTitle2": "Family & Education",
-    "formTitle3": "Experience & Skills",
+    "formTitle2": "Education & Skills",
+    "formTitle3": "Experience & Motivation",
     "labels": {
       "firstName": "First Name",
       "lastName": "Last Name",
@@ -1390,27 +923,27 @@
   "SubmitDocuments": {
     "back": "Back to Dashboard",
     "title": "Submit Documents",
-    "subtitle": "Optional: You can upload these now or later in your student profile.",
+    "subtitle": "Optional: You can upload these now or later in your volunteer profile.",
     "progress": "Upload Progress",
     "finishTitle": "Finish setup?",
     "finishDesc": "Click submit to continue. Any documents not uploaded now can be added later.",
-    "submitBtn": "Complete Registration",
+    "submitBtn": "Complete Submission",
     "processing": "Processing...",
     "uploadError": "Upload failed. Please try again.",
     "successMsg": "Submission successful! You can upload remaining documents later in your profile.",
     "submitError": "Failed to submit. Please try again.",
     "labels": {
-      "passport": "Passport",
-      "emongoliaCert": "E-mongolia Registration Certificate",
-      "marriageCert": "Marriage Certificate",
-      "residenceCert": "Residence Certificate",
-      "birthCert": "Birth Certificate",
-      "educationCert": "Education Certificate (High School)",
-      "bachelorDiploma": "Bachelor's Diploma",
-      "driverLicense": "Driver's License",
-      "englishCert": "English Certificate (IELTS/TOEFL B1-B2)",
-      "medicalRecords": "Medical Records",
-      "mentalHealthExam": "Mental Health Examination",
+      "passport": "Identification Document",
+      "emongoliaCert": "Social Security Certificate",
+      "marriageCert": "Other Certificates",
+      "residenceCert": "Residence Proof",
+      "birthCert": "Personal Document",
+      "educationCert": "Education Certificate",
+      "bachelorDiploma": "Diploma",
+      "driverLicense": "Special License",
+      "englishCert": "Language Certificate",
+      "medicalRecords": "Health Records",
+      "mentalHealthExam": "Evaluation",
       "professionalExp": "Professional Experience"
     },
     "card": {

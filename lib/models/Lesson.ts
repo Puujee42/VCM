@@ -5,10 +5,12 @@ const LessonSchema = new Schema(
         title: {
             mn: { type: String, required: true },
             en: { type: String, required: true },
+            de: { type: String, required: true },
         },
         description: {
             mn: { type: String, required: true },
             en: { type: String, required: true },
+            de: { type: String, required: true },
         },
         category: { type: String, required: true }, // e.g., 'grammar', 'culture', 'vocabulary'
         countryTag: { type: String, default: "General" }, // e.g., 'Germany', 'Belgium', 'Austria', 'Switzerland'
@@ -17,6 +19,7 @@ const LessonSchema = new Schema(
         focus: {
             mn: [String],
             en: [String],
+            de: [String],
         },
         imageUrl: { type: String },
         videoUrl: { type: String }, // Optional video link

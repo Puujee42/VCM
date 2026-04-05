@@ -101,7 +101,7 @@ export default function Navbar() {
           <Link href="/" className="flex items-center gap-3 group shrink-0">
             <div className="relative w-10 h-10 overflow-hidden rounded-full border-2 border-white/50 shadow-md bg-white">
               <Image
-                src="/image.png"
+                src="https://res.cloudinary.com/dc127wztz/image/upload/q_auto/f_auto/v1775390339/logos_xs3a5r.png"
                 alt="AuPair Logo"
                 fill
                 priority
@@ -184,7 +184,7 @@ export default function Navbar() {
           <div style={{ WebkitBackdropFilter: "blur(16px)" }} className="transform-gpu flex items-center gap-2 p-1.5 pr-4 rounded-full backdrop-blur-xl border shadow-xl transition-all duration-500 bg-white/80 border-white/50 text-slate-800 drop-shadow-sm">
             <div className="relative w-8 h-8 rounded-full overflow-hidden border border-white/50 bg-white">
               <Image
-                src="/image.png"
+                src="https://res.cloudinary.com/dc127wztz/image/upload/q_auto/f_auto/v1775390339/logos_xs3a5r.png"
                 alt="Logo"
                 fill
                 priority

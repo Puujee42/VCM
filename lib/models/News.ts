@@ -5,14 +5,17 @@ const NewsSchema = new Schema(
     title: {
       en: { type: String, required: true },
       mn: { type: String, required: true },
+      de: { type: String, required: true },
     },
     summary: {
       en: { type: String, required: true },
       mn: { type: String, required: true },
+      de: { type: String, required: true },
     },
     content: {
       en: { type: String, required: true },
       mn: { type: String, required: true },
+      de: { type: String, required: true },
     },
     author: { type: String, default: "Admin" },
     publishedDate: { type: Date, default: Date.now },

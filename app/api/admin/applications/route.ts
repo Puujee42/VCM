@@ -6,10 +6,10 @@ import User from "@/lib/models/User";
 import { withAdminAuth } from "@/lib/adminAuth";
 
 const PROGRAM_MAP: Record<string, string> = {
-  "DE": "Germany",
-  "BE": "Belgium",
-  "AT": "Austria",
-  "CH": "Switzerland"
+  "EDU": "Education Program",
+  "AND": "And Program",
+  "V": "VClub Program",
+  "VCLUB": "VClub Program"
 };
 
 export const GET = withAdminAuth(async () => {
@@ -62,6 +62,7 @@ export const PUT = withAdminAuth(async (req: Request) => {
             $set: {
                 role: 'volunteer', 
                 country: country,
+                program: application.programId,
                 step: "Documents",
                 fullName: `${application.firstName} ${application.lastName}`,
                 email: application.email,

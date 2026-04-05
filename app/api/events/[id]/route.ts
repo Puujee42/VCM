@@ -70,3 +70,41 @@ export async function POST(
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+
+export async function DELETE(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const user = await getAuthUser();
+    if (!user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { id: eventId } = await params;
+    await connectToDB();
+
+    const event = await Event.findById(eventId);
+    if (!event) {
+      return NextResponse.json({ error: "Event not found" }, { status: 404 });
+    }
+
+    // Check if registered
+    if (!event.attendees.includes(user._id)) {
+      return NextResponse.json({ error: "Not registered for this event" }, { status: 400 });
+    }
+
+    // Remove user from attendees
+    event.attendees = event.attendees.filter((id: { toString: () => string }) => id.toString() !== user._id.toString());
+    await event.save();
+
+    // Optionally remove from activity history or mark as cancelled
+    user.eventsAttendedCount = Math.max(0, user.eventsAttendedCount - 1);
+    await user.save();
+
+    return NextResponse.json({ success: true, message: "Successfully cancelled registration" }, { status: 200 });
+  } catch (error) {
+    console.error("Error cancelling registration:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}

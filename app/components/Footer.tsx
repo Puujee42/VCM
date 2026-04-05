@@ -19,8 +19,8 @@ const footerData = {
     exploreTitle: "Нүүр",
     exploreLinks: [
       { text: "Бидний тухай", href: "/about" },
-      { text: "Сайн дурын ажил", href: "/volunteers" },
-      { text: "Арга хэмжээ", href: "/events" },
+      { text: "Хөтөлбөрүүд", href: "/programs" },
+      { text: "Сайн дурын ажил", href: "/events" },
       { text: "Мэдээ", href: "/news" },
     ],
     supportTitle: "Дэмжлэг",
@@ -43,8 +43,8 @@ const footerData = {
     exploreTitle: "Explore",
     exploreLinks: [
       { text: "About Us", href: "/about" },
-      { text: "Volunteer Work", href: "/volunteers" },
-      { text: "Events", href: "/events" },
+      { text: "Programs", href: "/programs" },
+      { text: "Volunteering", href: "/events" },
       { text: "News", href: "/news" },
     ],
     supportTitle: "Support",

@@ -9,7 +9,7 @@ import {
   FaMapMarkerAlt,
   FaClock,
   FaArrowRight,
-  FaGlobeEurope,
+  FaHeart,
   FaUserCheck,
 } from "react-icons/fa";
 import dynamic from "next/dynamic";
@@ -153,7 +153,7 @@ const HeroSlider = () => {
               <motion.div variants={textVariants} className="flex flex-wrap items-center gap-3 mb-8">
                 {/* Location Badge */}
                 <span className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/40 backdrop-blur-md border border-slate-200 text-xs font-bold uppercase tracking-widest text-slate-800 shadow-md">
-                  <FaGlobeEurope className="text-sky-500" size={14} />
+                  <FaHeart className="text-sky-500" size={14} />
                   {activeSlide.location}
                 </span>
 

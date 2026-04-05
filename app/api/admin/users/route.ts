@@ -60,6 +60,7 @@ export const PUT = withAdminAuth(async (req: Request) => {
           $set: {
             role: data.role,
             country: data.country,
+            program: data.program,
             step: data.step,
             status: data.status,
             fullName: data.fullName,
