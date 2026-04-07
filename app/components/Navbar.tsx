@@ -212,7 +212,8 @@ export default function Navbar() {
                 <Link
                   key={item.id}
                   href={item.href}
-                  className="flex flex-col items-center justify-center pt-2 pb-1 relative"
+                  aria-label={item.label}
+                  className="flex flex-col items-center justify-center py-4 relative"
                 >
                   {isActive && (
                     <motion.div
@@ -222,13 +223,10 @@ export default function Navbar() {
                     />
                   )}
                   <item.icon
-                    size={20}
+                    size={24}
                     strokeWidth={isActive ? 2.2 : 1.6}
                     className={`transition-colors duration-200 ${isActive ? "text-sky-500" : "text-slate-400"}`}
                   />
-                  <span className={`text-[10px] mt-1 font-semibold leading-none transition-colors duration-200 ${isActive ? "text-sky-600" : "text-slate-400"}`}>
-                    {item.label}
-                  </span>
                 </Link>
               );
             })}
